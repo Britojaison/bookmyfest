@@ -1,5 +1,5 @@
 .topnav {
-    background-color: #314093    ;
+    background-color: #3a489a    ;
     overflow: hidden;
     height: 100px;
     margin-bottom: 20px;
@@ -17,7 +17,7 @@
 
   .topnav p{
     float: center;
-    color: #e0d6d6;
+    color: #ecd0d0;
     text-align: center;
     padding: 20px 16px;
     text-decoration: none;
@@ -54,6 +54,10 @@ h1 {
 }
 .header p a{
     text-decoration: none;
+}
+
+.item img{
+  border-radius: 8px;
 }
 
 .wrapper {
