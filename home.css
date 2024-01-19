@@ -1,9 +1,10 @@
 .topnav {
     background-color: #232E6F ;
     overflow: hidden;
+    height: 100px;
+    margin-bottom: 20px;
   }
   
-  /* Style the links inside the navigation bar */
 
   .topnav img{
     float: left;
@@ -11,7 +12,66 @@
     text-align: center;
     padding: 20px 16px;
     text-decoration: none;
-    font-size: 17px;
+  }
+
+  .topnav p{
+    float: center;
+    color: #8AD3F8;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-size: 50px;
   }
   
-  
+
+  .wrapper img{
+    width: 200px;
+  } 
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin: 0;
+  background-color:  #e0d6d6;
+}
+
+h1 {
+    font-family: Arial;
+    color: rgb(75, 22, 22);
+    text-align: justify;
+  }
+.header{
+    display: flex;
+    align-items: baseline;
+}
+.header p a{
+    text-decoration: none;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3,100%);
+  overflow:hidden;
+  scroll-behavior:smooth;
+
+  section {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    margin: 20px 0;
+    
+    .item {
+      
+      transition: duration all;
+      
+      &:hover { 
+        margin: 0 40px;
+        transform: scale(1.2);
+      }
+      
+    }  
+  }
+}
