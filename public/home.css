@@ -1,5 +1,5 @@
 .topnav {
-    background-color: #3a489a    ;
+    background-color: #021479    ;
     overflow: hidden;
     height: 100px;
     margin-bottom: 20px;
@@ -16,7 +16,7 @@
   }
 
   .topnav p{
-    font-family: 'Lemon', serif;
+    font-family: 'Montserrat', serif;
     font-weight: 100;
     float: center;
     color: #ecd0d0;
@@ -46,7 +46,7 @@ body {
 }
 
 h1 {
-  font-family: 'Lemon', serif;
+  font-family: 'Noto Serif', serif;
   font-weight: 100;
     color: rgb(32, 107, 171);
     text-align: justify;
@@ -54,9 +54,10 @@ h1 {
 .header{
     display: flex;
     align-items: baseline;
-    
 }
 .header p a{
+    
+    font-weight: 600;
     text-decoration: none;
 }
 
