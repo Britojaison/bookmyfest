@@ -15,7 +15,7 @@
     text-decoration: none;
   }
 
-  .topnav p{
+  #title{
     font-family: 'Montserrat', serif;
     font-weight: 100;
     float: center;
@@ -24,6 +24,10 @@
     padding: 20px 16px;
     text-decoration: none;
     font-size: 50px;
+  }
+
+  .header p{
+    
   }
   
   .profile_photo{
@@ -53,12 +57,18 @@ h1 {
   }
 .header{
     display: flex;
+    position: relative;
     align-items: baseline;
+    h1{
+      margin-left: 2rem;
+    }
 }
 .header p a{
-    
+  position: absolute;
+    right: 0;
     font-weight: 600;
     text-decoration: none;
+    margin-right: 7rem;
 }
 
 .item img{
@@ -89,4 +99,38 @@ h1 {
       
     }  
   }
+}
+
+.schoolbtn{
+  padding: 2rem;
+  
+}
+.button-63 {
+  margin-bottom: 1rem;
+  align-items: center;
+  background-image: linear-gradient(144deg, #2814a5 50%,#1eb5bd);
+  border: 0;
+  border-radius: 8px;
+  display: flex;
+  box-shadow: rgba(151, 65, 252, 0.2);
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font-family: Phantomsans, sans-serif;
+  font-size: 1.56rem;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 10px 20px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-63:active,
+.button-63:hover {
+  outline: 0;
 }
