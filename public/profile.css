@@ -1,24 +1,36 @@
 html {
     font-family: Roboto;
 }
+body{
+    background:#f5f5f7;
+}
 
 .container {
+    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .first {
+    border-radius: 8px;
+    background-color: #ffff;
     width: 750px;
     height: 100%;
+    h2{
+        padding-left: 1rem;
+        color: rgba(51, 51, 51);
+        font-weight: 600;
+    }
+
 }
 
 .hello {
-    border-radius: 8px;
-    background: linear-gradient(to right, #0662bf, #3399ff, #fff);
+    border-radius: 8px 0 0 0;
+    background: linear-gradient(to right, #0662bf, #3399ff, #ffffff);
     display: flex;
     align-items: center;
-    color: #ecd0d0;
+    color: #ffff;
     font-size: 2rem;
     gap: 10px;
 
@@ -26,9 +38,6 @@ html {
         width: 100px;
         border-radius: 50%;
     }
-}
-.info{
-    
 }
 .details {
     display: flex;
@@ -58,13 +67,7 @@ html {
         appearance: none;
         border-radius: 4px;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        :focus{
-            color: #212529;
-            background-color: #fff;
-            border-color: #86b7fe;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
-        }
+        
         
     }
 
