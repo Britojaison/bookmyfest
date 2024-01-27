@@ -1,0 +1,58 @@
+.topnav {
+    background-color: #021479    ;
+    overflow: hidden;
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 0px 0px 40px 40px;
+  }
+  
+
+  .topnav img{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+  }
+  .profile_photo{
+    width: 100px;
+    border-radius: 50%;
+   
+  }
+  #title{
+    font-family: 'Montserrat', serif;
+    font-weight: 100;
+    float: center;
+    color: #ecd0d0;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-size: 50px;
+  }
+  
+  .wrapper img{
+    width: 200px;
+  } 
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin: 0;
+  background-color:  #e0d6d6;
+}
+h1 {
+    font-family: 'Noto Serif', serif;
+    font-weight: 100;
+      color: rgb(32, 107, 171);
+      text-align: justify;
+    }
+.header{
+    display: flex;
+    position: relative;
+    align-items: baseline;
+    h1{
+      margin-left: 2rem;
+    }
+}
