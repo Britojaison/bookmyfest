@@ -56,3 +56,24 @@ h1 {
       margin-left: 2rem;
     }
 }
+
+.container{
+  display: grid;
+  grid-template-columns: 279px auto;
+  grid-template-rows: 295px auto;
+  gap: 1.5rem;
+}
+
+.event img{
+  border-radius: 8%;
+  width: 279px;
+    height: 295px 
+}
+.eventname {
+  font-size: 2rem;
+  p{
+    line-height: 1.4;
+    letter-spacing: .05em;
+    font-size: 1.5rem;
+  }
+}
