@@ -1,47 +1,89 @@
 .topnav {
-  background-color: #1c738e    ;
-  overflow: hidden;
+  display: flex;
+  background-color: #1c738e;
   height: 70px;
   margin-bottom: 20px;
-  /* border-radius: 0px 0px 40px 40px; */
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: #FFFFFF;
+    margin-left: auto;
+    margin-right: 2rem;
+    text-decoration: solid  ;
+  }
+}
+#title{
+  padding-left: 37rem;
+  padding-top: .5rem;
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+  font-size: 50px;
+  img{
+    width: 23rem;
+  }
+}
+ 
+  .profile_photo {
+    width: 100px;
+    border-radius: 50%;
+    float: right;
+    color: #f2f2f2;
+    width: 4rem;
+    margin-right: 2rem;
+    text-decoration: none;
+    cursor: pointer;
+  
+  }
+  
+.profile-image {
+  position: relative;
+  cursor: pointer;
+}
+
+.options {
+  display: none;
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.options a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+.options a:hover {
+  background-color: #f0f0f0;
+}
+
+.profile-image:hover  .options {
+  display: block;
 }
 
 
-  .topnav img{
-    float: right;
-    color: #ffffff;
-    text-align: center;
-    width: 4rem;
-    margin-left: 1rem;
-    text-decoration: none;
-    
-  }
-  .profile_photo{
-    width: 100px;
-    border-radius: 50%;
-   
-  }
-  #title{
-    font-family: Helvetica, sans-serif;
-    font-weight: 100;
-    float: center;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    font-size: 50px;
-  }
-  
-  .wrapper img{
-    width: 200px;
-  } 
 
 html {
   scroll-behavior:smooth;
+  
 }
 
 body {
   margin: 0;
-  background-color:  #e0d6d6;
+  background-color:  #FFFFFF;
 }
 h1 {
     font-family: 'Noto Serif', serif;
@@ -54,6 +96,8 @@ h1 {
     position: relative;
     align-items: baseline;
     h1{
+      font-family: Helvetica, sans-serif;
+      font-weight: bold;
       margin-left: 2rem;
     }
 }
@@ -68,7 +112,11 @@ h1 {
 .event img{
   border-radius: 8%;
   width: 279px;
-    height: 295px 
+    height: 295px ;
+    &:hover {
+      transform: scale(1.1);
+    }
+
 }
 .eventname {
   font-size: 2rem;

@@ -1,74 +1,177 @@
-html {
-    font-family: Roboto;
-}
-body{
-    background:#f5f5f7;
-}
-
-.container {
-    
+.topnav {
     display: flex;
+    background-color: #1c738e;
+    height: 70px;
+    margin-bottom: 20px;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-}
 
-.first {
-    border-radius: 8px;
-    background-color: #ffff;
-    width: 750px;
-    height: 100%;
-    h2{
-        padding-left: 1rem;
-        color: rgba(51, 51, 51);
-        font-weight: 600;
+    a {
+        color: #FFFFFF;
+        margin-left: auto;
+        margin-right: 2rem;
+        text-decoration: solid;
     }
-
 }
 
-.hello {
-    border-radius: 8px 0 0 0;
-    background: linear-gradient(to right, #0662bf, #3399ff, #ffffff);
-    display: flex;
-    align-items: center;
-    color: #ffff;
-    font-size: 2rem;
-    gap: 10px;
+#title {
+    padding-left: 37rem;
+    padding-top: 1.5rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0;
+    font-size: 50px;
 
     img {
-        width: 100px;
-        border-radius: 50%;
+        width: 23rem;
     }
 }
-.details {
+
+
+.profile_photo {
+    width: 100px;
+    border-radius: 50%;
+    float: right;
+    color: #f2f2f2;
+    width: 4rem;
+    margin-right: 2rem;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.profile-image {
+    position: relative;
+    cursor: pointer;
+}
+
+.options {
+    display: none;
+    position: absolute;
+
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.options a {
+    font-family: Helvetica, sans-serif;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    transition: background-color 0.3s;
+}
+
+.options a:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-image:hover .options {
+    display: block;
+}
+
+.welcome {
     display: flex;
-    gap: 5px;
-    padding-left: 50px;
-    padding-right: 170px;
-    padding-bottom: 2rem;
+    gap: 4rem;
 
-    /* .flex-item {
-        flex-basis: 100px;
-        flex-grow: 1;
-    } */
-    .text{
-        flex: 1;
-    }
-    .value{
-        flex: 2;
-        
-        padding: 6px 12px;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        appearance: none;
-        border-radius: 4px;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        
-        
+}
+
+.user-info {
+    color: #336492;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
+
+.user-image {
+    margin-left: 1.12rem;
+
+
+    img {
+        border-radius: 2.125rem;
+        background: #D9D9D9;
+        width: 14.0625rem;
+        height: 19.625rem;
     }
 
+}
+
+.wrapper img {
+    width: 200px;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #FFFFFF;
+}
+
+
+.header {
+    display: flex;
+    position: relative;
+    align-items: baseline;
+
+    h1 {
+        font-weight: 100;
+        color: rgb(32, 107, 171);
+        text-align: justify;
+        font-family: "inter";
+        font-weight: bold;
+        margin-left: 2rem;
+    }
+}
+
+.header p a {
+    margin-left: 1rem;
+    font-family: "inter";
+    font-weight: 200;
+    text-decoration: none;
+    color: black;
+}
+
+.item img {
+    border-radius: 8px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 100%);
+    overflow: hidden;
+    scroll-behavior: smooth;
+
+    section {
+        width: 100%;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(6, auto);
+        margin: 20px 0;
+        margin-left: 30px;
+
+        .item {
+            transition: transform 0.6s ease;
+
+            &:hover {
+                margin: 0 40px;
+                border-radius: 8px;
+                transform: scale(1.1);
+            }
+
+        }
+    }
 }
