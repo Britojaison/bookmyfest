@@ -165,6 +165,7 @@ body {
 
         .item {
             transition: transform 0.6s ease;
+            font-family: Helvetica, sans-serif;
 
             &:hover {
                 margin: 0 40px;
