@@ -1,34 +1,30 @@
 .topnav {
-    background-color: #021479    ;
+    background-color: #1c738e    ;
     overflow: hidden;
-    height: 100px;
+    height: 70px;
     margin-bottom: 20px;
-    border-radius: 0px 0px 40px 40px;
+    /* border-radius: 0px 0px 40px 40px; */
   }
   
 
   .topnav img{
-    float: left;
+    float: right;
     color: #f2f2f2;
     text-align: center;
-    padding: 20px 16px;
+    width: 4rem;
+    margin-right: 1rem;
     text-decoration: none;
   }
 
   #title{
     font-family: 'Montserrat', serif;
     font-weight: 100;
-    float: center;
-    color: #ecd0d0;
+    color: #FFFFFF;
     text-align: center;
-    padding: 20px 16px;
     text-decoration: none;
     font-size: 50px;
   }
 
-  .header p{
-    
-  }
   
   .profile_photo{
     width: 100px;
@@ -46,7 +42,7 @@ html {
 
 body {
   margin: 0;
-  background-color:  #e0d6d6;
+  background-color:  #FFFFFF;
 }
 
 h1 {
