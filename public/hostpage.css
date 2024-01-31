@@ -1,5 +1,5 @@
 .topnav {
-    background-color: #021479;
+    background-color: #1c738e;
     overflow: hidden;
     height: 90px;
     margin-bottom: 20px;
@@ -90,7 +90,7 @@ h1 {
         margin-left: 30px;
 
         .item {
-            transition: duration all;
+            transition: transform 0.6s ease;
 
             &:hover {
                 margin: 0 40px;
