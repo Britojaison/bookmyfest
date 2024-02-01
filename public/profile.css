@@ -176,3 +176,32 @@ body {
         }
     }
 }
+
+
+footer {
+    font-family: Helvetica, sans-serif;
+    background-color: #1c738e;
+    display: flex;
+    justify-content: space-around;
+    color: #FFFFFF;
+  
+    div {
+      text-align: center;
+      h3{
+        margin-top: 11;
+        margin-bottom: 0;
+      }
+      a {
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+    }
+  
+    address {
+      text-align: center;
+      margin: 0;
+    }
+    p{
+      padding-top: 1rem;
+    }
+  }
