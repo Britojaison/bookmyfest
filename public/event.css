@@ -1,6 +1,8 @@
-body{
-    background-color: #60f2f4;
+body {
+    background-color: #1c738e;
+    margin: 0;
 }
+
 .image-container {
     width: 400px;
     height: 90vh;
@@ -9,41 +11,43 @@ body{
     /*border: 1px solid red;*/
     border-radius: 5px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin-left: 1rem;
 }
 
-.infobox{
+.infobox {
     display: flex;
-    gap:20px;
-    height:50%;
-    width:50%;
-    margin-left: 315px;
-    margin-top: 30px;
+    gap: 20px;
+    height: 40%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(247, 250, 250);
-    border-radius:20px;
-   
+    border-radius: 20px;
+
 }
-.txt{
-    /* margin-left: 40%; */
+
+.txt {
+    margin-left: 2rem;
 }
+
 .image {
     width: 200px;
     height: 350px;
-    /* display: flex;
-    align-items: center; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     object-fit: cover;
 }
 
-.container{
+.container {
     display: flex;
-   
-    background-color: #60f2f4;
+    align-items: center;
+    justify-content: center;
+    background-color: #1c738e;
 }
 
-.eventdesc{
+.eventdesc {
     display: flex;
-    p{
-        width: 40%;
+
+    p {
+        width: 60%;
         margin: 0 0 0 1rem;
 
     }
@@ -52,39 +56,46 @@ body{
 }
 
 
-.eventdate{
+.eventdate {
     display: flex;
     margin: 2rem 2rem 2rem 0;
-    p{
+
+    p {
         width: 60%;
         margin: 0 2rem 2rem 3.6rem;
 
     }
 
-    
+
 }
-.eventvenue{
+
+.eventvenue {
     display: flex;
     margin: 1rem 1rem 1rem 0;
-    p{
+
+    p {
         width: 60%;
         margin: 0 1rem 1rem 2.7rem;
 
     }
 }
-.eventtime{
+
+.eventtime {
     display: flex;
     margin: 1rem 1rem 1rem 0;
-    p{
+
+    p {
         width: 60%;
         margin: 0 1rem 1rem 3.2rem;
 
     }
 }
-.host{
+
+.host {
     display: flex;
     margin: 1rem 1rem 1rem 0;
-    p{
+
+    p {
         width: 60%;
         margin: 0 1rem 1rem 3.5rem;
 
@@ -104,13 +115,13 @@ body{
     cursor: pointer;
     text-decoration: none;
     margin-left: 535px;
-    
+
 }
 
 .register-btn:hover {
     background-color: #2980b9;
 }
 
-.button{
-    background-color: #60f2f4;
+.button {
+    background-color: #1c738e;
 }
