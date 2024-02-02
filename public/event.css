@@ -1,127 +1,60 @@
 body {
-    background-color: #1c738e;
     margin: 0;
-}
-
-.image-container {
-    width: 400px;
-    height: 90vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    /*border: 1px solid red;*/
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin-left: 1rem;
-}
-
-.infobox {
-    display: flex;
-    gap: 20px;
-    height: 40%;
-    width: 50%;
     justify-content: center;
-    align-items: center;
-    background-color: rgb(247, 250, 250);
-    border-radius: 20px;
+    min-height: 100vh;
+    background-color: #3093b1;
+    font-family: Helvetica, sans-serif;
 
+    background: linear-gradient(-45deg, #1ba3cd, #3093b1, #95bcca, #ffffff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
 }
 
-.txt {
-    margin-left: 2rem;
-}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
 
-.image {
-    width: 200px;
-    height: 350px;
-    object-fit: cover;
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
+    background-color: #ffff;
     display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 60%;
+    height: 50%;
     align-items: center;
     justify-content: center;
-    background-color: #1c738e;
+    padding: 1rem;
+    border-radius: 30px;
+
 }
 
-.eventdesc {
-    display: flex;
+.image {
+    text-align: center;
+    width: 280px;
+    height: 350px;
+    border-radius: 8px;
 
-    p {
-        width: 60%;
-        margin: 0 0 0 1rem;
-
+    button {
+        background-color: #3093b1;
+        border: 0;
+        color: #ffff;
+        font-size: 1.2em;
+        cursor: pointer;
+        border-radius: 8px;
+        padding: 5px;
     }
-
-
-}
-
-
-.eventdate {
-    display: flex;
-    margin: 2rem 2rem 2rem 0;
-
-    p {
-        width: 60%;
-        margin: 0 2rem 2rem 3.6rem;
-
-    }
-
-
-}
-
-.eventvenue {
-    display: flex;
-    margin: 1rem 1rem 1rem 0;
-
-    p {
-        width: 60%;
-        margin: 0 1rem 1rem 2.7rem;
-
-    }
-}
-
-.eventtime {
-    display: flex;
-    margin: 1rem 1rem 1rem 0;
-
-    p {
-        width: 60%;
-        margin: 0 1rem 1rem 3.2rem;
-
-    }
-}
-
-.host {
-    display: flex;
-    margin: 1rem 1rem 1rem 0;
-
-    p {
-        width: 60%;
-        margin: 0 1rem 1rem 3.5rem;
-
-    }
-}
-
-
-
-.register-btn {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    margin-left: 535px;
-
-}
-
-.register-btn:hover {
-    background-color: #2980b9;
-}
-
-.button {
-    background-color: #1c738e;
 }
