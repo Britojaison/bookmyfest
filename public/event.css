@@ -141,3 +141,34 @@ body{
         padding: 5px;
     }
 }
+
+
+footer {
+  background-color: #1c738e;
+  display: flex;
+  justify-content: space-around;
+  color: #FFFFFF;
+ font-family: Helvetica, sans-serif; */
+
+  
+
+  
+  p{
+    padding-top: 1rem;
+  }
+}
+.site{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+address {
+  text-align: center;
+  margin: 0;
+  padding: .8rem;
+}
+
+.inside {
+  text-align: center;
+  padding-top: 1rem;
+}

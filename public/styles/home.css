@@ -141,7 +141,7 @@ h1 {
       transition: transform 0.6s ease;
 
       &:hover {
-        margin: 0 40px;
+        
         transform: scale(1.1);
       }
 
