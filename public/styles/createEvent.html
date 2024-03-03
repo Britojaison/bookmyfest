@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+  <link rel="stylesheet" href="../public/styles/createEvent.css">
+</head>
+
+<body>
+  <div class="topnav">
+    <div id="title">
+      <img src="../public/images/BookMyShow (5) (1) (1).png" alt="image">
+    </div>
+    <a href="">Home</a>
+    <div class="profile-image">
+      <img src="../public/images/Firefly 20231219114851.png" alt="Profile Image" class="profile_photo">
+      <div class="options">
+        <a href="./profile.html">Profile</a>
+        <a href="">About</a>
+        <a href="./login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="jeevan">
+    <div class="container">
+      <div class="image image-div">
+        <img src="../public/images/Firefly 20231219114851.png" alt="Event Image" class="image">
+        <button>Create</button>
+      </div>
+      <div class="info">
+        <div class="raone">
+          <p>Event name</p>
+          <input type="text" id="eventName" name="eventName" required>
+        </div>
+        <div class="raone">
+          <p>Event ID:</p>
+          <input type="text" id="eventID" name="eventID" required>
+        </div>
+
+        <div class="raone">
+          <p>Host ID:</p>
+          <input type="text" id="hostid" name="hostid" required>
+        </div>
+
+        <div class="raone">
+          <p>
+            Start Date:
+          </p>
+          <input type="date" id="eventDate" name="eventDate" required>
+        </div>
+
+        <div class="raone">
+          <p>End Date:</p>
+          
+          <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div class="raone">
+          <p>Pan campus</p>
+          <label for="Yes">Yes</label>
+          <input type="radio" id="eventDate" name="eventDate" required>
+         
+          <label for="No">No</label>
+          <input type="radio" id="eventDate" name="eventDate" required>
+        </div>
+
+        <div class="raone">
+          <p>Target Audience:</p>
+          <input type="text" id="audience" name="audience">
+        </div>
+
+        <div class="raone">
+          <p>Event Time</p>
+          <input type="time" id="eventTime" name="eventTime" required>
+        </div>
+
+        <div class="raone">
+          <p>Venue</p>
+          <input type="text" id="venue" name="venue" required>
+        </div>  
+        
+        <p>
+          attendence:
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

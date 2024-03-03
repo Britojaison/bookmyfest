@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign Up</title>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+<div class="left-side"></div>
+<div class="right-side">
+<div class="form-container" id="loginForm">
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="loginRegisterNumber">Register Number:</label>
+            <input type="text" id="loginRegisterNumber" name="loginRegisterNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+            <%-content %>
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+        <p class="login-link">New user? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+    </form>
+</div>
+
+<div class="form-container1" id="signupForm" style="display: none;">
+    <h2>Sign Up</h2>
+    <form action="#" method="post">
+       
+        <div class="form-group">
+            <label for="registerNumber">Register Number:</label>
+            <input type="text" id="registerNumber" name="registerNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+      
+        <div class="form-group">
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="text" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="School">School of:</label>
+            <select name="school" id="school">
+                <option value="a">Architecture</option>
+                <option value="b">Arts and humanities</option>
+                <option value="c">Business and Management</option>
+                <option value="d">Commerce,finance and accounting</option>
+                <option value="e">Education</option>
+                <option value="f">Engineering and technology</option>
+                <option value="g">Law</option>
+                <option value="h">Sciences</option>
+                <option value="i">Social Sciences</option>
+              </select>
+              
+        </div>
+
+       
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <select name="department" id="department">
+                <option value="a">Computer Science</option>
+                <option value="b">Chemistry</option>
+                <option value="c">Physics</option>
+                <option value="d">Mathematics</option>
+                <option value="e">Life Sciences</option>
+            </select>    
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+        <p class="login-link">Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+       
+    
+    </form>
+</div>
+</div>
+
+<script>
+    function toggleForms() {
+
+        var loginForm = document.getElementById('loginForm');
+        var signupForm = document.getElementById('signupForm');
+
+        if (loginForm.style.display === 'none') {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+        } else {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
