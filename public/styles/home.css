@@ -194,14 +194,14 @@ footer {
     text-align: center;
 
     a {
+      margin-top: 1rem;
       color: #FFFFFF;
       text-decoration: none;
     }
   }
 
   address {
-    text-align: center;
-    margin: 0;
+    margin-bottom: 1rem;
   }
   p{
     padding-top: 1rem;
