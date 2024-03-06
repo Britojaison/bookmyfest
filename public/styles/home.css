@@ -185,25 +185,16 @@ h1 {
 
 
 footer {
+  height: 7rem;
   background-color: #1c738e;
   display: flex;
   justify-content: space-around;
   color: #FFFFFF;
-
-  div {
-    text-align: center;
-
-    a {
-      margin-top: 1rem;
-      color: #FFFFFF;
-      text-decoration: none;
-    }
+  font-weight: bold;
+  align-items: center;
+  #link{
+    text-decoration: none;
+    color: #FFFFFF;
   }
 
-  address {
-    margin-bottom: 1rem;
-  }
-  p{
-    padding-top: 1rem;
-  }
 }
