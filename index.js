@@ -3,9 +3,8 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from 'mysql2'
 import bodyParser from "body-parser";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-
 const app = express()
 const port = 3000;
 
@@ -33,6 +32,18 @@ app.get("/", async (req, res) => {
     };
     res.render("login.ejs", message);
     console.log("11223343");
+});
+
+app.get("/logo-home", async(req, res)=> {
+    res.render("home.ejs");
+});
+
+app.get("/profile", async(req, res)=>{
+    res.render("profile.ejs");
+});
+
+app.get("/about", (req,res)=>{
+    res.render("aboutus.ejs");
 });
 
 app.post("/login", async (req, res) => {
