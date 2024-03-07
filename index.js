@@ -115,11 +115,8 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.get("/home", (req, res) => {
-    res.render(__dirname + "/view/home.ejs");
-});
 
-app.get("/campusseemore", (req, res) => {
+app.get("/campus-seemore", (req, res) => {
     res.render("school.ejs");
 })
 app.listen(port, () => {
