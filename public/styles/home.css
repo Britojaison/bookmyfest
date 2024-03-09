@@ -121,6 +121,8 @@ h1 {
 
 .item img {
   border-radius: 8px;
+  width: 200px;
+  height: 200px;
 }
 
 .wrapper {
@@ -133,13 +135,14 @@ h1 {
     width: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(5, auto);
     margin: 20px 0;
     margin-left: 30px;
 
     .item {
       transition: transform 0.6s ease;
-
+      /* width: 200px; */
+      
       &:hover {
         
         transform: scale(1.1);

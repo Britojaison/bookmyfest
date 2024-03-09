@@ -31,19 +31,21 @@ app.get("/", async (req, res) => {
     const message = {
         content: "",
     };
+
+
     res.render("login.ejs", message);
     console.log("11223343");
 });
 
-app.get("/logo-home", async(req, res)=> {
+app.get("/logo-home", async (req, res) => {
     res.render("home.ejs");
 });
 
-app.get("/profile", async(req, res)=>{
+app.get("/profile", async (req, res) => {
     res.render("profile.ejs");
 });
 
-app.get("/about", (req,res)=>{
+app.get("/about", (req, res) => {
     res.render("aboutus.ejs");
 });
 
@@ -63,7 +65,29 @@ app.post("/login", async (req, res) => {
             const storedpassword = user.password;
             //console.log(storedpassword);
             if (storedpassword == password) {
-                res.render("home.ejs");
+
+                const results = await db.query("select eventname,poster from events where pan_campus=1");
+                
+                var n=results[0].length;
+                console.log(n);
+                var eventname=[];
+                for (let index = 0; index < n; index++) {
+                    eventname.push(results[0][index].eventname);
+                }
+                var poster=[];
+                for (let index = 0; index < n; index++) {
+                    poster.push(results[0][index].poster);
+                }
+                const events={
+                    event:eventname,
+                    posters:poster,
+                    count:n
+                };
+                console.log(events);
+                
+                
+
+                res.render("home.ejs",events);
             }
             else {
                 const message = {
@@ -123,5 +147,3 @@ app.get("/campus-seemore", (req, res) => {
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`);
 })
-
-// This piece of code is importtant and it belongs to the most amazing person i have ever known that is Nayana <3
