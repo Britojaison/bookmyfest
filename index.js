@@ -2,148 +2,145 @@
 import express from "express";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import mysql from 'mysql2'
+import mysql from "mysql2";
 import bodyParser from "body-parser";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const app = express()
+const app = express();
 const port = 3000;
 
-
-
-const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'sqlmakri',
-    database: 'bmf'
-
-}).promise()
-
+const db = mysql
+  .createPool({
+    host: "localhost",
+    user: "root",
+    password: "1234",
+    database: "uems",
+  })
+  .promise();
 
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
+  //const results = await db.query("select  * from user")
+  //console.log(results[0])
+  const message = {
+    content: "",
+  };
 
-    //const results = await db.query("select  * from user")
-    //console.log(results[0])
-    const message = {
-        content: "",
-    };
-
-
-    res.render("login.ejs", message);
-    console.log("11223343");
+  res.render("login.ejs", message);
+  console.log("11223343");
 });
 
 app.get("/logo-home", async (req, res) => {
-    res.render("home.ejs");
+  res.render("home.ejs");
 });
 
 app.get("/profile", async (req, res) => {
-    res.render("profile.ejs");
+  res.render("profile.ejs");
 });
 
 app.get("/about", (req, res) => {
-    res.render("aboutus.ejs");
+  res.render("aboutus.ejs");
 });
 
 app.post("/login", async (req, res) => {
+  //console.log(req.body);
+  const regno = req.body.loginRegisterNumber;
+  const password = req.body.loginPassword;
+  // console.log(password);
 
-    //console.log(req.body);
-    const regno = req.body.loginRegisterNumber;
-    const password = req.body.loginPassword;
-    // console.log(password);
+  try {
+    const results = await db.query("select * from user where regno=?", [regno]);
+    // console.log(results)
+    if (results[0].length == 1) {
+      const user = results[0][0];
+      const storedpassword = user.password;
+      //console.log(storedpassword);
+      if (storedpassword == password) {
+        const results = await db.query(
+          "select eventname,poster from events where pan_campus=1"
+        );
 
-
-    try {
-        const results = await db.query("select * from user where regno=?", [regno]);
-        // console.log(results)
-        if (results[0].length == 1) {
-            const user = results[0][0];
-            const storedpassword = user.password;
-            //console.log(storedpassword);
-            if (storedpassword == password) {
-
-                const results = await db.query("select eventname,poster from events where pan_campus=1");
-                
-                var n=results[0].length;
-                console.log(n);
-                var eventname=[];
-                for (let index = 0; index < n; index++) {
-                    eventname.push(results[0][index].eventname);
-                }
-                var poster=[];
-                for (let index = 0; index < n; index++) {
-                    poster.push(results[0][index].poster);
-                }
-                const events={
-                    event:eventname,
-                    posters:poster,
-                    count:n
-                };
-                console.log(events);
-                
-                
-
-                res.render("home.ejs",events);
-            }
-            else {
-                const message = {
-                    content: "<h3>Wrong Password</h3>",
-                };
-                res.render("login.ejs", message);
-            }
-
-        } else {
-            const message = {
-                content: "<h3>User not found</h3>",
-            };
-            res.render("login.ejs", message);
+        var n = results[0].length;
+        console.log(n);
+        var eventname = [];
+        for (let index = 0; index < n; index++) {
+          eventname.push(results[0][index].eventname);
         }
-    } catch (error) {
-        console.log(error);
+        var poster = [];
+        for (let index = 0; index < n; index++) {
+          poster.push(results[0][index].poster);
+        }
+        const events = {
+          event: eventname,
+          posters: poster,
+          count: n,
+        };
+        console.log(events);
+
+        res.render("home.ejs", events);
+      } else {
+        const message = {
+          content: "<h3>Wrong Password</h3>",
+        };
+        res.render("login.ejs", message);
+      }
+    } else {
+      const message = {
+        content: "<h3>User not found</h3>",
+      };
+      res.render("login.ejs", message);
     }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/register", async (req, res) => {
-    const regno = req.body.registerNumber;
-    const password = req.body.password;
-    const mobileNumber = req.body.mobileNumber;
-    const email = req.body.email;
-    const department = req.body.department;
+  const regno = req.body.registerNumber;
+  const password = req.body.password;
+  const mobileNumber = req.body.mobileNumber;
+  const email = req.body.email;
+  const department = req.body.department;
 
-    try {
+  try {
+    const results = await db.query("select * from user where regno=?", [regno]);
 
-        const results = await db.query("select * from user where regno=?", [regno]);
+    if (results[0].length == 0) {
+      let departmentid = await db.query(
+        "select deptid from department where dept_name=?",
+        [department]
+      );
+      departmentid = departmentid[0][0].deptid;
+      // console.log(departmentid);
+      db.query("insert into user values(?,?,?,?,?)", [
+        regno,
+        password,
+        mobileNumber,
+        email,
+        departmentid,
+      ]);
+      const message = {
+        content: "",
+      };
+      res.render("login.ejs", message);
+    } else {
+      const message = {
+        content: "<h3>Registration Failed! User already exists.</h3>",
+      };
 
-        if (results[0].length == 0) {
-            let departmentid = await db.query("select deptid from department where dept_name=?", [department]);
-            departmentid = departmentid[0][0].deptid;
-            // console.log(departmentid);
-            db.query("insert into user values(?,?,?,?,?)", [regno, password, mobileNumber, email, departmentid]);
-            const message = {
-                content: "",
-            }
-            res.render("login.ejs", message);
-        } else {
-            const message = {
-                content: "<h3>Registration Failed! User already exists.</h3>",
-            }
-
-            res.render('login.ejs', message);
-        }
-
-    } catch (error) {
-        console.log(error);
+      res.render("login.ejs", message);
     }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-
 app.get("/campus-seemore", (req, res) => {
-    res.render("school.ejs");
-})
+  res.render("school.ejs");
+});
 app.listen(port, () => {
-    console.log(`server running on http://localhost:${port}`);
-})
+  console.log(`server running on http://localhost:${port}`);
+});
