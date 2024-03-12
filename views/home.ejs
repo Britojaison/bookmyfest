@@ -21,7 +21,7 @@
     <div id="title">
       <img src="images/BookMyShow.png" alt="image">
     </div>
-   
+
     <div class="profile-image">
       <img src="images/Firefly 20231219114851.png" alt="Profile Image" class="profile_photo">
       <div class="options">
@@ -41,36 +41,24 @@
   <div class="wrapper">
 
     <section id="section1">
+      
+      <%for(var i=0;i< event.length ;i++){%>
+        <div class="item">
+          <img src="<%= posters[i]%>" alt="Describe Image">
 
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
+          <p>
+            <%= event[i] %>
+          </p>
 
-
+        </div>
+        <%}%>
     </section>
 
 
   </div>
   <div class="header">
     <h1>Recommended</h1>
-    <p><a href="">see more</a></p>
+    <p><a href="/campus-seemore">see more</a></p>
   </div>
   <div class="wrapper">
 
@@ -103,14 +91,14 @@
 
   <div class="header">
     <h1>School</h1>
-    <p><a href="/seemoreschools">see more</a></p>
+    <p><a href="/seemore-schools">see more</a></p>
   </div>
   <div class="wrapper">
 
     <section id="section1">
 
       <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
+        <a href=""><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
         <p>Event Name</p>
       </div>
       <div class="item">
@@ -142,7 +130,7 @@
     <section id="section1">
 
       <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
+        <a href="/campus-seemore"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
         <p>school</p>
       </div>
       <div class="item">
@@ -180,9 +168,9 @@
   </div>
   <footer>
     <div>
-      
-        +91 1234567890 <br>mail@christuniversity.in
-      
+
+      +91 1234567890 <br>mail@christuniversity.in
+
     </div>
     <div>
       <a href="https://christuniversity.in/" id="link">christuniversity.in</a>

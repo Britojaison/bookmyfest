@@ -1,0 +1,1 @@
+adding event mysql> insert into events values(6 , 'Maverick' , 1 , NULL , '2024-03-14 ' , '2024-03-17' , NULL , "main campus" , "women's premier league" , NULL , NULL , NULL , '\\images\\maverick.jpg' , 4,NULL,NULL,NULL);
