@@ -24,6 +24,30 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+async function homepage (res){
+    const results = await db.query("select eventname,poster from events where pan_campus=1");
+                
+    var n=results[0].length;
+    // console.log(n);
+    var eventname=[];
+    for (let index = 0; index < n; index++) {
+        eventname.push(results[0][index].eventname);
+    }
+    var poster=[];
+    for (let index = 0; index < n; index++) {
+        poster.push(results[0][index].poster);
+    }
+    const events={
+        event:eventname,
+        posters:poster,
+        count:n
+    };
+    console.log(events);
+    res.render("home.ejs",events);
+
+}
+
 app.get("/", async (req, res) => {
 
     //const results = await db.query("select  * from user")
@@ -31,14 +55,12 @@ app.get("/", async (req, res) => {
     const message = {
         content: "",
     };
-
-
     res.render("login.ejs", message);
     console.log("11223343");
 });
 
 app.get("/logo-home", async (req, res) => {
-    res.render("home.ejs");
+    homepage(res);
 });
 
 app.get("/profile", async (req, res) => {
@@ -65,29 +87,25 @@ app.post("/login", async (req, res) => {
             const storedpassword = user.password;
             //console.log(storedpassword);
             if (storedpassword == password) {
-
-                const results = await db.query("select eventname,poster from events where pan_campus=1");
-                
-                var n=results[0].length;
-                console.log(n);
-                var eventname=[];
-                for (let index = 0; index < n; index++) {
-                    eventname.push(results[0][index].eventname);
-                }
-                var poster=[];
-                for (let index = 0; index < n; index++) {
-                    poster.push(results[0][index].poster);
-                }
-                const events={
-                    event:eventname,
-                    posters:poster,
-                    count:n
-                };
-                console.log(events);
-                
-                
-
-                res.render("home.ejs",events);
+                // const results = await db.query("select eventname,poster from events where pan_campus=1");
+                // var n=results[0].length;
+                // // console.log(n);
+                // var eventname=[];
+                // for (let index = 0; index < n; index++) {
+                //     eventname.push(results[0][index].eventname);
+                // }
+                // var poster=[];
+                // for (let index = 0; index < n; index++) {
+                //     poster.push(results[0][index].poster);
+                // }
+                // const events={
+                //     event:eventname,
+                //     posters:poster,
+                //     count:n
+                // };
+                // console.log(events);
+                // res.render("home.ejs",events);
+                homepage(res);
             }
             else {
                 const message = {
@@ -141,8 +159,37 @@ app.post("/register", async (req, res) => {
 });
 
 
-app.get("/campus-seemore", (req, res) => {
-    res.render("school.ejs");
+app.get("/campus-seemore", async(req, res) => {
+    try {
+        const results = await db.query("select eventname,poster,start_date from events where pan_campus=1");
+    var n=results[0].length;
+                // console.log(n);
+                var eventname=[];
+                for (let index = 0; index < n; index++) {
+                    eventname.push(results[0][index].eventname);
+                }
+                var poster=[];
+                for (let index = 0; index < n; index++) {
+                    poster.push(results[0][index].poster);
+                }
+                var dates=[];
+                for (let index = 0; index < n; index++) {
+                    dates.push(results[0][index].start_date);
+                }
+                const events={
+                    event:eventname,
+                    posters:poster,
+                    date:dates,
+                    count:n
+                };
+
+                console.log(events);
+
+    res.render("school.ejs",events);
+    } catch (error) {
+        console.log(error);
+    }
+    
 })
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`);

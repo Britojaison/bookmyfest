@@ -34,34 +34,16 @@
         <h1>Schools</h1>
     </div>
     <div class="container">
+        <%for(var i=0;i< event.length ;i++){%>
         <div class="event">
-            <img src="/images/Firefly 20231219114851.png" alt="">
+            <img src="<%= posters[i]%>" alt="Describe Image">
         </div>
         <div class="eventname">
-            <h2>Eventname</h2>
-            <p>date</p>
+            <h2><%= event[i] %></h2>
+            <p><%= date[i] %></p>
         </div>
-        <div class="event">
-            <img src="/images/Firefly 20231219114851.png" alt="">
-        </div>
-        <div class="eventname">
-            <h2>Eventname</h2>
-            <p>date</p>
-        </div>
-        <div class="event">
-            <img src="/images/Firefly 20231219114851.png" alt="">
-        </div>
-        <div class="eventname">
-            <h2>Eventname</h2>
-            <p>date</p>
-        </div>
-        <div class="event">
-            <img src="/images/Firefly 20231219114851.png" alt="">
-        </div>
-        <div class="eventname">
-            <h2>Eventname</h2>
-            <p>date</p>
-        </div>
+        <%}%>
+        
 
     </div>
     <footer>
