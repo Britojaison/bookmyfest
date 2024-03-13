@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and Sign Up</title>
     <link rel="stylesheet" href="styles/login.css">
+    
 </head>
 <body>
 <div class="left-side"></div>
@@ -48,34 +49,30 @@
             <input type="text" id="email" name="email" required>
         </div>
         <div class="form-group">
-            <label for="School">School of:</label>
-            <select name="school" id="school">
-                <option value="a">Architecture</option>
-                <option value="b">Arts and humanities</option>
-                <option value="c">Business and Management</option>
-                <option value="d">Commerce,finance and accounting</option>
-                <option value="e">Education</option>
-                <option value="f">Engineering and technology</option>
-                <option value="g">Law</option>
-                <option value="h">Sciences</option>
-                <option value="i">Social Sciences</option>
+            <label for="deanery">Select Deanery:</label>
+            <select name="school" id="deanery" onchange="updateDepartments()">
+                <option value="social sciences">social sciences</option>
+                <option value="science">science</option>
+                <option value="Arts">Arts and humanities</option>
+                <option value="Business and Management">Business and Management</option>
+                <option value="Commerce,finance and accounting">Commerce,finance and accounting</option>
+                <option value="Education">Education</option>
+                <option value="Engineering">Engineering and technology</option>
+                <option value="Law">Law</option>
+                
               </select>
               
         </div>
 
        
         <div class="form-group">
-            <label for="department">Department:</label>
-            <select name="department" id="department">
-                <option value="computer sciences">Computer Science</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="physics">Physics</option>
-                <option value="mathematics">Mathematics</option>
-                <option value="life sciences">Life Sciences</option>
+            <label for="department">Select Department:</label>
+            <select id="department">
+                <!-- Options will be dynamically populated based on deanery selection -->
             </select>    
         </div>
         
-        <button type="submit" class="submit-btn">Submit</button>
+        <button type="submit" class="submit-btn" value="Submit">Submit</button>
         <p class="login-link">Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
        
     
@@ -84,6 +81,34 @@
 </div>
 
 <script>
+    // Define departments for each deanery
+    const departments = {
+        "Arts": ["english and cultural studies","languages","media studies","performing arts,theatre studies and music","philosophy and theology"],
+        "science":["chemistry","computer sciences", "mathematics", "physics and electronics","statistics and data science"],
+        "Engineering": ["Civil Engineering", "Electrical Engineering", "Mechanical Engineering"],
+        "business and management":["business and management","hotel management","tourism management"],
+        "commerce,finance and accountancy":["commerce","professional studies"],
+        "law":[],
+        "social sciences":["economics","international studies,political science and history","psychology","psychology","sociology and social work"]
+        // Add more departments as needed
+    };
+
+    // Function to update department dropdown options based on deanery selection
+    function updateDepartments() {
+        const deanerySelect = document.getElementById("deanery");
+        const departmentSelect = document.getElementById("department");
+        const selectedDeanery = deanerySelect.value;
+
+        // Clear previous options
+        departmentSelect.innerHTML = "";
+
+        // Populate with departments for selected deanery
+        departments[selectedDeanery].forEach(function(department) {
+            const option = document.createElement("option");
+            option.text = department;
+            departmentSelect.add(option);
+        });
+    }
     function toggleForms() {
 
         var loginForm = document.getElementById('loginForm');
