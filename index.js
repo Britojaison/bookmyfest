@@ -49,9 +49,6 @@ async function homepage (res){
 }
 
 app.get("/", async (req, res) => {
-
-    //const results = await db.query("select  * from user")
-    //console.log(results[0])
     const message = {
         content: "",
     };
@@ -87,24 +84,7 @@ app.post("/login", async (req, res) => {
             const storedpassword = user.password;
             //console.log(storedpassword);
             if (storedpassword == password) {
-                // const results = await db.query("select eventname,poster from events where pan_campus=1");
-                // var n=results[0].length;
-                // // console.log(n);
-                // var eventname=[];
-                // for (let index = 0; index < n; index++) {
-                //     eventname.push(results[0][index].eventname);
-                // }
-                // var poster=[];
-                // for (let index = 0; index < n; index++) {
-                //     poster.push(results[0][index].poster);
-                // }
-                // const events={
-                //     event:eventname,
-                //     posters:poster,
-                //     count:n
-                // };
-                // console.log(events);
-                // res.render("home.ejs",events);
+                
                 homepage(res);
             }
             else {
