@@ -4,6 +4,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from 'mysql2'
 import bodyParser from "body-parser";
+import { render } from "ejs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express()
@@ -26,10 +27,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 async function homepage(res) {
-  const results = await db.query("select eventname,poster from events where pan_campus=1");
+  const results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
 
   var n = results[0].length;
   // console.log(n);
+  var eventid = [];
+  for (let index = 0; index < n; index++) {
+    eventid.push(results[0][index].eventid);
+  }
+
   var eventname = [];
   for (let index = 0; index < n; index++) {
     eventname.push(results[0][index].eventname);
@@ -38,11 +44,18 @@ async function homepage(res) {
   for (let index = 0; index < n; index++) {
     poster.push(results[0][index].poster);
   }
+  var dates = [];
+  for (let index = 0; index < n; index++) {
+    dates.push(results[0][index].start_date);
+  }
   const events = {
+    eventid: eventid,
     event: eventname,
     posters: poster,
+    date: dates,
     count: n
   };
+
   //console.log(events);
   res.render("home.ejs", events);
 
@@ -141,9 +154,14 @@ app.post("/register", async (req, res) => {
 
 app.get("/campus-seemore", async (req, res) => {
   try {
-    const results = await db.query("select eventname,poster,start_date from events where pan_campus=1");
+    const results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
     var n = results[0].length;
     // console.log(n);
+    var eventid = [];
+    for (let index = 0; index < n; index++) {
+      eventid.push(results[0][index].eventid);
+    }
+
     var eventname = [];
     for (let index = 0; index < n; index++) {
       eventname.push(results[0][index].eventname);
@@ -157,6 +175,7 @@ app.get("/campus-seemore", async (req, res) => {
       dates.push(results[0][index].start_date);
     }
     const events = {
+      eventid: eventid,
       event: eventname,
       posters: poster,
       date: dates,
@@ -171,14 +190,13 @@ app.get("/campus-seemore", async (req, res) => {
   }
 
 });
-app.get("/event/0", (req, res) => {
-  console.log("event 1");
-  console.log(req.body);
+app.get("/event/:id", (req, res) => {
+  // console.log("event 1");
+  const eventId = req.params;
+  console.log(eventId);
+  res.render("event.ejs")
 });
-app.get("/event/1", (req, res) => {
-  console.log("event 2");
-  console.log(req.body);
-});
+
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
 })
