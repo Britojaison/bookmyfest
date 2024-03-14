@@ -15,9 +15,7 @@ body {
 
   position: relative;
   overflow: hidden;
-
 }
-
 
 .right-side {
   width: 50%;
@@ -28,7 +26,6 @@ body {
 }
 
 .form-container {
-
   background-color: transparent;
   padding: 20px;
   border-radius: 8px;
@@ -40,7 +37,6 @@ body {
 }
 
 .form-container1 {
-
   background-color: transparent;
   padding: 20px;
   border-radius: 8px;
@@ -51,9 +47,7 @@ body {
   margin-left: 100px;
 }
 
-
-
-.form-container>h2 {
+.form-container > h2 {
   margin-bottom: 20px;
   color: #333;
 }
@@ -98,7 +92,7 @@ body {
   color: #555;
 }
 
-.login-link>a {
+.login-link > a {
   color: #3498db;
   text-decoration: none;
   font-weight: bold;
