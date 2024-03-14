@@ -24,13 +24,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 async function homepage(res) {
-<<<<<<< HEAD
+
   const results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
-=======
-  const results = await db.query(
-    "select eventname,poster from events where pan_campus=1"
-  );
->>>>>>> e2ab8f72b333fced7e6a8c772739875183f2ad15
+
 
   var n = results[0].length;
   // console.log(n);
@@ -55,12 +51,9 @@ async function homepage(res) {
     eventid: eventid,
     event: eventname,
     posters: poster,
-<<<<<<< HEAD
     date: dates,
     count: n
-=======
-    count: n,
->>>>>>> e2ab8f72b333fced7e6a8c772739875183f2ad15
+
   };
 
   //console.log(events);
