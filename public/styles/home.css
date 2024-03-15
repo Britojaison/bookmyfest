@@ -11,6 +11,7 @@
     margin-left: auto;
     margin-right: 2rem;
     text-decoration: solid;
+  
   }
 }
 
@@ -22,9 +23,11 @@
   color: #FFFFFF;
   margin: 0;
   font-size: 50px;
+  
 
   img {
     width: 23rem;
+    
   }
 }
 
@@ -188,13 +191,14 @@ h1 {
 
 
 footer {
-  height: 7rem;
+  height: 5rem;
   background-color: #1c738e;
   display: flex;
   justify-content: space-around;
   color: #FFFFFF;
   font-weight: bold;
   align-items: center;
+  font-family: 'Helvetica' , sans-serif;
   #link{
     text-decoration: none;
     color: #FFFFFF;

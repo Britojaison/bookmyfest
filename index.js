@@ -14,7 +14,7 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
+    password: "98409",
     database: "uems",
   })
   .promise();
@@ -56,7 +56,6 @@ async function homepage(res) {
 
   };
 
-  //console.log(events);
   res.render("home.ejs", events);
 }
 
