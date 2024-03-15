@@ -8,37 +8,24 @@
   </head>
 
   <body>
-    <div class="topnav">
-      <div id="title">
-        <a href="./home.ejs">
-        <img src="../public/images/BookMyShow.png" alt="image" />
-        </a>
-      </div>
-      
-      <div class="profile-image">
-        <img
-          src="../public/images/Firefly 20231219114851.png"
-          alt="Profile Image"
-          class="profile_photo"
-        />
-        <div class="options">
-          <a href="./profile.html">Profile</a>
-          <a href="aboutus.ejs">About</a>
-          <a href="./login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-
+    
     <div class="jeevan">
+        <div>
+          <a href="./admin.html">
+          <img id="backimage" src="../public/images/back.png">
+           </a>
+        </div>
       <div class="container">
-        <div class="image image-div">
-          <img
-            src="../public/images/Firefly 20231219114851.png"
-            alt="Event Image"
-            class="image"
-          />
+       <div class="image">
+          <input type="file" id="fileInput" style="display: none;">
+          <!-- Add an id to the img tag -->
+          <a href="#" onclick="document.getElementById('fileInput').click()">
+            <!-- Use the id to target the image -->
+            <img id="previewImage" src="../public/images/plus.png" alt="">
+          </a>
           <button>Create</button>
         </div>
+      
         <div class="info">
           <div class="raone">
             <p>Name:</p>
@@ -80,7 +67,17 @@
             <input type="time" id="eventTime" name="eventTime" required />
           </div>
           <div class="raone">
-            <p>Venue</p>
+            <label for="venue">Venue:</label>
+            <select id="venue" name="venue">
+              <option value="main audi">main audi</option>
+              <option value="KE audi">KE audi</option>
+              <option value="Block 1 audi">Block 1 audi</option>
+              <option value="skyview">skyview</option>
+            </select>
+          </div>
+            <p id="venue2">OR</p>
+          <div class="raone">
+            <p></p>
             <input type="text" id="venue" name="venue" required />
           </div>
           <div class="raone">
@@ -190,5 +187,6 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

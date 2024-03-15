@@ -170,3 +170,29 @@ address {
   text-align: center;
   padding-top: 1rem;
 }
+#venue2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 245px;
+}
+
+.image {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.image img {
+  height: 200px;
+  width: 200px;
+}
+
+#backimage {
+  height: 50px;
+  width: 50px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+}
