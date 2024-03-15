@@ -42,12 +42,12 @@
 
     <section id="section1">
 
-      <%for(var i=0;i< event.length ;i++){%>
-        <a href="/event/<%= eventid[i] %>">
+      <%for(var i=0;i< campusevent.length ;i++){%>
+        <a href="/event/<%= campuseventid[i] %>">
           <div class="item">
-            <img src="<%= posters[i]%>" alt="Describe Image">
+            <img src="<%= campusposters[i]%>" alt="Describe Image">
             <p>
-              <%= event[i] %>
+              <%= campusevent[i] %>
             </p>
           </div>
         </a>
@@ -69,22 +69,7 @@
         <img src="images/Firefly 20231219114851.png" alt="Describe Image">
         <p>Event Name</p>
       </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
+      
 
     </section>
 
@@ -98,26 +83,17 @@
 
     <section id="section1">
 
-      <div class="item">
-        <a href=""><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
+      <%for(var i=0;i< schoolevent.length ;i++){%>
+        <a href="/event/<%= schooleventid[i] %>">
+          <div class="item">
+            <img src="<%= schoolposters[i]%>" alt="Describe Image">
+            <p>
+              <%= schoolevent[i] %>
+            </p>
+          </div>
+        </a>
+        <%}%>
+      
 
     </section>
 
