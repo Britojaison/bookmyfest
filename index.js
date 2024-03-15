@@ -19,6 +19,7 @@ const db = mysql
     user: "root",
     password: "sqlmakri",
     database: "bmf2",
+
   })
   .promise();
 
@@ -97,9 +98,6 @@ async function homepage(req, res) {
     schoolcount: p
 
   };
-
-  //console.log(regno);
-
 
   res.render("home.ejs", events);
 }

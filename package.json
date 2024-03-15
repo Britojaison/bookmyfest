@@ -7,7 +7,11 @@
     "express-session": "^1.18.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
+<<<<<<< HEAD
     "nodemon": " 3.1.0 "
+=======
+    "nodemon": "^3.1.0"
+>>>>>>> f16d89c1a5bc1cb16ec5f546112e38503ab41dd6
   },
   "name": "bookmyfest",
   "version": "1.0.0",
