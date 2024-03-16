@@ -1,10 +1,13 @@
 // server
 import express from "express";
+import session from "express-session";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from "mysql2";
 import bodyParser from "body-parser";
 import { render } from "ejs";
+import { isModuleNamespaceObject } from "util/types";
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -23,12 +26,18 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-async function homepage(res) {
-  const results = await db.query(
-    "select eventid,eventname,poster,start_date from events where pan_campus=1"
-  );
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false,
+}));
 
-  var n = results[0].length;
+async function homepage(req, res) {
+
+  var results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
+
+
+  var n = results[0].length < 5 ? results[0].length : 5;
   // console.log(n);
   var eventid = [];
   for (let index = 0; index < n; index++) {
@@ -47,18 +56,53 @@ async function homepage(res) {
   for (let index = 0; index < n; index++) {
     dates.push(results[0][index].start_date);
   }
+
+  // schoool events!!!!!!!!!!!!!!!!!!!!!!
+
+  const userresults = await db.query(
+    "select user.regno,user.dept_id,department.school_id from user inner join department on user.dept_id=department.deptid where regno=?;",
+    [req.session.user]
+  );
+  const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
+  // console.log(schoolresults[0][0].eventid);
+  var p = schoolresults[0].length;
+  var schooleventid = [];
+  for (let index = 0; index < p; index++) {
+    schooleventid.push(schoolresults[0][index].eventid);
+  }
+
+  var schooleventname = [];
+  for (let index = 0; index < p; index++) {
+    schooleventname.push(schoolresults[0][index].eventname);
+  }
+  var schoolposter = [];
+  for (let index = 0; index < p; index++) {
+    schoolposter.push(schoolresults[0][index].poster);
+  }
+  var schooldates = [];
+  for (let index = 0; index < p; index++) {
+    schooldates.push(schoolresults[0][index].start_date);
+  }
   const events = {
-    eventid: eventid,
-    event: eventname,
-    posters: poster,
-    date: dates,
-    count: n,
+    campuseventid: eventid,
+    campusevent: eventname,
+    campusposters: poster,
+    campusdate: dates,
+    campuscount: n,
+
+    schooleventid: schooleventid,
+    schoolevent: schooleventname,
+    schoolposters: schoolposter,
+    schooldate: schooldates,
+    schoolcount: p
+
   };
 
   res.render("home.ejs", events);
 }
 
 app.get("/", async (req, res) => {
+  
   const message = {
     content: "",
   };
@@ -67,10 +111,11 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/logo-home", async (req, res) => {
-  homepage(res);
+  homepage(req, res);
 });
 
 app.get("/profile", async (req, res) => {
+  console.log(req.session.user);
   res.render("profile.ejs");
 });
 
@@ -82,7 +127,9 @@ app.post("/login", async (req, res) => {
   //console.log(req.body);
   const regno = req.body.loginRegisterNumber;
   const password = req.body.loginPassword;
-  // console.log(password);
+  req.session.user = req.body.loginRegisterNumber;
+
+  console.log(req.session.user);
 
   try {
     const results = await db.query("select * from user where regno=?", [regno]);
@@ -92,7 +139,7 @@ app.post("/login", async (req, res) => {
       const storedpassword = user.password;
       //console.log(storedpassword);
       if (storedpassword == password) {
-        homepage(res);
+        homepage(req, res);
       } else {
         const message = {
           content: "<h3>Wrong Password</h3>",
@@ -175,7 +222,7 @@ app.get("/campus-seemore", async (req, res) => {
     for (let index = 0; index < n; index++) {
       dates.push(results[0][index].start_date);
     }
-    const events = {
+    const campusevents = {
       eventid: eventid,
       event: eventname,
       posters: poster,
@@ -183,13 +230,57 @@ app.get("/campus-seemore", async (req, res) => {
       count: n,
     };
 
-    console.log(events);
+    console.log(campusevents);
 
-    res.render("school.ejs", events);
+    res.render("school.ejs", campusevents);
   } catch (error) {
     console.log(error);
   }
 });
+
+app.get("/seemore-schools", async (req, res) => {
+  //console.log(req.session.user);
+  try {
+    const userresults = await db.query(
+      "select user.regno,user.dept_id,department.school_id from user inner join department on user.dept_id=department.deptid where regno=?;",
+      [req.session.user]
+    );
+    //console.log(userresults);
+    const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
+
+    var p = schoolresults[0].length;
+    var schooleventid = [];
+    for (let index = 0; index < p; index++) {
+      schooleventid.push(schoolresults[0][index].eventid);
+    }
+
+    var schooleventname = [];
+    for (let index = 0; index < p; index++) {
+      schooleventname.push(schoolresults[0][index].eventname);
+    }
+    var schoolposter = [];
+    for (let index = 0; index < p; index++) {
+      schoolposter.push(schoolresults[0][index].poster);
+    }
+    var schooldates = [];
+    for (let index = 0; index < p; index++) {
+      schooldates.push(schoolresults[0][index].start_date);
+    }
+    const events = {
+      eventid: schooleventid,
+      event: schooleventname,
+      posters: schoolposter,
+      date: schooldates,
+      count: p
+
+    };
+    res.render("school.ejs",events);
+  } catch (error) {
+    console.log(error);
+  }
+    
+})
+
 app.get("/event/:id", (req, res) => {
   // console.log("event 1");
   const eventId = req.params;
