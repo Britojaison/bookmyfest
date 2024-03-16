@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf2",
   })
   .promise();
 
@@ -57,6 +57,31 @@ async function homepage(req, res) {
     dates.push(results[0][index].start_date);
   }
 
+  //recommended events!!!!!!
+
+  const userRecommended=await db.query(
+    "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
+    [req.session.user]);
+    console.log(userRecommended[0]);
+    var q = userRecommended[0].length;
+    var recommendeventid = [];
+  for (let index = 0; index < p; index++) {
+    recommendeventid.push(schoolresults[0][index].eventid);
+  }
+
+  var recommendeventname = [];
+  for (let index = 0; index < p; index++) {
+    recommendeventname.push(schoolresults[0][index].eventname);
+  }
+  var recommendposter = [];
+  for (let index = 0; index < p; index++) {
+    recommendposter.push(schoolresults[0][index].poster);
+  }
+  var recommenddates = [];
+  for (let index = 0; index < p; index++) {
+    recommenddates.push(schoolresults[0][index].start_date);
+  }
+
   // schoool events!!!!!!!!!!!!!!!!!!!!!!
 
   const userresults = await db.query(
@@ -64,7 +89,7 @@ async function homepage(req, res) {
     [req.session.user]
   );
   const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
-  // console.log(schoolresults[0][0].eventid);
+      //console.log(schoolresults[0]);
   var p = schoolresults[0].length;
   var schooleventid = [];
   for (let index = 0; index < p; index++) {
@@ -94,7 +119,13 @@ async function homepage(req, res) {
     schoolevent: schooleventname,
     schoolposters: schoolposter,
     schooldate: schooldates,
-    schoolcount: p
+    schoolcount: p,
+
+    recommendeventid: schooleventid,
+    recommendevent: schooleventname,
+    recommendposters: schoolposter,
+    recommenddate: schooldates,
+    recommendcount: q
 
   };
 
@@ -106,6 +137,8 @@ app.get("/", async (req, res) => {
   const message = {
     content: "",
   };
+
+
   res.render("login.ejs", message);
   console.log("11223343");
 });

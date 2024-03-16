@@ -67,10 +67,17 @@
 
     <section id="section1">
 
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
+      <%for(var i=0;i< recommendevent.length ;i++){%>
+        <a href="/event/<%= recommendeventid[i] %>">
+
+          <div class="item">
+            <img src="<%= recommendposters[i]%>" alt="Describe Image">
+            <p>
+              <%= recommendevent[i] %>
+            </p>
+          </div>
+        </a>
+        <%}%>
       
 
     </section>
