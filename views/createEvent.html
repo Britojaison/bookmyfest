@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Event</title>
-  <link rel="stylesheet" href="../public/styles/createEvent.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Event</title>
+    <link rel="stylesheet" href="../public/styles/createEvent.css" />
+  </head>
 
   <body>
     
@@ -45,17 +45,15 @@
             </div>
           </div>
 
-        <div class="raone">
-          <p>Host ID:</p>
-          <input type="text" id="hostid" name="hostid" required>
-        </div>
+          <div class="raone">
+            <p>Audience:</p>
+            <input type="text" id="eventID" name="eventID" required />
+          </div>
 
-        <div class="raone">
-          <p>
-            Start Date:
-          </p>
-          <input type="date" id="eventDate" name="eventDate" required>
-        </div>
+          <div class="raone">
+            <p>Start Date:</p>
+            <input type="date" id="eventDate" name="eventDate" required />
+          </div>
 
           <div class="raone">
             <p>End Date:</p>
@@ -69,7 +67,17 @@
             <input type="time" id="eventTime" name="eventTime" required />
           </div>
           <div class="raone">
-            <p>Venue</p>
+            <label for="venue">Venue:</label>
+            <select id="venue" name="venue">
+              <option value="main audi">main audi</option>
+              <option value="KE audi">KE audi</option>
+              <option value="Block 1 audi">Block 1 audi</option>
+              <option value="skyview">skyview</option>
+            </select>
+          </div>
+            <p id="venue2">OR</p>
+          <div class="raone">
+            <p></p>
             <input type="text" id="venue" name="venue" required />
           </div>
           <div class="raone">
@@ -179,5 +187,6 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

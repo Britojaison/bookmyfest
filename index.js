@@ -14,7 +14,7 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "98409",
+    password: "1234",
     database: "uems",
   })
   .promise();
@@ -24,9 +24,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 async function homepage(res) {
-
-  const results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
-
+  const results = await db.query(
+    "select eventid,eventname,poster,start_date from events where pan_campus=1"
+  );
 
   var n = results[0].length;
   // console.log(n);
@@ -52,8 +52,7 @@ async function homepage(res) {
     event: eventname,
     posters: poster,
     date: dates,
-    count: n
-
+    count: n,
   };
 
   res.render("home.ejs", events);
@@ -153,7 +152,9 @@ app.post("/register", async (req, res) => {
 
 app.get("/campus-seemore", async (req, res) => {
   try {
-    const results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
+    const results = await db.query(
+      "select eventid,eventname,poster,start_date from events where pan_campus=1"
+    );
 
     var n = results[0].length;
     // console.log(n);
@@ -193,7 +194,7 @@ app.get("/event/:id", (req, res) => {
   // console.log("event 1");
   const eventId = req.params;
   console.log(eventId);
-  res.render("event.ejs")
+  res.render("event.ejs");
 });
 
 app.listen(port, () => {
