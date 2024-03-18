@@ -1,166 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lemon&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/home.css" />
+    <title>BookMyFest</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/home.css">
-  <title>BookMyFest</title>
-</head>
+  <body>
+    <div class="topnav">
+      <div id="title">
+        <img src="images/BookMyShow.png" alt="image" />
+      </div>
 
-<body>
-  <div class="topnav">
-    <div id="title">
-      <img src="images/BookMyShow.png" alt="image">
-    </div>
-
-    <div class="profile-image">
-      <img src="images/Firefly 20231219114851.png" alt="Profile Image" class="profile_photo">
-      <div class="options">
-        <a href="/profile">Profile</a>
-        <a href="/about">About</a>
-        <a href="/">Logout</a>
+      <div class="profile-image">
+        <img
+          src="images/Firefly 20231219114851.png"
+          alt="Profile Image"
+          class="profile_photo"
+        />
+        <div class="options">
+          <a href="/profile">Profile</a>
+          <a href="/about">About</a>
+          <a href="/">Logout</a>
+        </div>
       </div>
     </div>
 
-
-  </div>
-
-  <div class="header">
-    <h1>Campus Events</h1>
-    <p><a href="/campus-seemore">see more</a></p>
-  </div>
-  <div class="wrapper">
-
-    <section id="section1">
-
-
-      <%for(var i=0;i< campusevent.length ;i++){%>
+    <div class="header">
+      <h1>Campus Events</h1>
+      <p><a href="/campus-seemore">see more</a></p>
+    </div>
+    <div class="wrapper">
+      <section id="section1">
+        <%for(var i=0;i< campusevent.length ;i++){%>
         <a href="/event/<%= campuseventid[i] %>">
-
           <div class="item">
-            <img src="<%= campusposters[i]%>" alt="Describe Image">
-            <p>
-              <%= campusevent[i] %>
-            </p>
+            <img src="<%= campusposters[i]%>" alt="Describe Image" />
+            <p><%= campusevent[i] %></p>
           </div>
         </a>
         <%}%>
+      </section>
+    </div>
+    <div class="header">
+      <h1>Recommended</h1>
+      <p><a href="/campus-seemore">see more</a></p>
+    </div>
+    <div class="wrapper">
+      <section id="section1">
+        <div class="item">
+          <img src="images/Firefly 20231219114851.png" alt="Describe Image" />
+          <p>Event Name</p>
+        </div>
+      </section>
+    </div>
 
-    </section>
-
-
-  </div>
-  <div class="header">
-    <h1>Recommended</h1>
-    <p><a href="/campus-seemore">see more</a></p>
-  </div>
-  <div class="wrapper">
-
-    <section id="section1">
-
-      <div class="item">
-        <img src="images/Firefly 20231219114851.png" alt="Describe Image">
-        <p>Event Name</p>
-      </div>
-      
-
-    </section>
-
-  </div>
-
-  <div class="header">
-    <h1>School</h1>
-    <p><a href="/seemore-schools">see more</a></p>
-  </div>
-  <div class="wrapper">
-
-    <section id="section1">
-
-      <%for(var i=0;i< schoolevent.length ;i++){%>
+    <div class="header">
+      <h1>School</h1>
+      <p><a href="/seemore-schools">see more</a></p>
+    </div>
+    <div class="wrapper">
+      <section id="section1">
+        <%for(var i=0;i< schoolevent.length ;i++){%>
         <a href="/event/<%= schooleventid[i] %>">
           <div class="item">
-            <img src="<%= schoolposters[i]%>" alt="Describe Image">
-            <p>
-              <%= schoolevent[i] %>
-            </p>
+            <img src="<%= schoolposters[i]%>" alt="Describe Image" />
+            <p><%= schoolevent[i] %></p>
           </div>
         </a>
         <%}%>
-      
-
-    </section>
-
-  </div>
-
-  <div class="header">
-    <h1>visit schools </h1>
-  </div>
-  <div class="wrapper">
-
-    <section id="section1">
-
-      <div class="item">
-        <a href="/campus-seemore"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <br>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-      <div class="item">
-        <a href="./school.html"><img src="images/Firefly 20231219114851.png" alt="Describe Image"></a>
-        <p>school</p>
-      </div>
-
-    </section>
-
-  </div>
-  <footer>
-    <div>
-
-      +91 1234567890 <br>mail@christuniversity.in
-
+      </section>
     </div>
-    <div>
-      <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
+
+    <div class="header">
+      <h1>visit schools</h1>
     </div>
-    <div>PRIVACY POLICY</div>
-  </footer>
+    <div class="wrapper">
+      <section id="section1">
+        <div class="item">
+          <a href="./school.ejs"
+            ><img
+              src="images/Firefly 20231219114851.png"
+              alt="Describe Image"
+            />
+          </a>
+          <a href="./school.ejs">
+            <p>Architecture</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Arts and Humanities</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Business and Management</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Commerce,Finance and Accountancy</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Education</p>
+          </a>
+        </div>
+        <br />
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Engineering and Technology</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Law</p>
+          </a>
+        </div>
+        <div class="item">
+          <a href="./school.ejs"
+            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
+          /></a>
+          <a href="./school.ejs">
+            <p>Social Sciencs</p>
+          </a>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <div>+91 1234567890 <br />mail@christuniversity.in</div>
+      <div>
+        <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
+      </div>
+      <div>PRIVACY POLICY</div>
+    </footer>
 
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

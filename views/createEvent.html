@@ -18,9 +18,9 @@
       <div class="container">
        <div class="image">
           <input type="file" id="fileInput" style="display: none;">
-          <!-- Add an id to the img tag -->
+          
           <a href="#" onclick="document.getElementById('fileInput').click()">
-            <!-- Use the id to target the image -->
+
             <img id="previewImage" src="../public/images/plus.png" alt="">
           </a>
           <button>Create</button>
@@ -32,8 +32,9 @@
             <input type="text" id="eventName" name="eventName" required />
           </div>
           <div class="raone">
-            <p>Pan campus</p>
+            <p>Campus-wide</p>
             <div class="raone">
+              <div class="raone-cont">
               <div class="">
                 <label for="Yes">Yes</label>
                 <input type="radio" id="eventDate" name="eventDate" required />
@@ -42,11 +43,17 @@
                 <label for="No">No</label>
                 <input type="radio" id="eventDate" name="eventDate" required />
               </div>
+              <div class="tooltip"><img src="../public/images/information.png" >
+                <span class="tooltiptext">Select YES if anyone can participate in the event.If NO mention who can participate</span>
+            </div>
+              </div>
+
             </div>
           </div>
+          
 
           <div class="raone">
-            <p>Audience:</p>
+            <p>For:</p>
             <input type="text" id="eventID" name="eventID" required />
           </div>
 
@@ -68,21 +75,26 @@
           </div>
           <div class="raone">
             <label for="venue">Venue:</label>
+            
             <select id="venue" name="venue">
               <option value="main audi">main audi</option>
               <option value="KE audi">KE audi</option>
               <option value="Block 1 audi">Block 1 audi</option>
               <option value="skyview">skyview</option>
             </select>
+            
           </div>
             <p id="venue2">OR</p>
           <div class="raone">
             <p></p>
             <input type="text" id="venue" name="venue" required />
+            
           </div>
           <div class="raone">
             <p>Registration:</p>
             <div class="raone">
+              <div class="raone-cont">
+
               <div class="">
                 <label for="yes">Yes</label>
                 <input
@@ -101,6 +113,11 @@
                   required
                 />
               </div>
+               <div class="tooltip"><img src="../public/images/information.png" >
+              <span class="tooltiptext">Select YES if you want registration. You can also limit the range for number of registration</span>
+            </div>
+              </div>
+
             </div>
           </div>
           <div class="raone">
@@ -115,6 +132,8 @@
           <div class="raone">
             <p>Attendance:</p>
             <div class="raone">
+              <div class="raone-cont">
+
               <div class="">
                 <label for="yes">Yes</label>
                 <input
@@ -133,22 +152,34 @@
                   required
                 />
               </div>
+               <div class="tooltip"><img src="../public/images/information.png" >
+              <span class="tooltiptext">Select YES if you will be providing claims for the participants</span>
+              </div>
+            </div>
             </div>
           </div>
           <div class="raone">
             
             <label for="category">Category:</label>
             <select id="category" name="category">
-              <option value="dance">dance</option>
-              <option value="theatre">theatre</option>
-              <option value="quiz">quiz</option>
-              <option value="fest">fest</option>
+              <option value="dance">Dance</option>
+              <option value="theatre">Theatre</option>
+              <option value="Stage">Stage</option>
+              <option value="music">Music</option>
+              <option value="photography">photography</option>
+              <option value="workshop">Workshop</option>
+              <option value="quiz">Quiz</option>
+              <option value="Sports">Sports</option>
+              <option value="fest">Fests</option>
+              <option value="Conference">Conference</option>
 
             </select>
           </div>
           <div class="raone">
             <p>Sub-events:</p>
             <div class="raone">
+              <div class="raone-cont">
+
               <div class="">
                 <label for="yes">Yes</label>
                 <input
@@ -166,6 +197,10 @@
                   name="subevents"
                   required
                 />
+              </div>
+               <div class="tooltip"><img src="../public/images/information.png" >
+              <span class="tooltiptext">Select YES if there are any sub-events.Also select the number of sub-events</span>
+            </div>
               </div>
             </div>
               </div>

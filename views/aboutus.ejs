@@ -1,194 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Event Management System</title>
-  <style>
-    .topnav {
-      display: flex;
-      background-color: #1c738e;
-      height: 70px;
-      margin-bottom: 20px;
-      justify-content: space-between;
-      align-items: center;
-    
-      a {
-        color: #FFFFFF;
-        margin-left: auto;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Event Management System</title>
+    <style>
+      .topnav {
+        display: flex;
+        background-color: #1c738e;
+        height: 70px;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+          color: #ffffff;
+          margin-left: auto;
+          margin-right: 2rem;
+          text-decoration: solid;
+        }
+      }
+
+      #title {
+        padding-left: 37rem;
+        padding-top: 0.5rem;
+        font-family: Helvetica, sans-serif;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0;
+        font-size: 50px;
+
+        img {
+          width: 23rem;
+        }
+      }
+
+      .profile_photo {
+        width: 100px;
+        border-radius: 50%;
+        float: right;
+        color: #f2f2f2;
+        width: 4rem;
         margin-right: 2rem;
-        text-decoration: solid;
+        text-decoration: none;
+        cursor: pointer;
       }
-    }
-    
-    #title {
-      padding-left: 37rem;
-      padding-top: .5rem;
-      font-family: Helvetica, sans-serif;
-      font-weight: 600;
-      color: #FFFFFF;
-      margin: 0;
-      font-size: 50px;
-    
-      img {
-        width: 23rem;
+
+      .profile-image {
+        position: relative;
+        cursor: pointer;
       }
-    }
-    
-    
-    .profile_photo {
-      width: 100px;
-      border-radius: 50%;
-      float: right;
-      color: #f2f2f2;
-      width: 4rem;
-      margin-right: 2rem;
-      text-decoration: none;
-      cursor: pointer;
-    
-    }
-    
-    .profile-image {
-      position: relative;
-      cursor: pointer;
-    }
-    
-    .options {
-      display: none;
-      position: absolute;
-    
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-    
-      border-radius: 5px;
-      z-index: 1;
-    }
-    
-    .options a {
-      display: block;
-      text-decoration: none;
-      color: #333;
-      padding: 8px;
-      transition: background-color 0.3s;
-    }
-    
-    .options a:hover {
-      background-color: #f0f0f0;
-    }
-    
-    .profile-image:hover .options {
-      display: block;
-    }
-    
-    h1{
-      text-align: center;
-      text-decoration: underline;
-    }
-    body{
-      text-align: center;
-      background: linear-gradient(-45deg, #1ba3cd, #3093b1, #95bcca, #ffffff);
-      background-size: 400% 400%;
-      animation: gradient 6s ease infinite;
-      margin: 0;
-      
-    }
-    @keyframes gradient {
-  0% {
-      background-position: 0% 50%;
-  }
 
-  50% {
-      background-position: 100% 50%;
-  }
+      .options {
+        display: none;
+        position: absolute;
 
-  100% {
-      background-position: 0% 50%;
-  }
-}
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
 
-    .history{
-      margin-top: 100px;
-    }
+        border-radius: 5px;
+        z-index: 1;
+      }
 
-    .Vision{
-      margin-top: 70px;
+      .options a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+        padding: 8px;
+        transition: background-color 0.3s;
+      }
 
-    }
-   
-    footer {
-  height: 5rem;
-  background-color: #1c738e;
-  display: flex;
-  justify-content: space-around;
-  color: #FFFFFF;
-  font-weight: bold;
-  align-items: center;
-  font-family: 'Helvetica' , sans-serif;
-  #link{
-    text-decoration: none;
-    color: #FFFFFF;
-  }
+      .options a:hover {
+        background-color: #f0f0f0;
+      }
 
-}
-   
-  </style>
-</head>
+      .profile-image:hover .options {
+        display: block;
+      }
 
+      h1 {
+        text-align: center;
+        text-decoration: underline;
+      }
+      body {
+        text-align: center;
+        background: linear-gradient(-45deg, #1ba3cd, #3093b1, #95bcca, #ffffff);
+        background-size: 400% 400%;
+        animation: gradient 6s ease infinite;
+        margin: 0;
+      }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
 
-<body>
-  <div class="topnav">
-    <div id="title">
-      <a href="/logo-home"><img src="/images/BookMyShow.png" alt="image"></a>
-    </div>
-   
-    <div class="profile-image">
-      <img src="/images/Firefly 20231219114851.png" alt="Profile Image" class="profile_photo">
-      <div class="options">
-        <a href="/profile">Profile</a>
-        <a href="/">Logout</a>
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .history {
+        margin-top: 100px;
+      }
+
+      .Vision {
+        margin-top: 70px;
+      }
+
+      footer {
+        height: 5rem;
+        background-color: #1c738e;
+        display: flex;
+        justify-content: space-around;
+        color: #ffffff;
+        font-weight: bold;
+        align-items: center;
+        font-family: "Helvetica", sans-serif;
+        #link {
+          text-decoration: none;
+          color: #ffffff;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <div id="title">
+        <a href="/logo-home"
+          ><img src="/images/BookMyShow.png" alt="image"
+        /></a>
+      </div>
+
+      <div class="profile-image">
+        <img
+          src="/images/Firefly 20231219114851.png"
+          alt="Profile Image"
+          class="profile_photo"
+        />
+        <div class="options">
+          <a href="/profile">Profile</a>
+          <a href="/">Logout</a>
+        </div>
       </div>
     </div>
+    <h1>About Us</h1>
+    <div class="content">
+      <p class="Start">
+        Ever felt overwhelmed by the sheer number of college fests happening
+        around you? Struggling to keep track of dates, themes, registrations,
+        and everything in between?<br />
+        We feel you! <br />
+        That's why we built this platform – your ultimate guide to college
+        fests. We curate information on fests across different schools, bringing
+        everything you need to know right at your fingertips. No more panic
+        about missing a fest of your like or frantic searches – find all the
+        details, from electrifying performances to mind-blowing workshops, in
+        one convenient location. We're passionate about making your college
+        experience vibrant and enriching. Explore diverse fests, discover hidden
+        talents, and forge lasting memories. Let's turn that "fest frenzy" into
+        a well-planned adventure!
+      </p>
+      <h2 class="Vision">Vision:</h2>
+      <p>
+        Our Vision is to provide the best platform for a student to get
+        knowledge about all the fests and programs happening around them. We
+        also strive to more student participation by giving them all the
+        information on a single platform
+      </p>
 
-
-  </div>
-  <h1>About Us</h1>
-  <div class="content">
-    <p class="Start">Ever felt overwhelmed by the sheer number of college fests happening around you? Struggling to keep track of dates, themes, registrations, and everything in between?<br> We feel you! <br>
-      That's why we built this platform – your ultimate guide to college fests. We curate information on fests across different schools, bringing everything you need to know right at your fingertips. No more panic about missing a fest of your like or frantic searches – find all the details, from electrifying performances to mind-blowing workshops, in one convenient location.
-      We're passionate about making your college experience vibrant and enriching. Explore diverse fests, discover hidden talents, and forge lasting memories. Let's turn that "fest frenzy" into a well-planned adventure!
-    </p>
-    <h2 class="Vision">Vision:</h2>
-    <p>
-      Our Vision is to provide the best platform for a student to get knowledge about all the fests and programs happening around them.
-      We also strive to more student participation by giving them all the information on a single platform
-    </p>
-
-    <h2 class="history">History:</h2>
-    <p>Christ Deemed To Be University is known for their academic excellence as well as diverse option for a student's extracurricular.
-      But Due to Student's laziness to not check out their department's stalls or having to check their mail for information about all extracurriculars in their surrounding,
-      student's have not been able to been able to know and participate in fests of their interests. This is when It was brought to attention of how a platform 
-      like BookMyFest is required, which can make it easy for hosts to spread information on the fests they are hosting and for students to get informed.
-    </p>
-    
-  </div>
-  <footer>
-    <div>
-
-      +91 1234567890 <br>mail@christuniversity.in
-
+      <h2 class="history">History:</h2>
+      <p>
+        Christ Deemed To Be University is known for their academic excellence as
+        well as diverse option for a student's extracurricular. But Due to
+        Student's laziness to not check out their department's stalls or having
+        to check their mail for information about all extracurriculars in their
+        surrounding, student's have not been able to been able to know and
+        participate in fests of their interests. This is when It was brought to
+        attention of how a platform like BookMyFest is required, which can make
+        it easy for hosts to spread information on the fests they are hosting
+        and for students to get informed.
+      </p>
     </div>
-    <div>
-      <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
-    </div>
-    <div>PRIVACY POLICY</div>
-  </footer>
-
-
-</body>
-
-
-
+    <footer>
+      <div>+91 1234567890 <br />mail@christuniversity.in</div>
+      <div>
+        <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
+      </div>
+      <div>PRIVACY POLICY</div>
+    </footer>
+  </body>
+</html>
