@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="/styles/event.css" />
 </head>
 
-  <body>
-    
-      <div>
-        <a href="/logo-home">
-          <img id="backimage" src="/images/back.png" />
-        </a>
-      </div>
-    
+<body>
+
+  <div>
+    <a href="/logo-home">
+      <img id="backimage" src="/images/back.png" />
+    </a>
+  </div>
+
   </div>
   <div class="jeevan">
     <h1>Event Name</h1>
@@ -27,7 +27,13 @@
       <div class="info">
         <p>host:</p>
         <p>Campus Wide:</p>
-        <p>For:</p>
+        <p>
+          <%if (pan_campus) {%>
+            
+            <% }else{ %>
+              for:
+              <% } %>
+        </p>
         <p>date:</p>
         <p>Time:</p>
         <p>Venue:</p>
@@ -35,14 +41,22 @@
         <p>attendence:</p>
       </div>
       <div class="results">
-        <p>lkdscm</p>
-        <p>jljwnkdew</p>
-        <p>nwccwwccwcwccw</p>
-        <p>lkdscm</p>
-        <p>jljwnkdew</p>
-        <p>nwccwwccwcwccw</p>
-        <p>nwccwwccwcwccw</p>
-        <p>nwccwwccwcwccw</p>
+        <p>
+          <%= club %>
+        </p>
+        <p>
+          <%if (pan_campus) {%>
+            Yes
+            <% }else{ %>
+              No
+              <% } %>
+        </p>
+        <p><%= audience %></p>
+        <p><%= start_date %></p>
+        <p><%= event_time %></p>
+        <p><%= venue %></p>
+        <p><%= event_desc %></p>
+        <p><%= attendance %></p>
 
       </div>
     </div>

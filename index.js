@@ -7,6 +7,7 @@ import mysql from "mysql2";
 import bodyParser from "body-parser";
 import { render } from "ejs";
 import { isModuleNamespaceObject } from "util/types";
+import { count } from "console";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -59,12 +60,12 @@ async function homepage(req, res) {
 
   //recommended events!!!!!!
 
-  const userRecommended=await db.query(
+  const userRecommended = await db.query(
     "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
     [req.session.user]);
-    console.log(userRecommended[0]);
-    var q = userRecommended[0].length;
-    var recommendeventid = [];
+  console.log(userRecommended[0]);
+  var q = userRecommended[0].length;
+  var recommendeventid = [];
   for (let index = 0; index < p; index++) {
     recommendeventid.push(schoolresults[0][index].eventid);
   }
@@ -89,7 +90,7 @@ async function homepage(req, res) {
     [req.session.user]
   );
   const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
-      //console.log(schoolresults[0]);
+  //console.log(schoolresults[0]);
   var p = schoolresults[0].length;
   var schooleventid = [];
   for (let index = 0; index < p; index++) {
@@ -133,7 +134,7 @@ async function homepage(req, res) {
 }
 
 app.get("/", async (req, res) => {
-  
+
   const message = {
     content: "",
   };
@@ -307,18 +308,33 @@ app.get("/seemore-schools", async (req, res) => {
       count: p
 
     };
-    res.render("school.ejs",events);
+    res.render("school.ejs", events);
   } catch (error) {
     console.log(error);
   }
-    
+
 })
 
-app.get("/event/:id", (req, res) => {
+app.get("/event/:id", async (req, res) => {
   // console.log("event 1");
   const eventId = req.params;
   console.log(eventId);
-  res.render("event.ejs");
+  try {
+    const result = await db.query("select * from events where eventid=? ", [eventId.id]);
+    // const clubid=result[0][0].clubID;
+    // console.log(clubid);
+    const club=await db.query("select clubname from clubs where clubid=?",[result[0][0].clubID]);
+
+    var eventdetails=result[0][0];
+    eventdetails.club=club[0][0].clubname;
+    console.log(eventdetails);
+
+    res.render("event.ejs", eventdetails);
+
+  } catch (error) {
+    console.log(error);
+  }
+  
 });
 
 app.listen(port, () => {
