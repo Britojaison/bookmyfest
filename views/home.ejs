@@ -59,20 +59,35 @@
           </div>
         </a>
         <%}%>
-      </section>
-    </div>
-    <div class="header">
-      <h1>Recommended</h1>
-      <p><a href="/campus-seemore">see more</a></p>
-    </div>
-    <div class="wrapper">
-      <section id="section1">
-        <div class="item">
-          <img src="images/Firefly 20231219114851.png" alt="Describe Image" />
-          <p>Event Name</p>
-        </div>
-      </section>
-    </div>
+
+    </section>
+
+
+  </div>
+  <div class="header">
+    <h1>Recommended</h1>
+    <p><a href="/campus-seemore">see more</a></p>
+  </div>
+  <div class="wrapper">
+
+    <section id="section1">
+
+      <%for(var i=0;i< recommendevent.length ;i++){%>
+        <a href="/event/<%= recommendeventid[i] %>">
+
+          <div class="item">
+            <img src="<%= recommendposters[i]%>" alt="Describe Image">
+            <p>
+              <%= recommendevent[i] %>
+            </p>
+          </div>
+        </a>
+        <%}%>
+      
+
+    </section>
+
+  </div>
 
     <div class="header">
       <h1>School</h1>
