@@ -154,7 +154,7 @@ h1 {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 100px;
     /* align-self: flex-start;
 
     display: grid;

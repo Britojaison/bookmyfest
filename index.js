@@ -33,6 +33,10 @@ app.use(session({
   saveUninitialized: false,
 }));
 
+async function adminpage(req,res){
+
+}
+
 async function homepage(req, res) {
 
   var results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
@@ -63,7 +67,7 @@ async function homepage(req, res) {
   const userRecommended = await db.query(
     "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
     [req.session.user]);
-  console.log(userRecommended[0]);
+  //console.log(userRecommended[0]);
   var q = userRecommended[0].length;
   var recommendeventid = [];
   for (let index = 0; index < p; index++) {
@@ -173,7 +177,14 @@ app.post("/login", async (req, res) => {
       const storedpassword = user.password;
       //console.log(storedpassword);
       if (storedpassword == password) {
-        homepage(req, res);
+        console.log(user.role);
+        if (user.role == "A") {
+          adminpage(req, res);
+          res.render("admin.ejs");
+        } else {
+
+          homepage(req, res);
+        }
       } else {
         const message = {
           content: "<h3>Wrong Password</h3>",
@@ -323,10 +334,10 @@ app.get("/event/:id", async (req, res) => {
     const result = await db.query("select * from events where eventid=? ", [eventId.id]);
     // const clubid=result[0][0].clubID;
     // console.log(clubid);
-    const club=await db.query("select clubname from clubs where clubid=?",[result[0][0].clubID]);
+    const club = await db.query("select clubname from clubs where clubid=?", [result[0][0].clubID]);
 
-    var eventdetails=result[0][0];
-    eventdetails.club=club[0][0].clubname;
+    var eventdetails = result[0][0];
+    eventdetails.club = club[0][0].clubname;
     console.log(eventdetails);
 
     res.render("event.ejs", eventdetails);
@@ -334,7 +345,7 @@ app.get("/event/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  
+
 });
 
 app.listen(port, () => {
