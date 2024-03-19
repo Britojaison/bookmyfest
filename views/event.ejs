@@ -18,27 +18,27 @@
 
   </div>
   <div class="jeevan">
-    <h1>Event Name</h1>
+    <h1><%= eventname %></h1>
     <div class="container">
       <div class="image image-div">
-        <img src="/images/Firefly 20231219114851.png" alt="Event Image" class="image" />
+        <img src="<%= poster %>" alt="Event Image" class="image" />
         <button>Register</button>
       </div>
       <div class="info">
-        <p>host:</p>
+        <p>Host:</p>
         <p>Campus Wide:</p>
         <p>
           <%if (pan_campus) {%>
             
             <% }else{ %>
-              for:
+              For:
               <% } %>
         </p>
-        <p>date:</p>
+        <p>Date:</p>
         <p>Time:</p>
         <p>Venue:</p>
-        <p>description:</p>
-        <p>attendence:</p>
+        <p>Description:</p>
+        <p>Attendence:</p>
       </div>
       <div class="results">
         <p>
