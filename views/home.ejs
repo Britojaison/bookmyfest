@@ -27,6 +27,19 @@
 
   <body>
     <div class="topnav">
+      <div class="drop">
+        <select id="school" >
+          <option value="" disabled selected>School:</option>
+          <option value="arc">School of Architecture</option>
+          <option value="art">School of Arts And Humanities</option>
+          <option value="bus">School of Business And Management</option>
+          <option value="comm">School of Commerce, Finance And Accountancy </option>
+          <option value="edu">School of Education</option>
+          <option value="eng">School of Engineering And Technology </option>
+          <option value="soc">School of Social Sciences</option>
+          <option value="law">School of Law </option>
+        </select>
+  </div>
       <div id="title">
         <img src="images/BookMyShow.png" alt="image" />
       </div>
@@ -44,7 +57,11 @@
         </div>
       </div>
     </div>
-
+    <div class="video">
+      <video autoplay muted loop id="myVideo">
+        <source src="video\introvideo.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="header">
       <h1>Campus Events</h1>
       <p><a href="/campus-seemore">see more</a></p>
@@ -106,81 +123,7 @@
       </section>
     </div>
 
-    <div class="header">
-      <h1>visit schools</h1>
-    </div>
-    <div class="wrapper">
-      <section id="section1">
-        <div class="item">
-          <a href="./school.ejs"
-            ><img
-              src="images/Firefly 20231219114851.png"
-              alt="Describe Image"
-            />
-          </a>
-          <a href="./school.ejs">
-            <p>Architecture</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Arts and Humanities</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Business and Management</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Commerce,Finance and Accountancy</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Education</p>
-          </a>
-        </div>
-        <br />
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Engineering and Technology</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Law</p>
-          </a>
-        </div>
-        <div class="item">
-          <a href="./school.ejs"
-            ><img src="images/Firefly 20231219114851.png" alt="Describe Image"
-          /></a>
-          <a href="./school.ejs">
-            <p>Social Sciencs</p>
-          </a>
-        </div>
-      </section>
-    </div>
+   
     <footer>
       <div>+91 1234567890 <br />mail@christuniversity.in</div>
       <div>

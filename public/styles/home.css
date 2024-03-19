@@ -2,7 +2,7 @@
   display: flex;
   background-color: #1c738e;
   height: 70px;
-  margin-bottom: 20px;
+  
   justify-content: space-between;
   align-items: center;
 
@@ -14,8 +14,21 @@
   }
 }
 
+#school{
+  margin-left: 1rem;
+  width: 80px;
+  background-color: #1c738e;
+  border: solid 1px;
+  color: #f0f0f0;
+  font-size: large;
+}
+
+#school:hover {
+  text-decoration: underline;
+}
+
 #title {
-  padding-left: 37rem;
+  padding-left:2rem;
   padding-top: 0.5rem;
   font-family: Helvetica, sans-serif;
   font-weight: 600;
@@ -87,7 +100,16 @@ body {
   margin: 0;
   background-color: #ffffff;
 }
+.video{
+  height: 400px;
+  width: 100%;
+ }
 
+ #myVideo{
+  height: 100%;
+  width: 100%;
+  object-fit:cover;
+}
 h1 {
   font-family: "Noto Serif", serif;
   font-weight: 100;
