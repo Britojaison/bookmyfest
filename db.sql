@@ -1,13 +1,14 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+
+-- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
 -- Host: localhost    Database: uems
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -147,6 +148,7 @@ CREATE TABLE `events` (
   `poster` varchar(500) DEFAULT NULL,
   `categoryID` int DEFAULT NULL,
   `formlink` varchar(500) DEFAULT NULL,
+  `host` int DEFAULT NULL,
   PRIMARY KEY (`eventID`),
   KEY `categoryID` (`categoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -158,7 +160,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'Darpan',1,NULL,'2024-05-15','2024-06-15',NULL,NULL,'Darpan is the flagship SWO event',NULL,NULL,NULL,'\\images\\darpan.png',NULL,NULL),(2,'Interface',0,'Dept. of Computer Science','2024-07-15','2024-07-18',NULL,'main audi','interface is the flagship CUCS event',NULL,NULL,NULL,'\\images\\interface.jpg',9,NULL),(3,'Gen Quiz',1,NULL,'2024-07-15',NULL,'16:15:00','skyview','quiz event for central campus',NULL,1,1000,'\\images\\genquiz.jpeg',7,NULL),(4,'crispo',1,NULL,'2024-03-05','2024-03-27',NULL,'ground','inter campus sport',NULL,NULL,NULL,'\\images\\crispo.jpeg',NULL,NULL),(5,'inbloom',1,NULL,'2024-05-17','2024-05-24',NULL,'central campus','inter deanery fest',NULL,NULL,NULL,'\\images\\inbloom.jpg',NULL,NULL),(6,'maverick',1,NULL,'2024-05-14','2024-05-17',NULL,'central campus','women premier league',NULL,NULL,NULL,'\\images\\maverick.jpg',NULL,NULL),(7,'hackathon',1,NULL,'2024-03-23','2024-03-24',NULL,'skyview','coding league',NULL,NULL,NULL,'\\images\\hackathon.jpg',9,NULL);
+INSERT INTO `events` VALUES (1,'Darpan',1,NULL,'2024-05-15','2024-06-15',NULL,NULL,'Darpan is the flagship SWO event',NULL,NULL,NULL,'\\images\\darpan.png',NULL,NULL,NULL),(2,'Interface',0,'Dept. of Computer Science','2024-07-15','2024-07-18',NULL,'main audi','interface is the flagship CUCS event',NULL,NULL,NULL,'\\images\\interface.jpg',9,NULL,NULL),(3,'Gen Quiz',1,NULL,'2024-07-15',NULL,'16:15:00','skyview','quiz event for central campus',NULL,1,1000,'\\images\\genquiz.jpeg',7,NULL,NULL),(4,'crispo',1,NULL,'2024-03-05','2024-03-27',NULL,'ground','inter campus sport',NULL,NULL,NULL,'\\images\\crispo.jpeg',NULL,NULL,NULL),(5,'inbloom',1,NULL,'2024-05-17','2024-05-24',NULL,'central campus','inter deanery fest',NULL,NULL,NULL,'\\images\\inbloom.jpg',NULL,NULL,NULL),(6,'maverick',1,NULL,'2024-05-14','2024-05-17',NULL,'central campus','women premier league',NULL,NULL,NULL,'\\images\\maverick.jpg',NULL,NULL,NULL),(7,'hackathon',1,NULL,'2024-03-23','2024-03-24',NULL,'skyview','coding league',NULL,NULL,NULL,'\\images\\hackathon.jpg',9,NULL,8000);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,6 +189,7 @@ CREATE TABLE `participated` (
 
 LOCK TABLES `participated` WRITE;
 /*!40000 ALTER TABLE `participated` DISABLE KEYS */;
+INSERT INTO `participated` VALUES (1,2241110,6),(2,2241110,7);
 /*!40000 ALTER TABLE `participated` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +246,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1100001,78304923,4523454567,'swo@christuniversity.in',NULL,'A',NULL),(1108018,44948739,4623454567,'cucs@christuniversity.in',NULL,'A',NULL),(2241101,11223344,1234567890,'aaditya.mishra@bca.christuniversity.in',18,'S',1),(2241102,11223345,1234567890,'aaryan.singh@bca.christuniversity.in',18,'S',1),(2241103,11223346,1234567890,'aayushi.goel@bca.christuniversity.in',18,'S',1),(2241104,11223347,1234567890,'abraham@bca.christuniversity.in',18,'S',1),(2241105,11223348,1234567890,'adrij.mondal@bca.christuniversity.in',18,'S',1),(2241106,11223349,1234567890,'agamjot.dua@bca.christuniversity.in',18,'S',1),(2241107,11223340,1234567890,'ahanya.mariam@bca.christuniversity.in',18,'S',2),(2241108,11223341,1234567890,'akshay.jaithin@bca.christuniversity.in',18,'S',2),(2241109,11223342,1234567890,'akshita.mathur@bca.christuniversity.in',18,'S',2),(2241110,11223343,1234567890,'alan.joshy@bca.christuniversity.in',18,'S',9),(2241111,11223344,1876543210,'amritha@bca.christuniversity.in',18,'S',2),(2241112,11223345,9876543210,'arjun@bca.christuniversity.in',18,'S',2);
+INSERT INTO `user` VALUES (8000,81865974,6782645456,'sos@gmail.com',NULL,'A',NULL),(1100001,78304923,4523454567,'swo@christuniversity.in',NULL,'A',NULL),(1108018,44948739,4623454567,'cucs@christuniversity.in',NULL,'A',NULL),(2241101,11223344,1234567890,'aaditya.mishra@bca.christuniversity.in',8018,'S',1),(2241102,11223345,1234567890,'aaryan.singh@bca.christuniversity.in',8018,'S',1),(2241103,11223346,1234567890,'aayushi.goel@bca.christuniversity.in',8018,'S',1),(2241104,11223347,1234567890,'abraham@bca.christuniversity.in',8018,'S',1),(2241105,11223348,1234567890,'adrij.mondal@bca.christuniversity.in',8018,'S',1),(2241106,11223349,1234567890,'agamjot.dua@bca.christuniversity.in',8018,'S',1),(2241107,11223340,1234567890,'ahanya.mariam@bca.christuniversity.in',8018,'S',2),(2241108,11223341,1234567890,'akshay.jaithin@bca.christuniversity.in',8018,'S',2),(2241109,11223342,1234567890,'akshita.mathur@bca.christuniversity.in',8018,'S',2),(2241110,11223343,1234567890,'alan.joshy@bca.christuniversity.in',8018,'S',9),(2241111,11223344,1876543210,'amritha@bca.christuniversity.in',8018,'S',2),(2241112,11223345,9876543210,'arjun@bca.christuniversity.in',8018,'S',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-20  0:27:29
+-- Dump completed on 2024-03-20 13:04:14

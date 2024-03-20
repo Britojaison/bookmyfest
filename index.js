@@ -9,7 +9,6 @@ import { render } from "ejs";
 import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
@@ -18,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf2",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -27,20 +26,20 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: 'secret-key',
-  resave: false,
-  saveUninitialized: false,
-}));
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-async function adminpage(req, res) {
-
-}
+async function adminpage(req, res) {}
 
 async function homepage(req, res) {
-
-  var results = await db.query("select eventid,eventname,poster,start_date from events where pan_campus=1");
-
+  var results = await db.query(
+    "select eventid,eventname,poster,start_date from events where pan_campus=1"
+  );
 
   var n = results[0].length < 5 ? results[0].length : 5;
   // console.log(n);
@@ -66,7 +65,8 @@ async function homepage(req, res) {
 
   const userRecommended = await db.query(
     "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
-    [req.session.user]);
+    [req.session.user]
+  );
   //console.log(userRecommended[0]);
   var q = userRecommended[0].length;
   var recommendeventid = [];
@@ -93,7 +93,10 @@ async function homepage(req, res) {
     "select user.regno,user.dept_id,department.school_id from user inner join department on user.dept_id=department.deptid where regno=?;",
     [req.session.user]
   );
-  const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
+  const schoolresults = await db.query(
+    "select eventid,eventname,poster,start_date from events where schoolid=?",
+    [userresults[0][0].school_id]
+  );
   //console.log(schoolresults[0]);
   var p = schoolresults[0].length;
   var schooleventid = [];
@@ -130,19 +133,16 @@ async function homepage(req, res) {
     recommendevent: schooleventname,
     recommendposters: schoolposter,
     recommenddate: schooldates,
-    recommendcount: q
-
+    recommendcount: q,
   };
 
   res.render("home.ejs", events);
 }
 
 app.get("/", async (req, res) => {
-
   const message = {
     content: "",
   };
-
 
   res.render("login.ejs", message);
   console.log(" alen  11223343 \n swo 1100001 pwd 12345678");
@@ -155,18 +155,17 @@ app.get("/logo-home", async (req, res) => {
 app.get("/profile", async (req, res) => {
   console.log(req.session.user);
   try {
-    const results = await db.query(
-      "select * from participated where regno=?",
-      [req.session.user]);
+    const results = await db.query("select * from participated where regno=?", [
+      req.session.user,
+    ]);
     var events = new Array();
     var l = results[0].length;
     var t = l;
     while (0 < t) {
       console.log("hello");
-      var event = await db.query(
-        "select * from events where eventID=?",
-        [results[0][t - 1].eventID]
-      );
+      var event = await db.query("select * from events where eventID=?", [
+        results[0][t - 1].eventID,
+      ]);
       events.push(event[0][0]);
       t--;
     }
@@ -188,7 +187,7 @@ app.get("/profile", async (req, res) => {
       eventid: eventid,
       event: eventname,
       posters: poster,
-      count: l
+      count: l,
     };
     console.log(eventsdetails);
 
@@ -196,7 +195,6 @@ app.get("/profile", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
 });
 
 app.get("/about", (req, res) => {
@@ -224,7 +222,6 @@ app.post("/login", async (req, res) => {
           adminpage(req, res);
           res.render("admin.ejs");
         } else {
-
           homepage(req, res);
         }
       } else {
@@ -333,7 +330,10 @@ app.get("/seemore-schools", async (req, res) => {
       [req.session.user]
     );
     //console.log(userresults);
-    const schoolresults = await db.query("select eventid,eventname,poster,start_date from events where schoolid=?", [userresults[0][0].school_id]);
+    const schoolresults = await db.query(
+      "select eventid,eventname,poster,start_date from events where schoolid=?",
+      [userresults[0][0].school_id]
+    );
 
     var p = schoolresults[0].length;
     var schooleventid = [];
@@ -358,22 +358,20 @@ app.get("/seemore-schools", async (req, res) => {
       event: schooleventname,
       posters: schoolposter,
       date: schooldates,
-      count: p
-
+      count: p,
     };
     res.render("school.ejs", events);
   } catch (error) {
     console.log(error);
   }
-
 });
 
 app.get("/recomm-seemore", async (req, res) => {
-
   try {
     const userRecommended = await db.query(
       "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
-      [req.session.user]);
+      [req.session.user]
+    );
     //console.log(userRecommended[0]);
     var q = userRecommended[0].length;
     var recommendeventid = [];
@@ -394,20 +392,17 @@ app.get("/recomm-seemore", async (req, res) => {
       recommenddates.push(userRecommended[0][index].start_date);
     }
     const events = {
-
       eventid: recommendeventid,
       event: recommendeventname,
       posters: recommendposter,
       date: recommenddates,
-      count: q
-
+      count: q,
     };
     console.log(events);
     res.render("school.ejs", events);
   } catch (error) {
     console.log(error);
   }
-
 });
 
 app.get("/event/:id", async (req, res) => {
@@ -415,21 +410,23 @@ app.get("/event/:id", async (req, res) => {
   const eventId = req.params;
   console.log(eventId);
   try {
-    const result = await db.query("select * from events where eventid=? ", [eventId.id]);
+    const result = await db.query("select * from events where eventid=? ", [
+      eventId.id,
+    ]);
     // const clubid=result[0][0].clubID;
     // console.log(clubid);
-    const club = await db.query("select clubname from clubs where clubid=?", [result[0][0].clubID]);
+    const club = await db.query("select clubname from clubs where clubid=?", [
+      result[0][0].clubID,
+    ]);
 
     var eventdetails = result[0][0];
     eventdetails.club = club[0][0].clubname;
     console.log(eventdetails);
 
     res.render("event.ejs", eventdetails);
-
   } catch (error) {
     console.log(error);
   }
-
 });
 
 app.listen(port, () => {
