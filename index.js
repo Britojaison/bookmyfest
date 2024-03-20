@@ -124,7 +124,7 @@ async function homepage(req, res) {
   //recommended events!!!!!!
 
   const userRecommended = await db.query(
-    "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
+    "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
     [req.session.user]);
   //console.log(userRecommended[0]);
   var q = userRecommended[0].length;
@@ -146,14 +146,15 @@ async function homepage(req, res) {
     recommenddates.push(userRecommended[0][index].start_date);
   }
 
-  // schoool events!!!!!!!!!!!!!!!!!!!!!!
+  // upcpming events!!!!!!!!!!!!!!!!!!!!!!
 
   const Upresults = await db.query(
-    "select * from participated where regno=?",
+    "SELECT p.* FROM participated p INNER JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE(); ",
     [req.session.user]);
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
+  console.log(Upresults[0]);
   while (0 < t) {
     // console.log("hello");
     var event = await db.query(
@@ -163,7 +164,7 @@ async function homepage(req, res) {
     events.push(event[0][0]);
     t--;
   }
-  // console.log(events);
+  console.log(events);
   var eventid = [];
   for (let index = 0; index < l; index++) {
     eventid.push(events[index].eventID);
