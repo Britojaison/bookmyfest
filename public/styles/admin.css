@@ -39,6 +39,21 @@
   cursor: pointer;
 }
 
+.eventbtn {
+  width: 100px;
+  border-radius: 50%;
+  float: right;
+  color: #f2f2f2;
+  width: 4rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-right: 2rem;
+  margin-top: 1.3rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 .profile-image {
   position: relative;
   cursor: pointer;
@@ -117,6 +132,8 @@ h1 {
 
 .item img {
   border-radius: 8px;
+  width: 200px;
+  height: 200px;
 }
 
 .wrapper {
