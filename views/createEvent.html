@@ -37,11 +37,11 @@
               <div class="raone-cont">
               <div class="">
                 <label for="Yes">Yes</label>
-                <input type="radio" id="eventDate" name="eventDate" required />
+                <input type="radio" id="yesCampus" name="campusWide" value="yes" required />
               </div>
               <div class="">
                 <label for="No">No</label>
-                <input type="radio" id="eventDate" name="eventDate" required />
+                <input type="radio" id="noCampus" name="campusWide" value="no" required />
               </div>
               <div class="tooltip"><img src="../public/images/information.png" >
                 <span class="tooltiptext">Select YES if anyone can participate in the event.If NO mention who can participate</span>
@@ -81,13 +81,18 @@
               <option value="KE audi">KE audi</option>
               <option value="Block 1 audi">Block 1 audi</option>
               <option value="skyview">skyview</option>
+              <option value="other">other</option>
             </select>
             
           </div>
             <p id="venue2">OR</p>
+            <!-- <div class="tooltip"><img src="../public/images/information.png" >
+               <span class="tooltiptext">select any venue or select OTHER and type in the venue</span>
+             </div> -->
           <div class="raone">
             <p></p>
-            <input type="text" id="venue" name="venue" required />
+            <input type="text" id="venueInput" name="venue" required />
+            
             
           </div>
           <div class="raone">
@@ -96,20 +101,22 @@
               <div class="raone-cont">
 
               <div class="">
-                <label for="yes">Yes</label>
+                <label for="yesRegistration">Yes</label>
                 <input
                   type="radio"
-                  id="registration"
+                  id="yesRegistration"
                   name="registration"
+                  value="yes"
                   required
                 />
               </div>
               <div class="">
-                <label for="No">No</label>
+                <label for="NoRegistration">No</label>
                 <input
                   type="radio"
-                  id="registration"
+                  id="noRegistration"
                   name="registration"
+                  value="no"
                   required
                 />
               </div>
@@ -181,19 +188,19 @@
               <div class="raone-cont">
 
               <div class="">
-                <label for="yes">Yes</label>
+                <label for="yesSubEvents">Yes</label>
                 <input
                   type="radio"
-                  id="subevents"
+                  id="yesSubEvents"
                   name="subevents"
                   required
                 />
               </div>
               <div class="">
-                <label for="No">No</label>
+                <label for="noSubEvents">No</label>
                 <input
                   type="radio"
-                  id="subevents"
+                  id="noSubEvents"
                   name="subevents"
                   required
                 />
@@ -207,14 +214,14 @@
               <div class="raone">
               
                         <p>No. of sub-events:</p>
-                <input type="number" id="nosubevents" name="nosubevents">
+                <input type="number" id="nosubevents" name="subevents">
                 
           
               </div>
               <div class="raone">
                 <p>Add sub-events</p>
-                 <a href="./createEvent.html">
-                <input type="button" id="subevents" name="subevents" value="Add" />
+                 <!-- <a href="#" id="">Add</a> -->
+                <input type="button" id="addSubEventButton" name="subevents" value="Add" />
                  
               </div>
             </div>
@@ -222,6 +229,6 @@
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="imagepreview.js"></script>
   </body>
 </html>
