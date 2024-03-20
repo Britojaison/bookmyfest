@@ -51,6 +51,26 @@
     </video>
       
   </div>
+
+  <div class="header">
+    <h1>Upcoming</h1>
+    <p><a href="/seemore-schools">see more</a></p>
+  </div>
+  <div class="wrapper">
+    <section id="section1">
+      <%for(var i=0;i< schoolevent.length ;i++){%>
+        <a href="/event/<%= schooleventid[i] %>">
+          <div class="item">
+            <img src="<%= schoolposters[i]%>" alt="Describe Image" />
+            <p>
+              <%= schoolevent[i] %>
+            </p>
+          </div>
+        </a>
+        <%}%>
+    </section>
+  </div>
+
   <div class="header">
     <h1>Campus Events</h1>
     <p><a href="/campus-seemore">see more</a></p>
@@ -97,24 +117,7 @@
 
   </div>
 
-  <div class="header">
-    <h1>School</h1>
-    <p><a href="/seemore-schools">see more</a></p>
-  </div>
-  <div class="wrapper">
-    <section id="section1">
-      <%for(var i=0;i< schoolevent.length ;i++){%>
-        <a href="/event/<%= schooleventid[i] %>">
-          <div class="item">
-            <img src="<%= schoolposters[i]%>" alt="Describe Image" />
-            <p>
-              <%= schoolevent[i] %>
-            </p>
-          </div>
-        </a>
-        <%}%>
-    </section>
-  </div>
+
 
 
   <footer>

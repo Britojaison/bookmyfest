@@ -1,1 +1,7 @@
 adding event mysql> insert into events values(7 , 'hackathon' , 1 , NULL , '2024-03-23 ' , '2024-03-24' , NULL , "sky-view" , "coding league" , NULL , NULL , NULL , '\\images\\hackathon.jpg' , 11,18,NULL,NULL);
+
+SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = 2241110 AND e.eventID = 8 AND e.end_date < CURDATE();
+
+SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = 2241110 AND e.end_date > CURDATE();
+
+SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();
