@@ -41,10 +41,17 @@
     </div>
     <div class="wrapper">
       <section id="section1">
-        <div class="item">
-          <img src="/images/Firefly 20231219114851.png" alt="Describe Image" />
-          <p>Event Name</p>
-        </div>
+        <%for(var i=0;i< eventid.length ;i++){%>
+          <a href="/event/<%= eventid[i] %>">
+  
+            <div class="item">
+              <img src="<%= posters[i]%>" alt="Describe Image">
+              <p>
+                <%= event[i] %>
+              </p>
+            </div>
+          </a>
+          <%}%>
         
       </section>
     </div>

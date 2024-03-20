@@ -33,7 +33,7 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-async function adminpage(req,res){
+async function adminpage(req, res) {
 
 }
 
@@ -70,21 +70,21 @@ async function homepage(req, res) {
   //console.log(userRecommended[0]);
   var q = userRecommended[0].length;
   var recommendeventid = [];
-  for (let index = 0; index < p; index++) {
-    recommendeventid.push(schoolresults[0][index].eventid);
+  for (let index = 0; index < q; index++) {
+    recommendeventid.push(userRecommended[0][index].eventid);
   }
 
   var recommendeventname = [];
-  for (let index = 0; index < p; index++) {
-    recommendeventname.push(schoolresults[0][index].eventname);
+  for (let index = 0; index < q; index++) {
+    recommendeventname.push(userRecommended[0][index].eventname);
   }
   var recommendposter = [];
-  for (let index = 0; index < p; index++) {
-    recommendposter.push(schoolresults[0][index].poster);
+  for (let index = 0; index < q; index++) {
+    recommendposter.push(userRecommended[0][index].poster);
   }
   var recommenddates = [];
-  for (let index = 0; index < p; index++) {
-    recommenddates.push(schoolresults[0][index].start_date);
+  for (let index = 0; index < q; index++) {
+    recommenddates.push(userRecommended[0][index].start_date);
   }
 
   // schoool events!!!!!!!!!!!!!!!!!!!!!!
@@ -126,7 +126,7 @@ async function homepage(req, res) {
     schooldate: schooldates,
     schoolcount: p,
 
-    recommendeventid: schooleventid,
+    recommendeventid: recommendeventid,
     recommendevent: schooleventname,
     recommendposters: schoolposter,
     recommenddate: schooldates,
@@ -145,7 +145,7 @@ app.get("/", async (req, res) => {
 
 
   res.render("login.ejs", message);
-  console.log("11223343");
+  console.log(" alen  11223343 \n swo 1100001 pwd 12345678");
 });
 
 app.get("/logo-home", async (req, res) => {
@@ -154,7 +154,49 @@ app.get("/logo-home", async (req, res) => {
 
 app.get("/profile", async (req, res) => {
   console.log(req.session.user);
-  res.render("profile.ejs");
+  try {
+    const results = await db.query(
+      "select * from participated where regno=?",
+      [req.session.user]);
+    var events = new Array();
+    var l = results[0].length;
+    var t = l;
+    while (0 < t) {
+      console.log("hello");
+      var event = await db.query(
+        "select * from events where eventID=?",
+        [results[0][t - 1].eventID]
+      );
+      events.push(event[0][0]);
+      t--;
+    }
+    console.log(events);
+    var eventid = [];
+    for (let index = 0; index < l; index++) {
+      eventid.push(events[index].eventID);
+    }
+
+    var eventname = [];
+    for (let index = 0; index < l; index++) {
+      eventname.push(events[index].eventname);
+    }
+    var poster = [];
+    for (let index = 0; index < l; index++) {
+      poster.push(events[index].poster);
+    }
+    const eventsdetails = {
+      eventid: eventid,
+      event: eventname,
+      posters: poster,
+      count: l
+    };
+    console.log(eventsdetails);
+
+    res.render("profile.ejs", eventsdetails);
+  } catch (error) {
+    console.log(error);
+  }
+
 });
 
 app.get("/about", (req, res) => {
@@ -177,7 +219,7 @@ app.post("/login", async (req, res) => {
       const storedpassword = user.password;
       //console.log(storedpassword);
       if (storedpassword == password) {
-        console.log(user.role);
+        // console.log(user.role);
         if (user.role == "A") {
           adminpage(req, res);
           res.render("admin.ejs");
@@ -324,7 +366,49 @@ app.get("/seemore-schools", async (req, res) => {
     console.log(error);
   }
 
-})
+});
+
+app.get("/recomm-seemore", async (req, res) => {
+
+  try {
+    const userRecommended = await db.query(
+      "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
+      [req.session.user]);
+    //console.log(userRecommended[0]);
+    var q = userRecommended[0].length;
+    var recommendeventid = [];
+    for (let index = 0; index < q; index++) {
+      recommendeventid.push(userRecommended[0][index].eventid);
+    }
+
+    var recommendeventname = [];
+    for (let index = 0; index < q; index++) {
+      recommendeventname.push(userRecommended[0][index].eventname);
+    }
+    var recommendposter = [];
+    for (let index = 0; index < q; index++) {
+      recommendposter.push(userRecommended[0][index].poster);
+    }
+    var recommenddates = [];
+    for (let index = 0; index < q; index++) {
+      recommenddates.push(userRecommended[0][index].start_date);
+    }
+    const events = {
+
+      eventid: recommendeventid,
+      event: recommendeventname,
+      posters: recommendposter,
+      date: recommenddates,
+      count: q
+
+    };
+    console.log(events);
+    res.render("school.ejs", events);
+  } catch (error) {
+    console.log(error);
+  }
+
+});
 
 app.get("/event/:id", async (req, res) => {
   // console.log("event 1");
