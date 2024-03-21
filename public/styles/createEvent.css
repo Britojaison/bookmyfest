@@ -179,7 +179,6 @@ address {
 #venue2 {
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: 245px;
 }
 
 .image {
@@ -226,4 +225,16 @@ address {
 }
 .tooltip img {
   height: 15px;
+}
+
+.venue-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.venue-cont select {
+  width: 100%;
 }
