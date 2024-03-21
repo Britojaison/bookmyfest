@@ -555,7 +555,7 @@ app.get("/adminevent/:id", async (req, res) => {
     eventdetails.host = host[0][0].hostname;
     //console.log(eventdetails);
 
-    res.render("event.ejs", eventdetails);
+    res.render("adminevent.ejs", eventdetails);
   } catch (error) {
     console.log(error);
   }

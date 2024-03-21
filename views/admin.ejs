@@ -63,7 +63,7 @@
     <div class="wrapper">
       <section id="section1">
         <%for(var i=0;i< event.length ;i++){%>
-        <a href="/event/<%= eventid[i] %>">
+        <a href="/adminevent/<%= eventid[i] %>">
           <div class="item">
             <img src="<%= posters[i]%>" alt="Describe Image" />
             <p><%= event[i] %></p>
@@ -80,7 +80,7 @@
     <div class="wrapper">
       <section id="section1">
         <%for(var i=0;i< pasteventid.length ;i++){%>
-        <a href="/event/<%= pasteventid[i] %>">
+        <a href="/adminevent/<%= pasteventid[i] %>">
           <div class="item">
             <img src="<%= pastposters[i]%>" alt="Describe Image" />
             <p><%= pastevent[i] %></p>
