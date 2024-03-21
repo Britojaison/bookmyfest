@@ -28,20 +28,25 @@
   <body>
     <div class="topnav">
       <div class="drop">
-        <select id="school">
-          <option value="" disabled selected>School:</option>
-          <option value="8">School of Sciences</option>
-          <option value="arc">School of Architecture</option>
-          <option value="art">School of Arts And Humanities</option>
-          <option value="bus">School of Business And Management</option>
-          <option value="comm">
-            School of Commerce, Finance And Accountancy
-          </option>
-          <option value="edu">School of Education</option>
-          <option value="eng">School of Engineering And Technology</option>
-          <option value="soc">School of Social Sciences</option>
-          <option value="law">School of Law</option>
-        </select>
+        <form action="/school" method="get">
+          <select name="page" id="school">
+            <option value="" disabled selected>School:</option>
+            
+              <option value="8000">School of Sciences</option>
+            
+            <option value="1000">School of Architecture</option>
+            <option value="2000">School of Arts And Humanities</option>
+            <option value="3000">School of Business And Management</option>
+            <option value="4000">
+              School of Commerce, Finance And Accountancy
+            </option>
+            <option value="5000">School of Education</option>
+            <option value="6000">School of Engineering And Technology</option>
+            <option value="9000">School of Social Sciences</option>
+            <option value="7000">School of Law</option>
+          </select>
+          <button type="submit">Go</button>
+        </form>
       </div>
       <div id="title">
         <img src="images/BookMyShow.png" alt="image" />
