@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -258,7 +258,7 @@ app.get("/profile", async (req, res) => {
       "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
       [req.session.user]
     );
-    // console.log(pastEventResults[0]);
+    console.log(pastEventResults[0]);
     var n = pastEventResults.length;
     n = n - 1;
 
@@ -443,12 +443,12 @@ app.get("/seemore-upcomming", async (req, res) => {
     for (let index = 0; index < l; index++) {
       eventid.push(events[index].eventID);
     }
-  
+
     var eventname = [];
     for (let index = 0; index < l; index++) {
       eventname.push(events[index].eventname);
     }
-    var date=[];
+    var date = [];
     for (let index = 0; index < l; index++) {
       date.push(events[index].start_date);
     }
@@ -458,10 +458,10 @@ app.get("/seemore-upcomming", async (req, res) => {
     }
     const eventss = {
       eventid: eventid,
-    event: eventname,
-    posters: poster,
-    date:date,
-    count: l,
+      event: eventname,
+      posters: poster,
+      date: date,
+      count: l,
     };
     res.render("school.ejs", eventss);
   } catch (error) {
@@ -517,8 +517,8 @@ app.get("/event/:id", async (req, res) => {
       eventId.id,
     ]);
     //console.log(result[0]);
-    const hostID=result[0][0].hostID;
-     console.log(hostID);
+    const hostID = result[0][0].hostID;
+    console.log(hostID);
     const host = await db.query("select hostname from host where hostid=?", [
       result[0][0].hostID,
     ]);
@@ -532,7 +532,6 @@ app.get("/event/:id", async (req, res) => {
     console.log(error);
   }
 });
-
 
 // admin event page
 
@@ -545,8 +544,8 @@ app.get("/adminevent/:id", async (req, res) => {
       eventId.id,
     ]);
     //console.log(result[0]);
-    const hostID=result[0][0].hostID;
-     console.log(hostID);
+    const hostID = result[0][0].hostID;
+    console.log(hostID);
     const host = await db.query("select hostname from host where hostid=?", [
       result[0][0].hostID,
     ]);
@@ -560,8 +559,6 @@ app.get("/adminevent/:id", async (req, res) => {
     console.log(error);
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
