@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -36,10 +36,10 @@ app.use(
 
 async function adminpage(req, res) {
   const results = await db.query(
-    "SELECT * FROM events WHERE host = ? AND end_date > CURDATE();",
+    "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
     [req.session.user]
   );
-  console.log(results[0]);
+  //console.log(results[0]);
   var n = results[0].length;
   // console.log(n);
   var eventid = [];
@@ -61,10 +61,10 @@ async function adminpage(req, res) {
   }
 
   const pastEventResults = await db.query(
-    "SELECT * FROM events WHERE host = ? AND end_date < CURDATE();",
+    "SELECT * FROM events WHERE hostid = ? AND end_date < CURDATE();",
     [req.session.user]
   );
-  console.log(pastEventResults[0]);
+  //console.log(pastEventResults[0]);
   var n = pastEventResults.length;
   n = n - 1;
 
@@ -94,7 +94,7 @@ async function adminpage(req, res) {
     pastposters: pastposter,
     pastcount: n,
   };
-  console.log(hostevents);
+  //console.log(hostevents);
   res.render("admin.ejs", hostevents);
 }
 
@@ -103,10 +103,10 @@ async function homepage(req, res) {
     "SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();"
   );
   var n = results[0].length < 5 ? results[0].length : 5;
-  // console.log(n);
+  //console.log(results);
   var campuseventid = [];
   for (let index = 0; index < n; index++) {
-    campuseventid.push(results[0][index].eventid);
+    campuseventid.push(results[0][index].eventID);
   }
   var campuseventname = [];
   for (let index = 0; index < n; index++) {
@@ -156,7 +156,7 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  console.log(Upresults[0]);
+  //console.log(Upresults[0]);
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -165,7 +165,7 @@ async function homepage(req, res) {
     events.push(event[0][0]);
     t--;
   }
-  console.log(events);
+  // console.log(events);
   var eventid = [];
   for (let index = 0; index < l; index++) {
     eventid.push(events[index].eventID);
@@ -197,7 +197,7 @@ async function homepage(req, res) {
     recommenddate: recommenddates,
     recommendcount: q,
   };
-
+  //  console.log(eventdetails);
   res.render("home.ejs", eventdetails);
 }
 
@@ -214,6 +214,10 @@ app.get("/logo-home", async (req, res) => {
   homepage(req, res);
 });
 
+app.get("/admin-home", async (req, res) => {
+  adminpage(req, res);
+});
+
 app.get("/profile", async (req, res) => {
   // console.log(req.session.user);
   try {
@@ -227,7 +231,7 @@ app.get("/profile", async (req, res) => {
     var l = results[0].length;
     var t = l;
     while (0 < t) {
-      console.log("hello");
+      //console.log("hello");
       var event = await db.query("select * from events where eventID=?", [
         results[0][t - 1].eventID,
       ]);
@@ -254,7 +258,7 @@ app.get("/profile", async (req, res) => {
       "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
       [req.session.user]
     );
-    console.log(pastEventResults[0]);
+    // console.log(pastEventResults[0]);
     var n = pastEventResults.length;
     n = n - 1;
 
@@ -283,7 +287,7 @@ app.get("/profile", async (req, res) => {
       pastposters: pastposter,
       pastcount: n,
     };
-    console.log(eventsdetails);
+    // console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
   } catch (error) {
@@ -384,7 +388,7 @@ app.get("/campus-seemore", async (req, res) => {
     // console.log(n);
     var eventid = [];
     for (let index = 0; index < n; index++) {
-      eventid.push(results[0][index].eventid);
+      eventid.push(results[0][index].eventID);
     }
 
     var eventname = [];
@@ -415,45 +419,51 @@ app.get("/campus-seemore", async (req, res) => {
   }
 });
 
-app.get("/seemore-schools", async (req, res) => {
+app.get("/seemore-upcomming", async (req, res) => {
   //console.log(req.session.user);
   try {
-    const userresults = await db.query(
-      "select user.regno,user.dept_id,department.school_id from user inner join department on user.dept_id=department.deptid where regno=?;",
+    const Upresults = await db.query(
+      "SELECT p.* FROM participated p INNER JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE(); ",
       [req.session.user]
     );
-    //console.log(userresults);
-    const schoolresults = await db.query(
-      "select eventid,eventname,poster,start_date from events where schoolid=?",
-      [userresults[0][0].school_id]
-    );
-
-    var p = schoolresults[0].length;
-    var schooleventid = [];
-    for (let index = 0; index < p; index++) {
-      schooleventid.push(schoolresults[0][index].eventid);
+    var events = new Array();
+    var l = Upresults[0].length;
+    var t = l;
+    console.log(Upresults[0]);
+    while (0 < t) {
+      // console.log("hello");
+      var event = await db.query("select * from events where eventID=?", [
+        Upresults[0][t - 1].eventID,
+      ]);
+      events.push(event[0][0]);
+      t--;
     }
-
-    var schooleventname = [];
-    for (let index = 0; index < p; index++) {
-      schooleventname.push(schoolresults[0][index].eventname);
+    // console.log(events);
+    var eventid = [];
+    for (let index = 0; index < l; index++) {
+      eventid.push(events[index].eventID);
     }
-    var schoolposter = [];
-    for (let index = 0; index < p; index++) {
-      schoolposter.push(schoolresults[0][index].poster);
+  
+    var eventname = [];
+    for (let index = 0; index < l; index++) {
+      eventname.push(events[index].eventname);
     }
-    var schooldates = [];
-    for (let index = 0; index < p; index++) {
-      schooldates.push(schoolresults[0][index].start_date);
+    var date=[];
+    for (let index = 0; index < l; index++) {
+      date.push(events[index].start_date);
     }
-    const events = {
-      eventid: schooleventid,
-      event: schooleventname,
-      posters: schoolposter,
-      date: schooldates,
-      count: p,
+    var poster = [];
+    for (let index = 0; index < l; index++) {
+      poster.push(events[index].poster);
+    }
+    const eventss = {
+      eventid: eventid,
+    event: eventname,
+    posters: poster,
+    date:date,
+    count: l,
     };
-    res.render("school.ejs", events);
+    res.render("school.ejs", eventss);
   } catch (error) {
     console.log(error);
   }
@@ -501,26 +511,57 @@ app.get("/recomm-seemore", async (req, res) => {
 app.get("/event/:id", async (req, res) => {
   // console.log("event 1");
   const eventId = req.params;
-  console.log(eventId);
+  //console.log(eventId);
   try {
     const result = await db.query("select * from events where eventid=? ", [
       eventId.id,
     ]);
-    // const clubid=result[0][0].clubID;
-    // console.log(clubid);
-    const club = await db.query("select clubname from clubs where clubid=?", [
-      result[0][0].clubID,
+    //console.log(result[0]);
+    const hostID=result[0][0].hostID;
+     console.log(hostID);
+    const host = await db.query("select hostname from host where hostid=?", [
+      result[0][0].hostID,
     ]);
 
     var eventdetails = result[0][0];
-    eventdetails.club = club[0][0].clubname;
-    console.log(eventdetails);
+    eventdetails.host = host[0][0].hostname;
+    //console.log(eventdetails);
 
     res.render("event.ejs", eventdetails);
   } catch (error) {
     console.log(error);
   }
 });
+
+
+// admin event page
+
+app.get("/adminevent/:id", async (req, res) => {
+  // console.log("event 1");
+  const eventId = req.params;
+  //console.log(eventId);
+  try {
+    const result = await db.query("select * from events where eventid=? ", [
+      eventId.id,
+    ]);
+    //console.log(result[0]);
+    const hostID=result[0][0].hostID;
+     console.log(hostID);
+    const host = await db.query("select hostname from host where hostid=?", [
+      result[0][0].hostID,
+    ]);
+
+    var eventdetails = result[0][0];
+    eventdetails.host = host[0][0].hostname;
+    //console.log(eventdetails);
+
+    res.render("event.ejs", eventdetails);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
