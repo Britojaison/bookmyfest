@@ -258,9 +258,10 @@ app.get("/profile", async (req, res) => {
       "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
       [req.session.user]
     );
-    console.log(pastEventResults[0]);
+    // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     var n = pastEventResults.length;
     n = n - 1;
+    console.log(pastEventResults);
 
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
@@ -377,6 +378,52 @@ app.post("/register", async (req, res) => {
     console.log(error);
   }
 });
+
+// past evets see more!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+app.get("/past-seemore", async (req, res) => {
+  try {
+    const pastEventResults = await db.query(
+      "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
+      [req.session.user]
+    );
+
+    var n = pastEventResults.length;
+    n = n - 1;
+
+    var pasteventid = [];
+    for (let index = 0; index < n; index++) {
+      pasteventid.push(pastEventResults[0][index].eventID);
+    }
+
+    var pasteventname = [];
+    for (let index = 0; index < n; index++) {
+      pasteventname.push(pastEventResults[0][index].eventname);
+    }
+    var pastposter = [];
+    for (let index = 0; index < n; index++) {
+      pastposter.push(pastEventResults[0][index].poster);
+    }
+
+    var dates = [];
+    for (let index = 0; index < n; index++) {
+      dates.push(pastEventResults[0][index].start_date);
+    }
+    const campusevents = {
+      eventid: pasteventid,
+      event: pasteventname,
+      posters: pastposter,
+      date: dates,
+      count: n,
+    };
+
+    console.log(campusevents);
+
+    res.render("school.ejs", campusevents);
+  } catch (error) {
+    console.log(error);
+  }
+});
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 app.get("/campus-seemore", async (req, res) => {
   try {
@@ -554,10 +601,14 @@ app.get("/adminevent/:id", async (req, res) => {
     eventdetails.host = host[0][0].hostname;
     //console.log(eventdetails);
 
-    res.render("event.ejs", eventdetails);
+    res.render("adminevent.ejs", eventdetails);
   } catch (error) {
     console.log(error);
   }
+});
+
+app.get("/createEvent", (req, res) => {
+  res.render("createEvent.ejs");
 });
 
 app.listen(port, () => {
