@@ -21,8 +21,6 @@
   font-weight: 600;
   color: #ffffff;
   margin: 0;
-  font-size: 50px;
-
   img {
     width: 23rem;
   }
@@ -52,7 +50,6 @@
   text-decoration: none;
   cursor: pointer;
 }
-
 
 .profile-image {
   position: relative;
@@ -239,7 +236,7 @@ footer {
 
 .dropdownmenu {
   position: absolute;
-  height: 100px;
+  height: 80px;
   display: none;
   transform: translateX(-50%);
   background-color: #fff;

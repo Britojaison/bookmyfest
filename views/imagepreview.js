@@ -5,24 +5,6 @@ function previewImage(event) {
 
 document.getElementById("fileInput").addEventListener("change", previewImage);
 
-function handleNoSubEventsChange() {
-  var numSubEvents = parseInt(document.getElementById("nosubevents").value);
-  var addSubEventButton = document.getElementById("addSubEventButton");
-
-  if (isNaN(numSubEvents) || numSubEvents <= 0) {
-    addSubEventButton.classList.add("disabled");
-    addSubEventButton.removeAttribute("href");
-  } else {
-    addSubEventButton.classList.remove("disabled");
-
-    addSubEventButton.setAttribute("href", "./createEvent.html");
-  }
-}
-
-document
-  .getElementById("nosubevents")
-  .addEventListener("change", handleNoSubEventsChange);
-
 function handleCampusWideChange() {
   var yesCampus = document.getElementById("yesCampus");
   var eventIDInput = document.getElementById("eventID");
@@ -31,6 +13,8 @@ function handleCampusWideChange() {
 }
 
 document.querySelectorAll('input[name="campusWide"]').forEach((elem) => {
+  console.log("elem", elem);
+
   elem.addEventListener("change", handleCampusWideChange);
 });
 
@@ -45,20 +29,7 @@ document.querySelectorAll('input[name="registration"]').forEach((elem) => {
   elem.addEventListener("change", handleRegistrationChange);
 });
 
-function handleSubEventsChange() {
-  var yesSubEvents = document.getElementById("yesSubEvents");
-  var noOfSubEventsInput = document.getElementById("nosubevents");
-
-  noOfSubEventsInput.disabled = noSubEvents.checked;
-}
-
-document.querySelectorAll('input[name="subevents"]').forEach((elem) => {
-  elem.addEventListener("change", handleSubEventsChange);
-});
-
-handleSubEventsChange();
-
-// Function to handle changes in the venue selection
+n; // Function to handle changes in the venue selection
 function handleVenueChange() {
   var venueSelect = document.getElementById("venue");
   var venueInput = document.getElementById("venueInput");
