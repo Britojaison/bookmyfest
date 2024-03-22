@@ -131,21 +131,6 @@ h1 {
   }
 }
 
-footer {
-  height: 5rem;
-  background-color: #1c738e;
-  display: flex;
-  justify-content: space-around;
-  color: #ffffff;
-  font-weight: bold;
-  align-items: center;
-  font-family: "Helvetica", sans-serif;
-  #link {
-    text-decoration: none;
-    color: #ffffff;
-  }
-}
-
 address {
   text-align: center;
   margin: 0;
