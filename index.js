@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -394,23 +394,29 @@ app.post("/register", async (req, res) => {
   const mobileNumber = req.body.mobileNumber;
   const email = req.body.email;
   const department = req.body.department;
+  //const school=req.body.school;
+  const role="S";
+  const category=req.body.category;
 
   try {
     const results = await db.query("select * from user where regno=?", [regno]);
 
     if (results[0].length == 0) {
       let departmentid = await db.query(
-        "select deptid from department where dept_name=?",
+        "select deptid from department where deptname=?",
         [department]
       );
-      departmentid = departmentid[0][0].deptid;
+      console.log(departmentid[0]);
+      departmentid = departmentid[0][0].deptID;
       // console.log(departmentid);
-      db.query("insert into user values(?,?,?,?,?)", [
+      db.query("insert into user values(?,?,?,?,?,?,?)", [
         regno,
         password,
         mobileNumber,
         email,
         departmentid,
+        role,
+        category
       ]);
       const message = {
         content: "",
