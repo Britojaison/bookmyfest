@@ -18,14 +18,10 @@
   margin-left: 1rem;
   width: 85px;
   background-color: #1c738e;
-  /* border: solid 1px; */
+  border-color: transparent !important;
   color: #f0f0f0;
   font-size: large;
 }
-
-/* #school:hover {
-  text-decoration: underline;
-} */
 
 #title {
   padding-left: 2rem;
