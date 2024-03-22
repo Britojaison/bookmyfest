@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -299,12 +299,13 @@ app.get("/profile", async (req, res) => {
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-app.get('/school', async (req, res) => {
+app.get("/school", async (req, res) => {
   const page = req.query.page; // Access page parameter from req.query
   // console.log("Selected page:", page);
   if (page) {
-
-    const results = await db.query("select * from events where hostID=? ", [page]);
+    const results = await db.query("select * from events where hostID=? ", [
+      page,
+    ]);
     // console.log(result[0]);
     var n = results[0].length;
     // console.log(n);
@@ -333,7 +334,6 @@ app.get('/school', async (req, res) => {
       count: n,
     };
     res.render("school.ejs", school);
-
 
     // res.redirect(`/school/${page}`);
   }
@@ -416,7 +416,7 @@ app.post("/register", async (req, res) => {
         email,
         departmentid,
         role,
-        category
+        category,
       ]);
       const message = {
         content: "",
@@ -768,7 +768,7 @@ app.get("/create", async (req, res) => {
   const attendance = req.query.attendance;
   const category = req.query.category;
   const hostid = req.session.user;
-  const poster="/images/example.png";
+  const poster = "/images/example.png";
 
   if (campusWide == 1) {
     targeted = null;
@@ -780,7 +780,23 @@ app.get("/create", async (req, res) => {
   try {
     const sql = `INSERT INTO events (eventName, pan_campus, audience, start_date, end_date, event_time, venue, registration, reg_range, poster,  event_desc, formlink, attendance, categoryID, hostID) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)`;
-    const values = [eventName, campusWide, targeted, eventDate, endDate, eventTime, venue, registration, range, poster, desc, formlink, attendance, category, hostid];
+    const values = [
+      eventName,
+      campusWide,
+      targeted,
+      eventDate,
+      endDate,
+      eventTime,
+      venue,
+      registration,
+      range,
+      poster,
+      desc,
+      formlink,
+      attendance,
+      category,
+      hostid,
+    ];
     await db.query(sql, values);
   } catch (error) {
     console.log(error);
