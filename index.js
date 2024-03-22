@@ -304,7 +304,7 @@ app.get('/school', async (req, res) => {
   // console.log("Selected page:", page);
   if (page) {
 
-    const results=await db.query("select * from events where hostID=? ", [page]);
+    const results = await db.query("select * from events where hostID=? ", [page]);
     // console.log(result[0]);
     var n = results[0].length;
     // console.log(n);
@@ -332,11 +332,11 @@ app.get('/school', async (req, res) => {
       date: dates,
       count: n,
     };
-    res.render("school.ejs",school);
+    res.render("school.ejs", school);
 
-    
+
     // res.redirect(`/school/${page}`);
-  } 
+  }
 });
 
 // app.get("/school/:page",(req,res)=>{
@@ -395,8 +395,8 @@ app.post("/register", async (req, res) => {
   const email = req.body.email;
   const department = req.body.department;
   //const school=req.body.school;
-  const role="S";
-  const category=req.body.category;
+  const role = "S";
+  const category = req.body.category;
 
   try {
     const results = await db.query("select * from user where regno=?", [regno]);
@@ -749,7 +749,45 @@ app.get("/A-logo-home", (req, res) => {
 });
 
 app.get("/createEvent", (req, res) => {
+  // console.log("helllo123");
   res.render("createEvent.ejs");
+});
+
+app.get("/create", async (req, res) => {
+  const eventName = req.query.eventName;
+  const campusWide = req.query.campusWide;
+  let targeted = req.query.targeted;
+  const eventDate = req.query.eventDate;
+  const endDate = req.query.endDate;
+  const eventTime = req.query.eventTime;
+  const venue = req.query.venue;
+  const registration = req.query.registration;
+  let range = req.query.range;
+  const desc = req.query.desc;
+  const formlink = req.query.formlink;
+  const attendance = req.query.attendance;
+  const category = req.query.category;
+  const hostid = req.session.user;
+  const poster="/images/example.png";
+
+  if (campusWide == 1) {
+    targeted = null;
+  }
+  if (registration == 0) {
+    range = null;
+  }
+
+  try {
+    const sql = `INSERT INTO events (eventName, pan_campus, audience, start_date, end_date, event_time, venue, registration, reg_range, poster,  event_desc, formlink, attendance, categoryID, hostID) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)`;
+    const values = [eventName, campusWide, targeted, eventDate, endDate, eventTime, venue, registration, range, poster, desc, formlink, attendance, category, hostid];
+    await db.query(sql, values);
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log(req.query);
+  adminpage(req, res);
 });
 
 app.listen(port, () => {

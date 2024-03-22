@@ -14,198 +14,198 @@
           <img id="backimage" src="/images/back.png" />
         </a>
       </div>
-      <div class="container">
-        <div class="image">
-          <input type="file" id="fileInput" style="display: none" />
-
-          <a href="#" onclick="document.getElementById('fileInput').click()">
-            <img id="previewImage" src="/images/plus.png" alt="" />
-          </a>
-          <button>Create</button>
-        </div>
-
-        <div class="info">
-          <div class="raone">
-            <p>Name:</p>
-            <input type="text" id="eventName" name="eventName" required />
+      <form action="/create" method="get">
+        <div class="container">
+          <!-- //// -->
+          <div class="image">
+            <input type="file" id="fileInput" style="display: none" />
+            <a href="#" onclick="document.getElementById('fileInput').click()">
+              <img id="previewImage" src="/images/plus.png" alt="" />
+            </a>
+            <input type="submit" value="Create" class="button">
           </div>
-          <div class="raone">
-            <p>Campus-wide</p>
+          <div class="info">
             <div class="raone">
-              <div class="raone-cont">
-                <div class="">
-                  <label for="Yes">Yes</label>
-                  <input
-                    type="radio"
-                    id="yesCampus"
-                    name="campusWide"
-                    value="yes"
-                    required
-                  />
-                </div>
-                <div class="">
-                  <label for="No">No</label>
-                  <input
-                    type="radio"
-                    id="noCampus"
-                    name="campusWide"
-                    value="no"
-                    required
-                  />
-                </div>
-                <div class="tooltip">
-                  <img src="/images/information.png" />
-                  <span class="tooltiptext"
-                    >Select YES if anyone can participate in the event.If NO
-                    mention who can participate</span
-                  >
+              <p>Name:</p>
+              <input type="text" id="eventName" name="eventName" required />
+            </div>
+            <div class="raone">
+              <p>Campus-wide</p>
+              <div class="raone">
+                <div class="raone-cont">
+                  <div class="">
+                    <label for="Yes">Yes</label>
+                    <input
+                      type="radio"
+                      id="yesCampus"
+                      name="campusWide"
+                      value="1"
+                      required
+                    />
+                  </div>
+                  <div class="">
+                    <label for="No">No</label>
+                    <input
+                      type="radio"
+                      id="noCampus"
+                      name="campusWide"
+                      value="0"
+                      required
+                    />
+                  </div>
+                  <div class="tooltip">
+                    <img src="/images/information.png" />
+                    <span class="tooltiptext"
+                      >Select YES if anyone can participate in the event.If NO
+                      mention who can participate</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            <div class="raone">
+              <p>Target Audience:</p>
+              <input type="text" id="eventID" name="targeted" required />
+            </div>
+            <div class="raone">
+              <p>Start Date:</p>
+              <input type="date" id="eventDate" name="eventDate" required />
+            </div>
+            <div class="raone">
+              <p>End Date:</p>
+              <input type="date" id="endDate" name="endDate" required />
+            </div>
+            <div class="raone"></div>
+            <div class="raone">
+              <p>Event Time</p>
+              <input type="time" id="eventTime" name="eventTime" required />
+            </div>
+            <div class="raone">
+              <label for="venue">Venue:</label>
+              <div class="venue-cont">
+                <select id="venue" name="venue">
+                  <option value="">none</option>
+                  <option value="main audi">main audi</option>
+                  <option value="KE audi">KE audi</option>
+                  <option value="Block 1 audi">Block 1 audi</option>
+                  <option value="skyview">skyview</option>
+                  <option value="other">other</option>
+                </select>
+                <div class="raone" style="gap: 10px; align-items: center">
+                  <p id="venue2">OR</p>
+                  <div class="tooltip">
+                    <img src="/images/information.png" />
+                    <span class="tooltiptext"
+                      >select any venue or select OTHER and type in the
+                      venue</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="raone">
+              <p></p>
+              <input type="text" id="venueInput" name="venue" required />
+            </div>
+            <div class="raone">
+              <p>Registration:</p>
+              <div class="raone">
+                <div class="raone-cont">
+                  <div class="">
+                    <label for="yesRegistration">Yes</label>
+                    <input
+                      type="radio"
+                      id="yesRegistration"
+                      name="registration"
+                      value="1"
+                      required
+                    />
+                  </div>
+                  <div class="">
+                    <label for="noRegistration">No</label>
+                    <input
+                      type="radio"
+                      id="noRegistration"
+                      name="registration"
+                      value="0"
+                      required
+                    />
+                  </div>
+                  <div class="tooltip">
+                    <img src="/images/information.png" />
+                    <span class="tooltiptext"
+                      >Select YES if you want registration. You can also limit the
+                      range for number of registration</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="raone">
+              <p>Registration Range:</p>
+              <input type="number" id="range" name="range" />
+            </div>
+            <div class="raone">
+              <p>description:</p>
+              <input type="text" id="desc"  name="desc" />
+            </div>
+            <div class="raone">
+              <p>Google Form link:</p>
+              <input type="url" id="formlink" name="formlink" />
+            </div>
+            <div class="raone">
+              <p>Attendance:</p>
+              <div class="raone">
+                <div class="raone-cont">
+                  <div class="">
+                    <label for="yes">Yes</label>
+                    <input
+                      type="radio"
+                      id="yesattendance"
+                      name="attendance"
+                      value="1"
+                      required
 
-          <div class="raone">
-            <p>Target Audience:</p>
-            <input type="text" id="eventID" name="eventID" required />
-          </div>
-
-          <div class="raone">
-            <p>Start Date:</p>
-            <input type="date" id="eventDate" name="eventDate" required />
-          </div>
-
-          <div class="raone">
-            <p>End Date:</p>
-
-            <input type="date" id="endDate" name="endDate" required />
-          </div>
-          <div class="raone"></div>
-
-          <div class="raone">
-            <p>Event Time</p>
-            <input type="time" id="eventTime" name="eventTime" required />
-          </div>
-          <div class="raone">
-            <label for="venue">Venue:</label>
-
-            <div class="venue-cont">
-              <select id="venue" name="venue">
-                <option value="">none</option>
-                <option value="main audi">main audi</option>
-                <option value="KE audi">KE audi</option>
-                <option value="Block 1 audi">Block 1 audi</option>
-                <option value="skyview">skyview</option>
-                <option value="other">other</option>
+                    />
+                  </div>
+                  <div class="">
+                    <label for="No">No</label>
+                    <input
+                      type="radio"
+                      id="noattendance"
+                      name="attendance"
+                      value="0"
+                      required
+                    />
+                  </div>
+                  <div class="tooltip">
+                    <img src="/images/information.png" />
+                    <span class="tooltiptext"
+                      >Select YES if you will be providing claims for the
+                      participants</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="raone">
+              <label for="category">Category:</label>
+              <select id="category" name="category">
+                <option value="1">Dance</option>
+                <option value="2">Theatre</option>
+                <option value="3">Stage</option>
+                <option value="4">Music</option>
+                <option value="5">photography</option>
+                <option value="6">Workshop</option>
+                <option value="7">Quiz</option>
+                <option value="8">Sports</option>
+                <option value="9">Fests</option>
+                <option value="10">Conference</option>
               </select>
-
-              <div class="raone" style="gap: 10px; align-items: center">
-                <p id="venue2">OR</p>
-                <div class="tooltip">
-                  <img src="/images/information.png" />
-                  <span class="tooltiptext"
-                    >select any venue or select OTHER and type in the
-                    venue</span
-                  >
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="raone">
-            <p></p>
-            <input type="text" id="venueInput" name="venue" required />
-          </div>
-          <div class="raone">
-            <p>Registration:</p>
-            <div class="raone">
-              <div class="raone-cont">
-                <div class="">
-                  <label for="yesRegistration">Yes</label>
-                  <input
-                    type="radio"
-                    id="yesRegistration"
-                    name="registration"
-                    value="yes"
-                    required
-                  />
-                </div>
-                <div class="">
-                  <label for="noRegistration">No</label>
-                  <input
-                    type="radio"
-                    id="noRegistration"
-                    name="registration"
-                    value="no"
-                    required
-                  />
-                </div>
-                <div class="tooltip">
-                  <img src="/images/information.png" />
-                  <span class="tooltiptext"
-                    >Select YES if you want registration. You can also limit the
-                    range for number of registration</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="raone">
-            <p>Registration Range:</p>
-            <input type="number" id="range" name="range" />
-          </div>
-          <div class="raone">
-            <p>Google Form link:</p>
-            <input type="url" id="formlink" name="formlink" />
-          </div>
-
-          <div class="raone">
-            <p>Attendance:</p>
-            <div class="raone">
-              <div class="raone-cont">
-                <div class="">
-                  <label for="yes">Yes</label>
-                  <input
-                    type="radio"
-                    id="yesattendance"
-                    name="attendance"
-                    required
-                  />
-                </div>
-                <div class="">
-                  <label for="No">No</label>
-                  <input
-                    type="radio"
-                    id="noattendance"
-                    name="attendance"
-                    required
-                  />
-                </div>
-                <div class="tooltip">
-                  <img src="/images/information.png" />
-                  <span class="tooltiptext"
-                    >Select YES if you will be providing claims for the
-                    participants</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="raone">
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-              <option value="dance">Dance</option>
-              <option value="theatre">Theatre</option>
-              <option value="Stage">Stage</option>
-              <option value="music">Music</option>
-              <option value="photography">photography</option>
-              <option value="workshop">Workshop</option>
-              <option value="quiz">Quiz</option>
-              <option value="Sports">Sports</option>
-              <option value="fest">Fests</option>
-              <option value="Conference">Conference</option>
-            </select>
           </div>
         </div>
-      </div>
+      </form>
     </div>
     <script>
       function previewImage(event) {

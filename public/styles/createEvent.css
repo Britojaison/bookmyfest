@@ -124,7 +124,7 @@ body {
   height: 350px;
   border-radius: 8px;
 
-  button {
+  .button {
     background-color: #3093b1;
     border: 0;
     color: #ffff;
@@ -180,6 +180,8 @@ address {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+
 
 .image {
   display: flex;
