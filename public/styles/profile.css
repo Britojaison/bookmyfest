@@ -147,6 +147,8 @@ body {
 
 .item img {
     border-radius: 8px;
+    width: 200px;
+  height: 200px;
 }
 
 .wrapper {
@@ -173,6 +175,10 @@ body {
                 transform: scale(1.1);
             }
 
+        }
+        a{
+            text-decoration: none;
+            color: black;
         }
     }
 }
