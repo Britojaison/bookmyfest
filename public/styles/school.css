@@ -7,7 +7,7 @@
   align-items: center;
 
   a {
-    color: #FFFFFF;
+    color: #ffffff;
     margin-left: auto;
     margin-right: 2rem;
     text-decoration: solid;
@@ -16,10 +16,10 @@
 
 #title {
   padding-left: 37rem;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   font-family: Helvetica, sans-serif;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
   font-size: 50px;
 
@@ -37,7 +37,6 @@
   margin-right: 2rem;
   text-decoration: none;
   cursor: pointer;
-
 }
 
 .profile-image {
@@ -76,20 +75,17 @@
   display: block;
 }
 
-
-
 html {
   scroll-behavior: smooth;
-
 }
 
 body {
   margin: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 h1 {
-  font-family: 'Noto Serif', serif;
+  font-family: "Noto Serif", serif;
   font-weight: 100;
   color: rgb(32, 107, 171);
   text-align: justify;
@@ -112,7 +108,7 @@ h1 {
   grid-template-columns: 279px auto;
   grid-template-rows: 295px auto;
   gap: 1.5rem;
-  
+  height: 71vh;
 }
 
 .event img {
@@ -123,7 +119,6 @@ h1 {
   &:hover {
     transform: scale(1.1);
   }
-
 }
 
 .eventname {
@@ -131,32 +126,30 @@ h1 {
 
   p {
     line-height: 1.4;
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
     font-size: 1.5rem;
   }
 }
-
 
 footer {
   height: 5rem;
   background-color: #1c738e;
   display: flex;
   justify-content: space-around;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
   align-items: center;
-  font-family: 'Helvetica' , sans-serif;
-  #link{
+  font-family: "Helvetica", sans-serif;
+  #link {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #ffffff;
   }
-
 }
 
-  address {
-    text-align: center;
-    margin: 0;
-  }
-  p{
-    padding-top: 1rem;
-  }
+address {
+  text-align: center;
+  margin: 0;
+}
+p {
+  padding-top: 1rem;
+}

@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -428,7 +428,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
 // past evets see more!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.get("/past-seemore", async (req, res) => {
   try {
@@ -632,7 +631,6 @@ app.get("/event/:id", async (req, res) => {
   }
 });
 
-
 // admin event page
 
 app.get("/adminevent/:id", async (req, res) => {
@@ -693,14 +691,14 @@ app.get("/up_seemore_A", async (req, res) => {
       posters: poster,
       date: dates,
       count: n,
-    }
+    };
     res.render("adminseemore.ejs", hostevents);
   } catch (error) {
     console.log(error);
   }
 });
 
-app.get("/past_seemore_A", async(req, res) => {
+app.get("/past_seemore_A", async (req, res) => {
   try {
     const pastEventResults = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date < CURDATE();",
@@ -732,25 +730,21 @@ app.get("/past_seemore_A", async(req, res) => {
       event: pasteventname,
       posters: pastposter,
       date: dates,
-      count: n
+      count: n,
     };
-    res.render("adminseemore.ejs",hostevents);
-
+    res.render("adminseemore.ejs", hostevents);
   } catch (error) {
     console.log(error);
   }
 });
 
-app.get("/A-logo-home",(req,res)=>{
+app.get("/A-logo-home", (req, res) => {
   adminpage(req, res);
-})
-
-app.get("/createEvent", (req, res) => {
-  res.render("createEvent.ejs")
 });
 
-
-
+app.get("/createEvent", (req, res) => {
+  res.render("createEvent.ejs");
+});
 
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);

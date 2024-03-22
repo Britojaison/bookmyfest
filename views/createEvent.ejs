@@ -65,7 +65,7 @@
           </div>
 
           <div class="raone">
-            <p>For:</p>
+            <p>Target Audience:</p>
             <input type="text" id="eventID" name="eventID" required />
           </div>
 
@@ -90,6 +90,7 @@
 
             <div class="venue-cont">
               <select id="venue" name="venue">
+                <option value="">none</option>
                 <option value="main audi">main audi</option>
                 <option value="KE audi">KE audi</option>
                 <option value="Block 1 audi">Block 1 audi</option>
@@ -128,7 +129,7 @@
                   />
                 </div>
                 <div class="">
-                  <label for="NoRegistration">No</label>
+                  <label for="noRegistration">No</label>
                   <input
                     type="radio"
                     id="noRegistration"
@@ -148,11 +149,11 @@
             </div>
           </div>
           <div class="raone">
-            <p>Range:</p>
+            <p>Registration Range:</p>
             <input type="number" id="range" name="range" />
           </div>
           <div class="raone">
-            <p>Link to Form</p>
+            <p>Google Form link:</p>
             <input type="url" id="formlink" name="formlink" />
           </div>
 
@@ -164,7 +165,7 @@
                   <label for="yes">Yes</label>
                   <input
                     type="radio"
-                    id="attendance"
+                    id="yesattendance"
                     name="attendance"
                     required
                   />
@@ -173,7 +174,7 @@
                   <label for="No">No</label>
                   <input
                     type="radio"
-                    id="attendance"
+                    id="noattendance"
                     name="attendance"
                     required
                   />
@@ -206,6 +207,76 @@
         </div>
       </div>
     </div>
-    <script src="imagepreview.js"></script>
+    <script>
+      function previewImage(event) {
+        var image = document.getElementById("previewImage");
+        if (event.target.files && event.target.files[0]) {
+          image.src = URL.createObjectURL(event.target.files[0]);
+        }
+      }
+
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", previewImage);
+
+      function handleCampusWideChange() {
+        var yesCampus = document.getElementById("yesCampus");
+        var eventIDInput = document.getElementById("eventID");
+
+        if (yesCampus.checked) {
+          eventIDInput.disabled = true;
+        } else {
+          eventIDInput.disabled = false;
+        }
+      }
+
+      console.log("asdasdasd");
+
+      document.querySelectorAll('input[name="campusWide"]').forEach((elem) => {
+        console.log("elem", elem);
+
+        elem.addEventListener("change", handleCampusWideChange);
+      });
+
+      function handleRegistrationChange() {
+        var yesRegistration = document.getElementById("yesRegistration");
+        var rangeInput = document.getElementById("range");
+
+        if (yesRegistration.checked) {
+          rangeInput.disabled = false;
+        } else {
+          rangeInput.disabled = true;
+        }
+      }
+
+      document
+        .querySelectorAll('input[name="registration"]')
+        .forEach((elem) => {
+          elem.addEventListener("change", handleRegistrationChange);
+        });
+
+      function handleVenueChange() {
+        var venueSelect = document.getElementById("venue");
+        var venueInput = document.getElementById("venueInput");
+
+        if (venueSelect.value !== "other") {
+          venueInput.disabled = true;
+        } else {
+          venueInput.disabled = false;
+        }
+      }
+
+      document
+        .getElementById("venue")
+        .addEventListener("change", handleVenueChange);
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById("eventDate").valueAsDate = new Date();
+
+        const endDate = new Date();
+        endDate.setDate(endDate.getDate() + 1);
+        document.getElementById("endDate").valueAsDate = endDate;
+      });
+    </script>
   </body>
 </html>
