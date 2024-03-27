@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -156,7 +156,7 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  //console.log(Upresults[0]);
+  console.log(Upresults[0]);
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -258,9 +258,10 @@ app.get("/profile", async (req, res) => {
       "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
       [req.session.user]
     );
+    console.log(req.session.user);
     // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     var n = pastEventResults.length;
-    n = n - 1;
+    n = n-1 ;
     console.log(pastEventResults);
 
     var pasteventid = [];
