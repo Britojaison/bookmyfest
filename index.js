@@ -754,7 +754,7 @@ app.get("/createEvent", (req, res) => {
   res.render("createEvent.ejs");
 });
 
-app.get("/create", async (req, res) => {
+app.post("/create", async (req, res) => {
   const eventName = req.query.eventName;
   const campusWide = req.query.campusWide;
   let targeted = req.query.targeted;
