@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "aws-sdk": "^2.1589.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "ejs": "^3.1.9",
@@ -8,7 +9,6 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1",
     "nodemon": " 3.1.0 "
-
   },
   "name": "bookmyfest",
   "version": "1.0.0",

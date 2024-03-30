@@ -17,8 +17,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -261,7 +261,7 @@ app.get("/profile", async (req, res) => {
     console.log(req.session.user);
     // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     var n = pastEventResults.length;
-    n = n-1 ;
+    n = n - 1;
     console.log(pastEventResults);
 
     var pasteventid = [];
