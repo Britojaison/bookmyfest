@@ -8,9 +8,11 @@ import bodyParser from "body-parser";
 import { render } from "ejs";
 import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
+import bcrypt, { hash } from "bcrypt";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
+const saltround = 10;
 const port = 3000;
 
 const db = mysql
@@ -206,8 +208,23 @@ app.get("/", async (req, res) => {
     content: "",
   };
 
-  res.render("login.ejs", message);
-  console.log(" alen  11223343 \n swo 1100001 pwd 78304923");
+  // Calculate the date 60 days ago
+  const cutOffDate = new Date();
+  cutOffDate.setDate(cutOffDate.getDate() - 60);
+
+  try {
+    // Execute the SQL query to delete events
+    await db.query('DELETE FROM events WHERE end_date <= ?', [cutOffDate]);
+
+    // Render the login page
+    res.render("login.ejs", message);
+    console.log(" alen  11223343 \n swo 1100001 pwd 78304923");
+  } catch (error) {
+    console.error("Error deleting events:", error);
+    // Handle the error appropriately
+    // For example, render an error page or send an error response
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/logo-home", async (req, res) => {
@@ -353,31 +370,37 @@ app.get("/about", (req, res) => {
 app.post("/login", async (req, res) => {
   //console.log(req.body);
   const regno = req.body.loginRegisterNumber;
-  const password = req.body.loginPassword;
+  const loginPassword = req.body.loginPassword;
   req.session.user = req.body.loginRegisterNumber;
 
   console.log(req.session.user);
 
   try {
     const results = await db.query("select * from user where regno=?", [regno]);
-    // console.log(results)
+
     if (results[0].length == 1) {
       const user = results[0][0];
       const storedpassword = user.password;
-      //console.log(storedpassword);
-      if (storedpassword == password) {
-        // console.log(user.role);
-        if (user.role == "A") {
-          adminpage(req, res);
+      console.log(storedpassword);
+      bcrypt.compare(loginPassword, storedpassword, (err, result) => {
+        if (err) {
+          console.log(err);
         } else {
-          homepage(req, res);
+          if (result) {
+            if (user.role == "A") {
+              adminpage(req, res);
+            } else {
+              homepage(req, res);
+            }
+          } else {
+            const message = {
+              content: "<h3>Wrong Password</h3>",
+            };
+            res.render("login.ejs", message);
+          }
         }
-      } else {
-        const message = {
-          content: "<h3>Wrong Password</h3>",
-        };
-        res.render("login.ejs", message);
-      }
+      });
+
     } else {
       const message = {
         content: "<h3>User not found</h3>",
@@ -409,20 +432,31 @@ app.post("/register", async (req, res) => {
       );
       console.log(departmentid[0]);
       departmentid = departmentid[0][0].deptID;
-      // console.log(departmentid);
-      db.query("insert into user values(?,?,?,?,?,?,?)", [
-        regno,
-        password,
-        mobileNumber,
-        email,
-        departmentid,
-        role,
-        category,
-      ]);
-      const message = {
-        content: "",
-      };
-      res.render("login.ejs", message);
+
+      // password hashing 
+      bcrypt.hash(password, saltround, (err, hash) => {
+
+        if (err) {
+          console.log(err);
+        } else {
+
+          db.query("insert into user values(?,?,?,?,?,?,?)", [
+            regno,
+            hash,
+            mobileNumber,
+            email,
+            departmentid,
+            role,
+            category,
+          ]);
+          const message = {
+            content: "",
+          };
+          res.render("login.ejs", message);
+        }
+      });
+
+
     } else {
       const message = {
         content: "<h3>Registration Failed! User already exists.</h3>",
@@ -754,7 +788,7 @@ app.get("/createEvent", (req, res) => {
   res.render("createEvent.ejs");
 });
 
-app.get("/create", async (req, res) => {
+app.post("/create", async (req, res) => {
   const eventName = req.query.eventName;
   const campusWide = req.query.campusWide;
   let targeted = req.query.targeted;

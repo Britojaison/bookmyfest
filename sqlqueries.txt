@@ -1,7 +1,18 @@
-adding event mysql> insert into events values(7 , 'hackathon' , 1 , NULL , '2024-03-23 ' , '2024-03-24' , NULL , "sky-view" , "coding league" , NULL , NULL , NULL , '\\images\\hackathon.jpg' , 11,18,NULL,NULL);
+adding event mysql> 
+insert into events values(9 , 'test' , 1 , NULL , '2024-01-23 ' , '2024-01-25' , NULL , "sky-view" , "coding league" , NULL , NULL , NULL , '\\images\\hackathon.jpg' , 11,NULL,1100001);;
 
 SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = 2241110 AND e.eventID = 8 AND e.end_date < CURDATE();
 
 SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = 2241110 AND e.end_date > CURDATE();
 
 SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();
+
+
+-- Calculate the date 60 days ago
+SET @cutOffDate = DATE_SUB(CURDATE(), INTERVAL 60 DAY);
+
+-- Delete events with end_date 60 days or more before today
+DELETE FROM events
+WHERE end_date <= @cutOffDate;
+
+ALTER TABLE user MODIFY COLUMN `password` VARCHAR(255) NOT NULL;
