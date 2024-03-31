@@ -28,12 +28,10 @@
   <body>
     <div class="topnav">
       <div class="drop">
-        <form action="/school" method="get">
-          <select name="page" id="school">
-            <option value="" disabled selected hidden>School:</option>
-
+        <form id="schoolForm" action="/school" method="get">
+          <select name="page" id="school" onchange="submitForm()">
+            <option value="" disabled selected hidden>Schools</option>
             <option value="8000">School of Sciences</option>
-
             <option value="1000">School of Architecture</option>
             <option value="2000">School of Arts And Humanities</option>
             <option value="3000">School of Business And Management</option>
@@ -45,7 +43,23 @@
             <option value="9000">School of Social Sciences</option>
             <option value="7000">School of Law</option>
           </select>
-          <button type="submit">Go</button>
+        </form>
+      </div>
+      <div class="drop">
+        <form id="catForm" action="/school" method="get">
+          <select name="page" id="cat" onchange="submitForm2()">
+            <option value="" disabled selected hidden>Categories</option>
+            <option value="">Dance</option>
+            <option value="">Theatre</option>
+            <option value="">Stage</option>
+            <option value="">Music</option>
+            <option value="">Photography</option>
+            <option value="">Workshop</option>
+            <option value="">Quiz</option>
+            <option value="">Sports</option>
+            <option value="">Fests</option>
+            <option value="">Conference</option>
+          </select>
         </form>
       </div>
       <div id="title">
@@ -65,12 +79,13 @@
         </div>
       </div>
     </div>
-    <div class="video">
-      <video autoplay muted loop id="myVideo">
-        <source src="video\intro.mp4" type="video/mp4" />
-      </video>
+
+    <!-- <div class="video">
+    <video autoplay muted loop id="myVideo">
+      <source src="video\intro.mp4" type="video/mp4" />
+    </video>
         
-    </div>
+  </div> -->
 
     <div class="header">
       <h1>Upcoming</h1>
@@ -129,6 +144,17 @@
       </div>
       <div>PRIVACY POLICY</div>
     </footer>
+
+    <script>
+      function submitForm() {
+        document.getElementById("schoolForm").submit();
+      }
+    </script>
+    <script>
+      function submitForm2() {
+        document.getElementById("catForm").submit();
+      }
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

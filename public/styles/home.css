@@ -16,11 +16,24 @@
 
 #school {
   margin-left: 1rem;
+  padding-right: 0;
   width: 85px;
   background-color: #1c738e;
   border-color: transparent !important;
   color: #f0f0f0;
   font-size: large;
+}
+#cat {
+  margin-left: 0;
+  padding-left: 0;
+  width: 120px;
+  background-color: #1c738e;
+  border-color: transparent !important;
+  color: #f0f0f0;
+  font-size: large;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 #title {
@@ -100,12 +113,12 @@ body {
   height: 400px;
   width: 100%;
 }
-
+/* 
 #myVideo {
   height: 100%;
   width: 100%;
   object-fit: cover;
-}
+} */
 h1 {
   font-family: "Noto Serif", serif;
   font-weight: 100;
