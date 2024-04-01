@@ -28,36 +28,48 @@
         <p>Host:</p>
         <p>Campus Wide:</p>
         <p>
-          <%if (pan_campus) {%>
-            
-            <% }else{ %>
+          <% if (pan_campus) { %>
+            <% } else { %>
               For:
               <% } %>
         </p>
-        <p>Date:</p>
-        <p>Time:</p>
+        <% if (venue) { %>
         <p>Venue:</p>
-        <p>Description:</p>
+        <% } %>
+        <% if (start_date) { %>
+        <p>Date:</p>
+        <% } %>
+        <% if (event_time) { %>
+        <p>Time:</p>
+        <% } %>
+        <% if (attendance && attendance != 0) { %>
         <p>Attendence:</p>
+        <% } %>
+        <p>Description:</p>
       </div>
       <div class="results">
+        <p><%= host %></p>
         <p>
-          <%= host %>
-        </p>
-        <p>
-          <%if (pan_campus) {%>
+          <% if (pan_campus) { %>
             Yes
-            <% }else{ %>
-              No
-              <% } %>
+          <% } else { %>
+            No
+          <% } %>
         </p>
         <p><%= audience %></p>
-        <p><%= start_date %></p>
-        <p><%= event_time %></p>
+        <% if (venue) { %>
         <p><%= venue %></p>
+        <% } %>
+        <% if (start_date) { %>
+        <p><%= start_date.toLocaleDateString('en-GB') %></p>
+        <% } %>
+        <% if (event_time) { %>
+        <p><%= event_time %></p>
+        <% } %>
         <p><%= event_desc %></p>
+        <% if (attendance && attendance != 0) { %>
         <p><%= attendance %></p>
-
+        <% } %>
       </div>
     </div>
   </div>

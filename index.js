@@ -19,8 +19,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -214,7 +214,7 @@ app.get("/", async (req, res) => {
 
   try {
     // Execute the SQL query to delete events
-    await db.query('DELETE FROM events WHERE end_date <= ?', [cutOffDate]);
+    await db.query("DELETE FROM events WHERE end_date <= ?", [cutOffDate]);
 
     // Render the login page
     res.render("login.ejs", message);
@@ -400,7 +400,6 @@ app.post("/login", async (req, res) => {
           }
         }
       });
-
     } else {
       const message = {
         content: "<h3>User not found</h3>",
@@ -434,13 +433,11 @@ app.post("/register", async (req, res) => {
       departmentid = departmentid[0][0].deptid;
       console.log(departmentid);
 
-      // password hashing 
+      // password hashing
       bcrypt.hash(password, saltround, (err, hash) => {
-
         if (err) {
           console.log(err);
         } else {
-
           db.query("insert into user values(?,?,?,?,?,?,?)", [
             regno,
             hash,
@@ -456,8 +453,6 @@ app.post("/register", async (req, res) => {
           res.render("login.ejs", message);
         }
       });
-
-
     } else {
       const message = {
         content: "<h3>Registration Failed! User already exists.</h3>",
@@ -470,7 +465,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// past evets see more!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// past events see more!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.get("/past-seemore", async (req, res) => {
   try {
     const pastEventResults = await db.query(

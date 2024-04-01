@@ -1,68 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Information</title>
+    <link rel="stylesheet" href="/styles/event.css" />
+    <script>
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const year = date.getFullYear().toString().slice(-2);
+        return `${day}/${month}/${year}`;
+      }
+    </script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event Information</title>
-  <link rel="stylesheet" href="/styles/event.css" />
-</head>
+  <body>
+    <div>
+      <a href="/logo-home">
+        <img id="backimage" src="/images/back.png" />
+      </a>
+    </div>
 
-<body>
-
-  <div>
-    <a href="/logo-home">
-      <img id="backimage" src="/images/back.png" />
-    </a>
-  </div>
-
-  </div>
-  <div class="jeevan">
-    <h1><%= eventname %></h1>
-    <div class="container">
-      <div class="image image-div">
-        <img src="<%= poster %>" alt="Event Image" class="image" />
-        <a href="<%= formlink %>" target="_blank"><button>Register</button></a>
-      </div>
-      <div class="info">
-        <p>Host:</p>
-        <p>Campus Wide:</p>
-        <p>
-          <%if (pan_campus) {%>
-            
-            <% }else{ %>
-              For:
-              <% } %>
-        </p>
-        <p>Date:</p>
-        <p>Time:</p>
-        <p>Venue:</p>
-        <p>Description:</p>
-        <p>Attendence:</p>
-      </div>
-      <div class="results">
-        <p>
-          <%= host %>
-        </p>
-        <p>
-          <%if (pan_campus) {%>
-            Yes
-            <% }else{ %>
-              No
-              <% } %>
-        </p>
-        <p><%= audience %></p>
-        <p><%= start_date %></p>
-        <p><%= event_time %></p>
-        <p><%= venue %></p>
-        <p><%= event_desc %></p>
-        <p><%= attendance %></p>
-
+    <div class="jeevan">
+      <h1><%= eventname %></h1>
+      <div class="container">
+        <div class="image image-div">
+          <img src="<%= poster %>" alt="Event Image" class="image" />
+          <a href="<%= formlink %>" target="_blank"
+            ><button>Register</button></a
+          >
+        </div>
+        <div class="info">
+          <p>Host:</p>
+          <p>Campus Wide:</p>
+          <% if (audience !== null) { %>
+          <p>For: <%= audience %></p>
+          <% } %>
+          <p>Date:</p>
+          <% if (event_time) { %>
+          <p>Time:</p>
+          <% } %> <% if (venue !== null) { %>
+          <p>Venue:</p>
+          <% } %>
+          <p>Description:</p>
+          <% if (attendance === 1) { %>
+          <p>Attendance: Yes</p>
+          <% } %>
+        </div>
+        <div class="results">
+          <p><%= host %></p>
+          <% if (pan_campus) { %>
+          <p>Yes</p>
+          <% } else { %>
+          <p>No</p>
+          <% } %> <% if (audience !== null) { %>
+          <p><%= audience %></p>
+          <% } %>
+          <p>
+            <script>
+              document.write(formatDate("<%= start_date %>"));
+            </script>
+          </p>
+          <% if (event_time) { %>
+          <p><%= event_time %></p>
+          <% } %> <% if (venue !== null) { %>
+          <p><%= venue %></p>
+          <% } %>
+          <p><%= event_desc %></p>
+          <p><%= attendance %></p>
+        </div>
       </div>
     </div>
-  </div>
-
- 
-</body>
-
+  </body>
 </html>
