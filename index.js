@@ -431,7 +431,8 @@ app.post("/register", async (req, res) => {
         [department]
       );
       console.log(departmentid[0]);
-      departmentid = departmentid[0][0].deptID;
+      departmentid = departmentid[0][0].deptid;
+      console.log(departmentid);
 
       // password hashing 
       bcrypt.hash(password, saltround, (err, hash) => {
