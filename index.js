@@ -19,8 +19,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -70,6 +70,8 @@ async function adminpage(req, res) {
   var n = pastEventResults.length;
   n = n - 1;
 
+  console.log("itha ivde noku",req.session.user);
+  console.log(pastEventResults);
   var pasteventid = [];
   for (let index = 0; index < n; index++) {
     pasteventid.push(pastEventResults[0][index].eventID);
@@ -430,7 +432,8 @@ app.post("/register", async (req, res) => {
         [department]
       );
       console.log(departmentid[0]);
-      departmentid = departmentid[0][0].deptID;
+      departmentid = departmentid[0][0].deptid;
+      console.log(departmentid);
 
       // password hashing
       bcrypt.hash(password, saltround, (err, hash) => {
@@ -783,7 +786,7 @@ app.get("/createEvent", (req, res) => {
   res.render("createEvent.ejs");
 });
 
-app.post("/create", async (req, res) => {
+app.get("/create", async (req, res) => {
   const eventName = req.query.eventName;
   const campusWide = req.query.campusWide;
   let targeted = req.query.targeted;
@@ -799,6 +802,7 @@ app.post("/create", async (req, res) => {
   const category = req.query.category;
   const hostid = req.session.user;
   const poster = "/images/example.png";
+  console.log(req.query);
 
   if (campusWide == 1) {
     targeted = null;
@@ -832,7 +836,7 @@ app.post("/create", async (req, res) => {
     console.log(error);
   }
 
-  console.log(req.query);
+  //console.log(req.query);
   adminpage(req, res);
 });
 
