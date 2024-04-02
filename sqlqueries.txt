@@ -16,3 +16,12 @@ DELETE FROM events
 WHERE end_date <= @cutOffDate;
 
 ALTER TABLE user MODIFY COLUMN `password` VARCHAR(255) NOT NULL;
+
+
+SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE()
+
+
+SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date < CURDATE()
+
+SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.end_date < CURDATE();
+not working
