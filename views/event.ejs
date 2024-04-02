@@ -15,7 +15,6 @@
       }
     </script>
   </head>
-
   <body>
     <div>
       <a href="/logo-home">
@@ -71,7 +70,9 @@
           <p><%= venue %></p>
           <% } %>
           <p><%= event_desc %></p>
+          <% if (attendance === 1) { %>
           <p><%= attendance %></p>
+          <% } %>
         </div>
       </div>
     </div>

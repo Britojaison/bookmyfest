@@ -17,13 +17,23 @@
       <form action="/create" method="get">
         <div class="container">
           <!-- //// -->
-          <div class="image">
-            <input type="file" id="fileInput" style="display: none" />
-            <a href="#" onclick="document.getElementById('fileInput').click()">
-              <img id="previewImage" src="/images/plus.png" alt="" />
-            </a>
-            <input type="submit" value="Create" class="button" />
-          </div>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="image">
+              <input
+                type="file"
+                id="fileInput"
+                name="poster"
+                style="display: none"
+              />
+              <a
+                href="#"
+                onclick="document.getElementById('fileInput').click()"
+              >
+                <img id="previewImage" src="/images/plus.png" alt="" />
+              </a>
+              <input type="submit" value="Create" class="button" />
+            </div>
+          </form>
           <div class="info">
             <div class="raone">
               <p>Name:</p>
