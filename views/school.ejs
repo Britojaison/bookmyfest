@@ -47,7 +47,9 @@
     <div class="container">
       <%for(var i=0;i< event.length ;i++){%>
       <div class="event">
+        <a href="/event/<%= eventid[i] %>">
         <img src="<%= posters[i]%>" alt="Describe Image" />
+        </a>
       </div>
       <div class="eventname">
         <h2><%= event[i] %></h2>
