@@ -274,27 +274,39 @@ app.get("/profile", async (req, res) => {
 
     // past events
     const pastEventResults = await db.query(
-      "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
+      "SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date < CURDATE();",
       [req.session.user]
     );
     console.log(req.session.user);
     // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    var n = pastEventResults.length;
-    n = n - 1;
-    console.log(pastEventResults);
+    // var n = pastEventResults.length;
+    // n = n - 1;
+    // console.log(pastEventResults);
+    var events = new Array();
+    var n = results[0].length;
+    var t = n;
+    while (0 < t) {
+      //console.log("hello");
+      var event = await db.query("select * from events where eventID=?", [
+        results[0][t - 1].eventID,
+      ]);
+      events.push(event[0][0]);
+      t--;
+    }
+
 
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
-      pasteventid.push(pastEventResults[0][index].eventID);
+      pasteventid.push(events[index].eventID);
     }
 
     var pasteventname = [];
     for (let index = 0; index < n; index++) {
-      pasteventname.push(pastEventResults[0][index].eventname);
+      pasteventname.push(events[index].eventname);
     }
     var pastposter = [];
     for (let index = 0; index < n; index++) {
-      pastposter.push(pastEventResults[0][index].poster);
+      pastposter.push(events[index].poster);
     }
 
     const eventsdetails = {
