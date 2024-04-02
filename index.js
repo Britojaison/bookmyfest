@@ -70,6 +70,8 @@ async function adminpage(req, res) {
   var n = pastEventResults.length;
   n = n - 1;
 
+  console.log("itha ivde noku",req.session.user);
+  console.log(pastEventResults);
   var pasteventid = [];
   for (let index = 0; index < n; index++) {
     pasteventid.push(pastEventResults[0][index].eventID);
