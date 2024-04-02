@@ -1,168 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lemon&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/home.css" />
-    <title>BookMyFest</title>
-  </head>
 
-  <body>
-    <div class="topnav">
-      <div class="nav-drop">
-        <div class="drop">
-          <form id="schoolForm" action="/school" method="get">
-            <select name="page" id="school" onchange="submitForm()">
-              <option value="" disabled selected hidden>Schools</option>
-              <option value="8000">School of Sciences</option>
-              <option value="1000">School of Architecture</option>
-              <option value="2000">School of Arts And Humanities</option>
-              <option value="3000">School of Business And Management</option>
-              <option value="4000">
-                School of Commerce, Finance And Accountancy
-              </option>
-              <option value="5000">School of Education</option>
-              <option value="6000">School of Engineering And Technology</option>
-              <option value="9000">School of Social Sciences</option>
-              <option value="7000">School of Law</option>
-            </select>
-          </form>
-        </div>
-        <div class="drop">
-          <form id="catForm" action="/school" method="get">
-            <select name="page" id="cat" onchange="submitForm2()">
-              <option value="" disabled selected hidden>Categories</option>
-              <option value="">Dance</option>
-              <option value="">Theatre</option>
-              <option value="">Stage</option>
-              <option value="">Music</option>
-              <option value="">Photography</option>
-              <option value="">Workshop</option>
-              <option value="">Quiz</option>
-              <option value="">Sports</option>
-              <option value="">Fests</option>
-              <option value="">Conference</option>
-            </select>
-          </form>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/home.css" />
+  <title>BookMyFest</title>
+</head>
+
+<body>
+  <div class="topnav">
+    <div class="nav-drop">
+      <div class="drop">
+        <form id="schoolForm" action="/school" method="get">
+          <select name="page" id="school" onchange="submitForm()">
+            <option value="" disabled selected hidden>Schools</option>
+            <option value="8000">School of Sciences</option>
+            <option value="1000">School of Architecture</option>
+            <option value="2000">School of Arts And Humanities</option>
+            <option value="3000">School of Business And Management</option>
+            <option value="4000">
+              School of Commerce, Finance And Accountancy
+            </option>
+            <option value="5000">School of Education</option>
+            <option value="6000">School of Engineering And Technology</option>
+            <option value="9000">School of Social Sciences</option>
+            <option value="7000">School of Law</option>
+          </select>
+        </form>
       </div>
-
-      <div id="title">
-        <img src="images/BookMyShow.png" alt="image" />
-      </div>
-
-      <div class="profile-image">
-        <img
-          src="images/example.png"
-          alt="Profile Image"
-          class="profile_photo"
-        />
-        <div class="options">
-          <a href="/profile">Profile</a>
-          <a href="/about">About</a>
-          <a href="/">Logout</a>
-        </div>
+      <div class="drop">
+        <form id="catForm" action="/categories" method="get">
+          <select name="page" id="cat" onchange="submitForm2()">
+            <option value="" disabled selected hidden>Categories</option>
+            <option value="1">Dance</option>
+            <option value="2">Theatre</option>
+            <option value="3">Stage</option>
+            <option value="4">Music</option>
+            <option value="5">Photography</option>
+            <option value="6">Workshop</option>
+            <option value="7">Quiz</option>
+            <option value="8">Sports</option>
+            <option value="9">Fests</option>
+            <option value="10">Conference</option>
+          </select>
+        </form>
       </div>
     </div>
 
-    <!-- <div class="video">
+    <div id="title">
+      <img src="images/BookMyShow.png" alt="image" />
+    </div>
+
+    <div class="profile-image">
+      <img src="images/example.png" alt="Profile Image" class="profile_photo" />
+      <div class="options">
+        <a href="/profile">Profile</a>
+        <a href="/about">About</a>
+        <a href="/">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="video">
     <video autoplay muted loop id="myVideo">
       <source src="video\intro.mp4" type="video/mp4" />
     </video>
         
   </div> -->
 
-    <div class="header">
-      <h1>Upcoming</h1>
-      <p><a href="/seemore-upcomming?active=Upcoming">see more</a></p>
-    </div>
-    <div class="wrapper">
-      <section id="section1">
-        <%for(var i=0;i< schoolevent.length ;i++){%>
+  <div class="header">
+    <h1>Upcoming</h1>
+    <p><a href="/seemore-upcomming?active=Upcoming">see more</a></p>
+  </div>
+  <div class="wrapper">
+    <section id="section1">
+      <%for(var i=0;i< schoolevent.length ;i++){%>
         <a href="/event/<%= schooleventid[i] %>">
           <div class="item">
             <img src="<%= schoolposters[i]%>" alt="Describe Image" />
-            <p><%= schoolevent[i] %></p>
+            <p>
+              <%= schoolevent[i] %>
+            </p>
           </div>
         </a>
         <%}%>
-      </section>
-    </div>
+    </section>
+  </div>
 
-    <div class="header">
-      <h1>Campus Events</h1>
-      <p><a href="/campus-seemore?active=Campus">see more</a></p>
-    </div>
-    <div class="wrapper">
-      <section id="section1">
-        <%for(var i=0;i< campusevent.length ;i++){%>
+  <div class="header">
+    <h1>Campus Events</h1>
+    <p><a href="/campus-seemore?active=Campus">see more</a></p>
+  </div>
+  <div class="wrapper">
+    <section id="section1">
+      <%for(var i=0;i< campusevent.length ;i++){%>
         <a href="/event/<%= campuseventid[i] %>">
           <div class="item">
             <img src="<%= campusposters[i]%>" alt="Describe Image" />
-            <p><%= campusevent[i] %></p>
+            <p>
+              <%= campusevent[i] %>
+            </p>
           </div>
         </a>
         <%}%>
-      </section>
-    </div>
-    <div class="header">
-      <h1>Recommended</h1>
-      <p><a href="/recomm-seemore?active=Recommended">see more</a></p>
-    </div>
-    <div class="wrapper">
-      <section id="section1">
-        <%for(var i=0;i< recommendevent.length ;i++){%>
+    </section>
+  </div>
+  <div class="header">
+    <h1>Recommended</h1>
+    <p><a href="/recomm-seemore?active=Recommended">see more</a></p>
+  </div>
+  <div class="wrapper">
+    <section id="section1">
+      <%for(var i=0;i< recommendevent.length ;i++){%>
         <a href="/event/<%= recommendeventid[i] %>">
           <div class="item">
             <img src="<%= recommendposters[i]%>" alt="Describe Image" />
-            <p><%= recommendevent[i] %></p>
+            <p>
+              <%= recommendevent[i] %>
+            </p>
           </div>
         </a>
         <%}%>
-      </section>
+    </section>
+  </div>
+
+  <footer>
+    <div>+91 1234567890 <br />mail@christuniversity.in</div>
+    <div>
+      <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
     </div>
+    <div>PRIVACY POLICY</div>
+  </footer>
 
-    <footer>
-      <div>+91 1234567890 <br />mail@christuniversity.in</div>
-      <div>
-        <a href="https://christuniversity.in/" id="link">christuniversity.in</a>
-      </div>
-      <div>PRIVACY POLICY</div>
-    </footer>
+  <script>
+    function submitForm() {
+      document.getElementById("schoolForm").submit();
+    }
+  </script>
+  <script>
+    function submitForm2() {
+      document.getElementById("catForm").submit();
+    }
+  </script>
 
-    <script>
-      function submitForm() {
-        document.getElementById("schoolForm").submit();
-      }
-    </script>
-    <script>
-      function submitForm2() {
-        document.getElementById("catForm").submit();
-      }
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
 </html>

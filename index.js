@@ -70,7 +70,7 @@ async function adminpage(req, res) {
   var n = pastEventResults.length;
   n = n - 1;
 
-  console.log("itha ivde noku",req.session.user);
+  console.log("itha ivde noku", req.session.user);
   console.log(pastEventResults);
   var pasteventid = [];
   for (let index = 0; index < n; index++) {
@@ -354,16 +354,46 @@ app.get("/school", async (req, res) => {
       count: n,
     };
     res.render("school.ejs", school);
-
-    // res.redirect(`/school/${page}`);
   }
 });
 
-// app.get("/school/:page",(req,res)=>{
-//   const page = req.params.page; // Access page parameter from req.params
-//   console.log("Selected page:", page);
-//   // Here you can render the appropriate page based on the selected page parameter
-// });
+app.get("/categories", async(req, res) => {
+  const page = req.query.page; // Access page parameter from req.query
+  // console.log("Selected page:", page);
+  if(page) {
+    const results = await db.query("select * from events where categoryID=? ", [
+      page,
+    ]);
+    // console.log(result[0]);
+    var n = results[0].length;
+    // console.log(n);
+    var eventid = [];
+    for (let index = 0; index < n; index++) {
+      eventid.push(results[0][index].eventID);
+    }
+
+    var eventname = [];
+    for (let index = 0; index < n; index++) {
+      eventname.push(results[0][index].eventname);
+    }
+    var poster = [];
+    for (let index = 0; index < n; index++) {
+      poster.push(results[0][index].poster);
+    }
+    var dates = [];
+    for (let index = 0; index < n; index++) {
+      dates.push(results[0][index].start_date);
+    }
+    const school = {
+      eventid: eventid,
+      event: eventname,
+      posters: poster,
+      date: dates,
+      count: n,
+    };
+    res.render("school.ejs", school);
+  }
+});
 
 app.get("/about", (req, res) => {
   res.render("aboutus.ejs");
