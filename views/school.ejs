@@ -51,7 +51,17 @@
       </div>
       <div class="eventname">
         <h2><%= event[i] %></h2>
-        <p><%= date[i] %></p>
+        <script>
+          function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, "0");
+            const month = (date.getMonth() + 1).toString().padStart(2, "0");
+            const year = date.getFullYear().toString().slice(-2);
+            return `${day}/${month}/${year}`;
+          }
+
+          document.write(formatDate("<%= date[i] %>"));
+        </script>
       </div>
       <%}%>
     </div>

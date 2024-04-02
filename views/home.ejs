@@ -27,41 +27,44 @@
 
   <body>
     <div class="topnav">
-      <div class="drop">
-        <form id="schoolForm" action="/school" method="get">
-          <select name="page" id="school" onchange="submitForm()">
-            <option value="" disabled selected hidden>Schools</option>
-            <option value="8000">School of Sciences</option>
-            <option value="1000">School of Architecture</option>
-            <option value="2000">School of Arts And Humanities</option>
-            <option value="3000">School of Business And Management</option>
-            <option value="4000">
-              School of Commerce, Finance And Accountancy
-            </option>
-            <option value="5000">School of Education</option>
-            <option value="6000">School of Engineering And Technology</option>
-            <option value="9000">School of Social Sciences</option>
-            <option value="7000">School of Law</option>
-          </select>
-        </form>
+      <div class="nav-drop">
+        <div class="drop">
+          <form id="schoolForm" action="/school" method="get">
+            <select name="page" id="school" onchange="submitForm()">
+              <option value="" disabled selected hidden>Schools</option>
+              <option value="8000">School of Sciences</option>
+              <option value="1000">School of Architecture</option>
+              <option value="2000">School of Arts And Humanities</option>
+              <option value="3000">School of Business And Management</option>
+              <option value="4000">
+                School of Commerce, Finance And Accountancy
+              </option>
+              <option value="5000">School of Education</option>
+              <option value="6000">School of Engineering And Technology</option>
+              <option value="9000">School of Social Sciences</option>
+              <option value="7000">School of Law</option>
+            </select>
+          </form>
+        </div>
+        <div class="drop">
+          <form id="catForm" action="/school" method="get">
+            <select name="page" id="cat" onchange="submitForm2()">
+              <option value="" disabled selected hidden>Categories</option>
+              <option value="">Dance</option>
+              <option value="">Theatre</option>
+              <option value="">Stage</option>
+              <option value="">Music</option>
+              <option value="">Photography</option>
+              <option value="">Workshop</option>
+              <option value="">Quiz</option>
+              <option value="">Sports</option>
+              <option value="">Fests</option>
+              <option value="">Conference</option>
+            </select>
+          </form>
+        </div>
       </div>
-      <div class="drop">
-        <form id="catForm" action="/school" method="get">
-          <select name="page" id="cat" onchange="submitForm2()">
-            <option value="" disabled selected hidden>Categories</option>
-            <option value="">Dance</option>
-            <option value="">Theatre</option>
-            <option value="">Stage</option>
-            <option value="">Music</option>
-            <option value="">Photography</option>
-            <option value="">Workshop</option>
-            <option value="">Quiz</option>
-            <option value="">Sports</option>
-            <option value="">Fests</option>
-            <option value="">Conference</option>
-          </select>
-        </form>
-      </div>
+
       <div id="title">
         <img src="images/BookMyShow.png" alt="image" />
       </div>

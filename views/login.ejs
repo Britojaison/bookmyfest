@@ -1,183 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login and Sign Up</title>
+    <link rel="stylesheet" href="styles/login.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login and Sign Up</title>
-  <link rel="stylesheet" href="styles/login.css" />
-</head>
+  <body>
+    <div class="left-side"></div>
+    <div class="right-side">
+      <div class="form-container" id="loginForm">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+          <div class="form-group">
+            <label for="loginRegisterNumber">Register Number:</label>
+            <input
+              type="text"
+              id="loginRegisterNumber"
+              name="loginRegisterNumber"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password:</label>
+            <input
+              type="password"
+              id="loginPassword"
+              name="loginPassword"
+              required
+            />
+            <%-content %>
+          </div>
+          <button type="submit" class="submit-btn">Submit</button>
+          <p class="login-link">
+            New user? <a href="#" onclick="toggleForms()">Sign Up</a>
+          </p>
+        </form>
+      </div>
 
-<body>
-  <div class="left-side">
+      <div class="form-container1" id="signupForm" style="display: none">
+        <h2>Sign Up</h2>
+        <form action="register" method="post">
+          <div class="form-group">
+            <label for="registerNumber">Register Number:</label>
+            <input
+              type="text"
+              id="registerNumber"
+              name="registerNumber"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
 
-  </div>
-  <div class="right-side">
-    <div class="form-container" id="loginForm">
-      <h2>Login</h2>
-      <form action="/login" method="post">
-        <div class="form-group">
-          <label for="loginRegisterNumber">Register Number:</label>
-          <input type="text" id="loginRegisterNumber" name="loginRegisterNumber" required />
-        </div>
-        <div class="form-group">
-          <label for="loginPassword">Password:</label>
-          <input type="password" id="loginPassword" name="loginPassword" required />
-          <%-content %>
-        </div>
-        <button type="submit" class="submit-btn">Submit</button>
-        <p class="login-link">
-          New user? <a href="#" onclick="toggleForms()">Sign Up</a>
-        </p>
-      </form>
+          <div class="form-group">
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber" required />
+          </div>
+          <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="text" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="deanery">Select Deanery:</label>
+            <select name="school" id="deanery" onchange="updateDepartments()">
+              <option value="ss">social sciences</option>
+              <option value="science">science</option>
+              <option value="Arts">Arts and humanities</option>
+              <option value="Bam">Business and Management</option>
+              <option value="Cfa">Commerce,finance and accounting</option>
+              <option value="Education">Education</option>
+              <option value="Engineering">Engineering and technology</option>
+              <option value="Law">Law</option>
+              <option value="Architecture">Architecture</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Select Department:</label>
+            <select id="department" name="department">
+              <!-- Options will be dynamically populated based on deanery selection -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Select Category:</label>
+            <select id="category" name="category">
+              <option value="1">Dance</option>
+              <option value="2">Theatre</option>
+              <option value="3">Stage</option>
+              <option value="4">Music</option>
+              <option value="5">Photography</option>
+              <option value="6">Workshop</option>
+              <option value="7">Quiz</option>
+              <option value="8">Sports</option>
+              <option value="9">Fests</option>
+              <option value="10">Conference</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-btn" value="Submit">
+            Submit
+          </button>
+          <p class="login-link">
+            Already have an account?
+            <a href="#" onclick="toggleForms()">Login</a>
+          </p>
+        </form>
+      </div>
     </div>
 
-    <div class="form-container1" id="signupForm" style="display: none">
-      <h2>Sign Up</h2>
-      <form action="register" method="post">
-        <div class="form-group">
-          <label for="registerNumber">Register Number:</label>
-          <input type="text" id="registerNumber" name="registerNumber" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
+    <script>
+      // Define departments for each deanery
+      const departments = {
+        Arts: [
+          "english and cultural studies",
+          "languages",
+          "media studies",
+          "performing arts,theatre studies and music",
+          "philosophy and theology",
+        ],
+        science: [
+          "chemistry",
+          "computer science",
+          "life sciences",
+          "mathematics",
+          "physics and electronics",
+          "statistics and data science",
+        ],
+        Engineering: [
+          "Civil Engineering",
+          "Electrical and Electronics Engineering",
+          "Mechanical and Automobile Engineering",
+          "Computer Science and Engineering",
+          "Electrical and Communications Engineering",
+          "Science and Humanities Engineering",
+        ],
+        Bam: [
+          "business and management",
+          "hotel management",
+          "tourism management",
+        ],
+        Cfa: ["commerce", "professional studies"],
+        law: [],
+        education: [],
+        ss: [
+          "economics",
+          "international studies,political science and history",
+          "psychology",
+          "sociology and social work",
+        ],
+        architecture: [],
+        // Add more departments as needed
+      };
 
-        <div class="form-group">
-          <label for="mobileNumber">Mobile Number:</label>
-          <input type="text" id="mobileNumber" name="mobileNumber" required />
-        </div>
-        <div class="form-group">
-          <label for="Email">Email:</label>
-          <input type="text" id="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="deanery">Select Deanery:</label>
-          <select name="school" id="deanery" onchange="updateDepartments()">
-            <option value="social sciences">social sciences</option>
-            <option value="science">science</option>
-            <option value="Arts">Arts and humanities</option>
-            <option value="Business and Management">
-              Business and Management
-            </option>
-            <option value="Commerce,finance and accounting">
-              Commerce,finance and accounting
-            </option>
-            <option value="Education">Education</option>
-            <option value="Engineering">Engineering and technology</option>
-            <option value="Law">Law</option>
-            <option value="Architecture">Architecture</option>
-          </select>
-        </div>
+      // Function to update department dropdown options based on deanery selection
+      function updateDepartments() {
+        const deanerySelect = document.getElementById("deanery");
+        const departmentSelect = document.getElementById("department");
+        const selectedDeanery = deanerySelect.value;
 
-        <div class="form-group">
-          <label for="department">Select Department:</label>
-          <select id="department" name="department">
-            <!-- Options will be dynamically populated based on deanery selection -->
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="category">Select Category:</label>
-          <select id="category" name="category">
-            <option value="1">Dance</option>
-            <option value="2">Theatre</option>
-            <option value="3">Stage</option>
-            <option value="4">Music</option>
-            <option value="5">Photography</option>
-            <option value="6">Workshop</option>
-            <option value="7">Quiz</option>
-            <option value="8">Sports</option>
-            <option value="9">Fests</option>
-            <option value="10">Conference</option>
-          </select>
-        </div>
+        // Clear previous options
+        departmentSelect.innerHTML = "";
 
-        <button type="submit" class="submit-btn" value="Submit">
-          Submit
-        </button>
-        <p class="login-link">
-          Already have an account?
-          <a href="#" onclick="toggleForms()">Login</a>
-        </p>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    // Define departments for each deanery
-    const departments = {
-      Arts: [
-        "english and cultural studies",
-        "languages",
-        "media studies",
-        "performing arts,theatre studies and music",
-        "philosophy and theology",
-      ],
-      science: [
-        "chemistry",
-        "computer science",
-        "life sciences",
-        "mathematics",
-        "physics and electronics",
-        "statistics and data science",
-      ],
-      Engineering: [
-        "Civil Engineering",
-        "Electrical and Electronics Engineering",
-        "Mechanical and Automobile Engineering",
-        "Computer Science and Engineering",
-        "Electrical and Communications Engineering",
-        "Science and Humanities Engineering",
-      ],
-      "business and management": [
-        "business and management",
-        "hotel management",
-        "tourism management",
-      ],
-      "commerce,finance and accountancy": [
-        "commerce",
-        "professional studies",
-      ],
-      law: [],
-      "social sciences": [
-        "economics",
-        "international studies,political science and history",
-        "psychology",
-        "sociology and social work",
-      ],
-      // Add more departments as needed
-    };
-
-    // Function to update department dropdown options based on deanery selection
-    function updateDepartments() {
-      const deanerySelect = document.getElementById("deanery");
-      const departmentSelect = document.getElementById("department");
-      const selectedDeanery = deanerySelect.value;
-
-      // Clear previous options
-      departmentSelect.innerHTML = "";
-
-      // Populate with departments for selected deanery
-      departments[selectedDeanery].forEach(function (department) {
-        const option = document.createElement("option");
-        option.text = department;
-        departmentSelect.add(option);
-      });
-    }
-    function toggleForms() {
-      var loginForm = document.getElementById("loginForm");
-      var signupForm = document.getElementById("signupForm");
-
-      if (loginForm.style.display === "none") {
-        loginForm.style.display = "block";
-        signupForm.style.display = "none";
-      } else {
-        loginForm.style.display = "none";
-        signupForm.style.display = "block";
+        // Populate with departments for selected deanery
+        departments[selectedDeanery].forEach(function (department) {
+          const option = document.createElement("option");
+          option.text = department;
+          departmentSelect.add(option);
+        });
       }
-    }
-  </script>
-</body>
+      function toggleForms() {
+        var loginForm = document.getElementById("loginForm");
+        var signupForm = document.getElementById("signupForm");
 
+        if (loginForm.style.display === "none") {
+          loginForm.style.display = "block";
+          signupForm.style.display = "none";
+        } else {
+          loginForm.style.display = "none";
+          signupForm.style.display = "block";
+        }
+      }
+    </script>
+  </body>
 </html>
