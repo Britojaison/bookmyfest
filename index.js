@@ -9,18 +9,22 @@ import render  from "ejs";
 import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
+import multer from "multer";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const saltround = 10;
 const port = 3000;
+// const multer = require("multer");
+// const path = require("path");
+// const fs = require("fs");
 
 const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -884,4 +888,37 @@ app.get("/create", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
+});
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "/public");
+  },
+  filename: function (req, file, cb) {
+    // Generate a unique filename for the uploaded file
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/public", upload.single("poster"), (req, res) => {
+  // Access the uploaded file via req.file
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+
+  const imagePath = "public/" + req.file.filename; // Relative path to the uploaded image
+
+  db.query(
+    "INSERT INTO events (poster) VALUES (?)",
+    [imagePath],
+    (err, result) => {
+      if (err) throw err;
+      console.log("Image path saved to database.");
+    }
+  );
+
+  res.send("File uploaded successfully.");
 });
