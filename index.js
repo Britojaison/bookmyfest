@@ -5,7 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from "mysql2";
 import bodyParser from "body-parser";
-import render  from "ejs";
+import render from "ejs";
 import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
@@ -23,8 +23,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -373,10 +373,10 @@ app.get("/school", async (req, res) => {
   }
 });
 
-app.get("/categories", async(req, res) => {
+app.get("/categories", async (req, res) => {
   const page = req.query.page; // Access page parameter from req.query
   // console.log("Selected page:", page);
-  if(page) {
+  if (page) {
     const results = await db.query("select * from events where categoryID=? ", [
       page,
     ]);
@@ -921,4 +921,44 @@ app.post("/public", upload.single("poster"), (req, res) => {
   );
 
   res.send("File uploaded successfully.");
+});
+
+app.get("/editEvent", async (req, res) => {
+  try {
+    const results = await db.query(
+      "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
+      [req.session.user]
+    );
+    //console.log(results[0]);
+    var n = results[0].length;
+    // console.log(n);
+    var eventid = [];
+    for (let index = 0; index < n; index++) {
+      eventid.push(results[0][index].eventID);
+    }
+
+    var eventname = [];
+    for (let index = 0; index < n; index++) {
+      eventname.push(results[0][index].eventname);
+    }
+    var poster = [];
+    for (let index = 0; index < n; index++) {
+      poster.push(results[0][index].poster);
+    }
+    var dates = [];
+    for (let index = 0; index < n; index++) {
+      dates.push(results[0][index].start_date);
+    }
+
+    const hostevents = {
+      eventid: eventid,
+      event: eventname,
+      posters: poster,
+      date: dates,
+      count: n,
+    };
+    res.render("editlist.ejs", hostevents);
+  } catch (error) {
+    console.log(error);
+  }
 });

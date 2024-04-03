@@ -138,3 +138,13 @@ address {
 p {
   padding-top: 1rem;
 }
+
+.button {
+  background-color: #3093b1;
+  border: 0;
+  color: #ffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px;
+}

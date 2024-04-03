@@ -37,6 +37,9 @@
   </div>
   <div class="wrapper">
     <section id="section1">
+      <%if(eventid.length==0){%>
+        <h2>No Upcoming Events Found!</h2>
+        <% } %>
       <%for(var i=0;i< eventid.length ;i++){%>
         <a href="/event/<%= eventid[i] %>">
           <div class="item">
@@ -56,6 +59,9 @@
   </div>
   <div class="wrapper">
     <section id="section1">
+      <%if(pasteventid.length==0){%>
+        <h2 style="font-family: Helvetica;">No Upcoming Events Found!</h2>
+        <% } %>
       <%for(var i=0;i< pasteventid.length ;i++){%>
         <a href="/event/<%= pasteventid[i] %>">
           <div class="item">
