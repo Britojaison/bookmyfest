@@ -5,7 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from "mysql2";
 import bodyParser from "body-parser";
-import { render } from "ejs";
+import render  from "ejs";
 import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
@@ -70,8 +70,8 @@ async function adminpage(req, res) {
   var n = pastEventResults.length;
   n = n - 1;
 
-  console.log("itha ivde noku", req.session.user);
-  console.log(pastEventResults);
+  // console.log("itha ivde noku", req.session.user);
+  // console.log(pastEventResults);
   var pasteventid = [];
   for (let index = 0; index < n; index++) {
     pasteventid.push(pastEventResults[0][index].eventID);
@@ -425,7 +425,7 @@ app.post("/login", async (req, res) => {
     if (results[0].length == 1) {
       const user = results[0][0];
       const storedpassword = user.password;
-      console.log(storedpassword);
+      // console.log(storedpassword);
       bcrypt.compare(loginPassword, storedpassword, (err, result) => {
         if (err) {
           console.log(err);
@@ -473,9 +473,9 @@ app.post("/register", async (req, res) => {
         "select deptid from department where deptname=?",
         [department]
       );
-      console.log(departmentid[0]);
+      // console.log(departmentid[0]);
       departmentid = departmentid[0][0].deptid;
-      console.log(departmentid);
+      // console.log(departmentid);
 
       // password hashing
       bcrypt.hash(password, saltround, (err, hash) => {
@@ -546,7 +546,7 @@ app.get("/past-seemore", async (req, res) => {
       count: n,
     };
 
-    console.log(campusevents);
+    // console.log(campusevents);
 
     res.render("school.ejs", campusevents);
   } catch (error) {
@@ -588,7 +588,7 @@ app.get("/campus-seemore", async (req, res) => {
       count: n,
     };
 
-    console.log(campusevents);
+    // console.log(campusevents);
 
     res.render("school.ejs", campusevents);
   } catch (error) {
@@ -697,7 +697,7 @@ app.get("/event/:id", async (req, res) => {
     ]);
     //console.log(result[0]);
     const hostID = result[0][0].hostID;
-    console.log(hostID);
+    // console.log(hostID);
     const host = await db.query("select hostname from host where hostid=?", [
       result[0][0].hostID,
     ]);
