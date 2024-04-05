@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -942,7 +942,7 @@ app.get("/editEvent", async (req, res) => {
 app.get("/deleteEvent/:id", async (req, res) => {
   let id = req.params.id;
   console.log(`Deleting ${id}`);
-  await db.query('DELETE FROM events WHERE eventID = ?', [id]);
+  await db.query("DELETE FROM events WHERE eventID = ?", [id]);
   adminpage(req, res);
 });
 
@@ -957,10 +957,12 @@ app.get("/editEvent/:id", async (req, res) => {
   const eventid = req.params.id;
   console.log(eventid + " is the ID");
   try {
-    const result = await db.query("select * from events where eventid=?", [eventid]);
+    const result = await db.query("select * from events where eventid=?", [
+      eventid,
+    ]);
     // console.log(result[0]);
-    const start_date = formatDate(result[0][0].start_date)
-    const end_date = formatDate(result[0][0].end_date)
+    const start_date = formatDate(result[0][0].start_date);
+    const end_date = formatDate(result[0][0].end_date);
     const eventdetails = {
       eventid: result[0][0].eventID,
       eventname: result[0][0].eventname,
@@ -977,8 +979,8 @@ app.get("/editEvent/:id", async (req, res) => {
       poster: result[0][0].poster,
       categoryID: result[0][0].categoryID,
       formlink: result[0][0].formlink,
-      hostID: result[0][0].hostID
-    }
+      hostID: result[0][0].hostID,
+    };
     console.log(eventdetails);
     res.render("editevent.ejs", eventdetails);
   } catch (error) {
@@ -987,19 +989,35 @@ app.get("/editEvent/:id", async (req, res) => {
 });
 
 app.post("/update/:id", async (req, res) => {
-
   var id = req.params.id;
   console.log(req.file);
   const imagePath = "\\images\\" + req.file.filename;
   const poster = imagePath;
   try {
-    await db.query("UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,categoryID=?,formlink=? WHERE eventID = ?",
-      [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.endDate, req.body.eventTime, req.body.venue[0], req.body.desc, req.body.attendance, req.body.registration, req.body.range, req.body.category, req.body.formlink, id]);
-      adminpage(req,res);
+    await db.query(
+      "UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?",
+      [
+        req.body.eventName,
+        req.body.campusWide,
+        req.body.targeted,
+        req.body.eventDate,
+        req.body.endDate,
+        req.body.eventTime,
+        req.body.venue[0],
+        req.body.desc,
+        req.body.attendance,
+        req.body.registration,
+        req.body.range,
+        poster,
+        req.body.category,
+        req.body.formlink,
+        id,
+      ]
+    );
+    adminpage(req, res);
   } catch (error) {
     console.log(error);
   }
-
 });
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
