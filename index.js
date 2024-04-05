@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -43,7 +43,7 @@ async function adminpage(req, res) {
     "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
     [req.session.user]
   );
-  //console.log(results[0]);
+  console.log(results[0]);
   var n = results[0].length;
   // console.log(n);
   var eventid = [];
@@ -70,7 +70,7 @@ async function adminpage(req, res) {
   );
   //console.log(pastEventResults[0]);
   var n = pastEventResults.length;
-  n = n - 1;
+  //n = n - 1;
 
   // console.log("itha ivde noku", req.session.user);
   // console.log(pastEventResults);

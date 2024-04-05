@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/school.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <div id="title">
+            <a href="/admin-home"><img src="/images/BookMyShow.png" alt="image" /></a>
+        </div>
+        <div class="profile-image">
+            <img src="/images/example.png" alt="Profile Image" class="profile_photo" />
+            <div class="options">
+                <a href="/profile">Profile</a>
+
+                <a href="/about">About</a>
+                <a href="/">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <h1 id="header">SChool</h1>
+    </div>
+    <div class="container">
+        <%for(var i=0;i< event.length ;i++){%>
+            <div class="event">
+                <a href="/adminevent/<%= eventid[i] %>">
+                    <img src="<%= posters[i]%>" alt="Describe Image" />
+                </a>
+            </div>
+            <div class="eventname">
+                <h2>
+                    <%= event[i] %>
+                </h2>
+                <script>
+                    function formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const day = date.getDate().toString().padStart(2, "0");
+                        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+                        const year = date.getFullYear().toString().slice(-2);
+                        return `${day}/${month}/${year}`;
+                    }
+                    document.write(formatDate("<%= date[i] %>"));
+                </script><br>
+                <a href="/editEvent/<%= eventid[i] %>"><button class="button">Edit Event</button></a><br>
+                <a href="/deleteEvent/<%= eventid[i] %>"><button class="button-delete">Delete Event</button></a>
+            </div>
+            
+            
+            <%}%>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        const queryString = window.location.search;
+
+        const params = new URLSearchParams(queryString);
+
+        const activeVal = params.get("active");
+
+        const headingEl = document.getElementById("header");
+
+        console.log(headingEl);
+
+        headingEl.innerText = activeVal;
+    </script>
+</body>
+
+</html>

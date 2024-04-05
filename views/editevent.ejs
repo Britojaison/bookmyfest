@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Event</title>
+    <link rel="stylesheet" href="/styles/createEvent.css" />
+</head>
+
+<body>
+    <div class="jeevan">
+        <div>
+            <a href="/admin-home">
+                <img id="backimage" src="/images/back.png" />
+            </a>
+        </div>
+        <form action="/update/<%= eventid %>" method="post">
+            <div class="container">
+                <!-- //// -->
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="image">
+                        <input type="file" id="fileInput" name="poster" style="display: none" />
+                        <a href="#" onclick="document.getElementById('fileInput').click()">
+                            <img id="previewImage" src="/images/plus.png" alt="" />
+                        </a>
+                        <input type="submit" value="Update" class="button" />
+                    </div>
+                </form>
+                <div class="info">
+                    <div class="raone">
+                        <p>Name:</p>
+                        <input type="text" id="eventName" name="eventName" required value="<%= eventname %>"/>
+                    </div>
+                    <div class="raone">
+                        <p>Campus-wide</p>
+                        <div class="raone">
+                            <div class="raone-cont">
+                                <div class="">
+                                    <label for="Yes">Yes</label>
+                                    <input type="radio" id="yesCampus" name="campusWide" value="1" required <% if (pan_campus == 1) { %>checked<% } %> />
+                                </div>
+                                <div class="">
+                                    <label for="No">No</label>
+                                    <input type="radio" id="noCampus" name="campusWide" value="0" required <% if (pan_campus == 0) { %>checked<% } %> />
+                                </div>
+                                <div class="tooltip">
+                                    <img src="/images/information.png" />
+                                    <span class="tooltiptext">Select YES if anyone can participate in the event.If NO
+                                        mention who can participate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="raone">
+                        <p>Target Audience:</p>
+                        <input type="text" id="eventID" name="targeted" value="<%= audience %>"/>
+                    </div>
+                    <script>
+                        settingdate("17/05/24",'24/05/24' );
+                    </script>
+                    <div class="raone">
+                        <p>Start Date:</p>
+                        <input type="date" id="eventDate" name="eventDate" value="" required/>
+                    </div>
+                    <div class="raone">
+                        <p>End Date:</p>
+                        <input type="date" id="endDate" name="endDate" value="" required />
+                    </div>
+                    <div class="raone"></div>
+                    <div class="raone">
+                        <p>Event Time</p>
+                        <input type="time" id="eventTime" name="eventTime" value="<%= event_time %>" />
+                    </div>
+                    <div class="raone">
+                        <label for="venue">Venue:</label>
+                        <div class="venue-cont">
+                            <select id="venue" name="venue">
+                                <option value="">none</option>
+                                <option value="main audi" <% if (venue === 'main audi') { %>selected<% } %>>main audi</option>
+                                <option value="KE audi" <% if (venue === 'KE audi') { %>selected<% } %>>KE audi</option>
+                                <option value="Block 1 audi" <% if (venue === 'Block 1 audi') { %>selected<% } %>>Block 1 audi</option>
+                                <option value="skyview" <% if (venue === 'skyview') { %>selected<% } %>>skyview</option>
+                                <option value="other" <% if (venue === 'other') { %>selected<% } %>>other</option>
+                            </select>
+                            <div class="raone" style="gap: 10px; align-items: center">
+                                <p id="venue2">OR</p>
+                                <div class="tooltip">
+                                    <img src="/images/information.png" />
+                                    <span class="tooltiptext">select any venue or select OTHER and type in the
+                                        venue</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="raone">
+                        <p></p>
+                        <input type="text" id="venueInput" name="venue" value="<%= venue %>" />
+                    </div>
+                    <div class="raone">
+                        <p>Registration:</p>
+                        <div class="raone">
+                            <div class="raone-cont">
+                                <div class="">
+                                    <label for="yesRegistration">Yes</label>
+                                    <input type="radio" id="yesRegistration" name="registration" value="1" <% if (registration == 1) { %>checked<% } %> />
+                                </div>
+                                <div class="">
+                                    <label for="noRegistration">No</label>
+                                    <input type="radio" id="noRegistration" name="registration" value="0" <% if (registration == 0) { %>checked<% } %> />
+                                </div>
+                                <div class="tooltip">
+                                    <img src="/images/information.png" />
+                                    <span class="tooltiptext">Select YES if you want registration. You can also limit
+                                        the range for number of registration</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="raone">
+                        <p>Registration Range:</p>
+                        <input type="number" id="range" name="range" value="<%= reg_range %>" />
+                    </div>
+                    <div class="raone">
+                        <p>Description:</p>
+                        <input type="text" id="desc" name="desc" value="<%= event_desc %>" />
+                    </div>
+                    <div class="raone">
+                        <p>Google Form link:</p>
+                        <input type="url" id="formlink" name="formlink" value="<%= formlink %>" />
+                    </div>
+                    <div class="raone">
+                        <p>Attendance:</p>
+                        <div class="raone">
+                            <div class="raone-cont">
+                                <div class="">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yesattendance" name="attendance" value="1" <% if (attendance == 1) { %>checked<% } %> />
+                                </div>
+                                <div class="">
+                                    <label for="No">No</label>
+                                    <input type="radio" id="noattendance" name="attendance" value="0" <% if (attendance == 0) { %>checked<% } %> />
+                                </div>
+                                <div class="tooltip">
+                                    <img src="/images/information.png" />
+                                    <span class="tooltiptext">Select YES if you will be providing claims for the
+                                        participants</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="raone">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="1" <% if (categoryID == 1) { %>selected<% } %>>Dance</option>
+                            <option value="2" <% if (categoryID == 2) { %>selected<% } %>>Theatre</option>
+                            <option value="3" <% if (categoryID == 3) { %>selected<% } %>>Stage</option>
+                            <option value="4" <% if (categoryID == 4) { %>selected<% } %>>Music</option>
+                            <option value="5" <% if (categoryID == 5) { %>selected<% } %>>photography</option>
+                            <option value="6" <% if (categoryID == 6) { %>selected<% } %>>Workshop</option>
+                            <option value="7" <% if (categoryID == 7) { %>selected<% } %>>Quiz</option>
+                            <option value="8" <% if (categoryID == 8) { %>selected<% } %>>Sports</option>
+                            <option value="9" <% if (categoryID == 9) { %>selected<% } %>>Fests</option>
+                            <option value="10" <% if (categoryID == 10) { %>selected<% } %>>Conference</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        
+        function previewImage(event) {
+            var image = document.getElementById("previewImage");
+            if (event.target.files && event.target.files[0]) {
+                image.src = URL.createObjectURL(event.target.files[0]);
+            }
+        }
+
+        document
+            .getElementById("fileInput")
+            .addEventListener("change", previewImage);
+
+        function handleCampusWideChange() {
+            var yesCampus = document.getElementById("yesCampus");
+            var eventIDInput = document.getElementById("eventID");
+
+            if (yesCampus.checked) {
+                eventIDInput.value = "";
+                eventIDInput.disabled = true;
+
+            } else {
+                eventIDInput.disabled = false;
+            }
+        }
+
+        console.log("asdasdasd");
+
+        document.querySelectorAll('input[name="campusWide"]').forEach((elem) => {
+            console.log("elem", elem);
+
+            elem.addEventListener("change", handleCampusWideChange);
+        });
+
+        function handleRegistrationChange() {
+            var yesRegistration = document.getElementById("yesRegistration");
+            var rangeInput = document.getElementById("range");
+
+            if (yesRegistration.checked) {
+
+                rangeInput.disabled = false;
+            } else {
+                rangeInput.value="";
+                rangeInput.disabled = true;
+            }
+        }
+
+        document
+            .querySelectorAll('input[name="registration"]')
+            .forEach((elem) => {
+                elem.addEventListener("change", handleRegistrationChange);
+            });
+
+        function handleVenueChange() {
+            var venueSelect = document.getElementById("venue");
+            var venueInput = document.getElementById("venueInput");
+
+            if (venueSelect.value !== "other") {
+                venueInput.disabled = true;
+            } else {
+                venueInput.disabled = false;
+            }
+        }
+
+        function settingdate(sDate,eDate){
+            document.getElementById("eventDate").valueAsDate = sDate;
+            document.getElementById("endDate").valueAsDate = eDate;
+        }
+        document
+            .getElementById("venue")
+            .addEventListener("change", handleVenueChange);
+
+        
+    </script>
+</body>
+
+</html>

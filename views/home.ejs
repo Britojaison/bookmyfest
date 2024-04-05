@@ -83,7 +83,11 @@
   </div>
   <div class="wrapper">
     <section id="section1">
+      <%if(schoolevent.length==0){%>
+        <h2>No Upcoming Events Found!</h2>
+        <% } %>
       <%for(var i=0;i< schoolevent.length ;i++){%>
+        
         <a href="/event/<%= schooleventid[i] %>">
           <div class="item">
             <img src="<%= schoolposters[i]%>" alt="Describe Image" />
@@ -120,6 +124,9 @@
   </div>
   <div class="wrapper">
     <section id="section1">
+      <%if(recommendevent.length==0){%>
+        <h2>No Upcoming Events Found!</h2>
+        <% } %>
       <%for(var i=0;i< recommendevent.length ;i++){%>
         <a href="/event/<%= recommendeventid[i] %>">
           <div class="item">
