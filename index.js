@@ -133,7 +133,7 @@ async function homepage(req, res) {
     "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
     [req.session.user]
   );
-  //console.log(userRecommended[0]);
+  // console.log(userRecommended[0]);
   var q = userRecommended[0].length;
   var recommendeventid = [];
   for (let index = 0; index < q; index++) {
@@ -162,7 +162,7 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  console.log(Upresults[0]);
+  //console.log(Upresults[0]);
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -249,6 +249,7 @@ app.get("/profile", async (req, res) => {
     var events = new Array();
     var l = results[0].length;
     var t = l;
+    console.log(t + "is the number for upcoming events");
     while (0 < t) {
       //console.log("hello");
       var event = await db.query("select * from events where eventID=?", [
@@ -257,7 +258,7 @@ app.get("/profile", async (req, res) => {
       events.push(event[0][0]);
       t--;
     }
-    //console.log(events);
+    // console.log(events);
     var eventid = [];
     for (let index = 0; index < l; index++) {
       eventid.push(events[index].eventID);
@@ -278,21 +279,25 @@ app.get("/profile", async (req, res) => {
       [req.session.user]
     );
     console.log(req.session.user);
+    //  console.log(pastEventResults[0]);
     // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // var n = pastEventResults.length;
     // n = n - 1;
     // console.log(pastEventResults);
     var events = new Array();
-    var n = results[0].length;
+    var n = pastEventResults[0].length;
     var t = n;
-    while (0 < t) {
-      //console.log("hello");
+     console.log(t,"is the number for past events");
+    while (0<t) {
+      // console.log(pastEventResults[0][t -1].eventID);
+
       var event = await db.query("select * from events where eventID=?", [
-        results[0][t - 1].eventID,
+        pastEventResults[0][t -1].eventID,
       ]);
       events.push(event[0][0]);
       t--;
     }
+    // console.log(events);
 
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
@@ -320,7 +325,7 @@ app.get("/profile", async (req, res) => {
       pastposters: pastposter,
       pastcount: n,
     };
-    // console.log(eventsdetails);
+    //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
   } catch (error) {
@@ -648,7 +653,7 @@ app.get("/seemore-upcomming", async (req, res) => {
 app.get("/recomm-seemore", async (req, res) => {
   try {
     const userRecommended = await db.query(
-      "select e.eventid,e.eventname,e.poster,e.start_date,u.regno from events e inner join user u  on e.categoryid=u.categoryid where u.regno=?;",
+      "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
       [req.session.user]
     );
     //console.log(userRecommended[0]);
