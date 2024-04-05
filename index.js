@@ -291,6 +291,8 @@ app.get("/profile", async (req, res) => {
     var t = n;
     console.log(t, "is the number for past events");
     while (0 < t) {
+    console.log(t, "is the number for past events");
+    while (0 < t) {
       // console.log(pastEventResults[0][t -1].eventID);
 
       var event = await db.query("select * from events where eventID=?", [
@@ -980,7 +982,7 @@ app.get("/editEvent/:id", async (req, res) => {
       attendance: result[0][0].attendance,
       registration: result[0][0].registration,
       reg_range: result[0][0].reg_range,
-      poster: result[0][0].poster,
+      // poster: result[0][0].poster,
       categoryID: result[0][0].categoryID,
       formlink: result[0][0].formlink,
       hostID: result[0][0].hostID,
@@ -1006,7 +1008,7 @@ app.post("/update/:id", async (req, res) => {
         req.body.targeted,
         req.body.eventDate,
         req.body.endDate,
-        req.body.eventTime,
+        req.body.eventTime || null,
         req.body.venue[0],
         req.body.desc,
         req.body.attendance,
@@ -1014,7 +1016,7 @@ app.post("/update/:id", async (req, res) => {
         req.body.range,
         // poster,
         req.body.category,
-        req.body.formlink,
+        req.body.formlink || null,
         id,
       ]
     );
