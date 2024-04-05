@@ -10,6 +10,7 @@ import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
 import multer from "multer";
+import path from "path"; // Import the path module
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -298,7 +299,6 @@ app.get("/profile", async (req, res) => {
       t--;
     }
 
-
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
       pasteventid.push(events[index].eventID);
@@ -373,10 +373,10 @@ app.get("/school", async (req, res) => {
   }
 });
 
-app.get("/categories", async(req, res) => {
+app.get("/categories", async (req, res) => {
   const page = req.query.page; // Access page parameter from req.query
   // console.log("Selected page:", page);
-  if(page) {
+  if (page) {
     const results = await db.query("select * from events where categoryID=? ", [
       page,
     ]);
@@ -827,28 +827,48 @@ app.get("/A-logo-home", (req, res) => {
   adminpage(req, res);
 });
 
+///////////// poster storage
+
 app.get("/createEvent", (req, res) => {
   // console.log("helllo123");
   res.render("createEvent.ejs");
 });
 
-app.get("/create", async (req, res) => {
-  const eventName = req.query.eventName;
-  const campusWide = req.query.campusWide;
-  let targeted = req.query.targeted;
-  const eventDate = req.query.eventDate;
-  const endDate = req.query.endDate;
-  const eventTime = req.query.eventTime;
-  const venue = req.query.venue;
-  const registration = req.query.registration;
-  let range = req.query.range;
-  const desc = req.query.desc;
-  const formlink = req.query.formlink;
-  const attendance = req.query.attendance;
-  const category = req.query.category;
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+    // console.log("testt");
+  },
+});
+const upload = multer({ storage: storage });
+
+app.post("/create", upload.single("poster"), async (req, res) => {
+  // console.log(req.query);
+  const eventName = req.body.eventName;
+  const campusWide = req.body.campusWide;
+  let targeted = req.body.targeted;
+  const eventDate = req.body.eventDate;
+  const endDate = req.body.endDate;
+  const eventTime = req.body.eventTime || null;
+  const venue = req.body.venue;
+  const registration = req.body.registration;
+  let range = req.body.range || null;
+  const desc = req.body.desc;
+  const formlink = req.body.formlink || null;
+  const attendance = req.body.attendance;
+  const category = req.body.category;
   const hostid = req.session.user;
-  const poster = "/images/example.png";
-  console.log(req.query);
+
+  // console.log(req.query, req.file);
+
+  // upload.single("poster");
+  const imagePath = "\\images\\" + req.file.filename;
+  const poster = imagePath;
+  // console.log(req.query);
 
   if (campusWide == 1) {
     targeted = null;
@@ -888,37 +908,4 @@ app.get("/create", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
-});
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/public");
-  },
-  filename: function (req, file, cb) {
-    // Generate a unique filename for the uploaded file
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/public", upload.single("poster"), (req, res) => {
-  // Access the uploaded file via req.file
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
-
-  const imagePath = "public/" + req.file.filename; // Relative path to the uploaded image
-
-  db.query(
-    "INSERT INTO events (poster) VALUES (?)",
-    [imagePath],
-    (err, result) => {
-      if (err) throw err;
-      console.log("Image path saved to database.");
-    }
-  );
-
-  res.send("File uploaded successfully.");
 });

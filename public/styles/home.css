@@ -43,7 +43,8 @@
 }
 
 #title {
-  padding-left: 2rem;
+  padding-left: 0rem;
+  padding-right: 7rem;
   padding-top: 0.5rem;
   font-family: Helvetica, sans-serif;
   font-weight: 600;

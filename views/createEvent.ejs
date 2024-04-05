@@ -14,9 +14,8 @@
           <img id="backimage" src="/images/back.png" />
         </a>
       </div>
-      <form action="/create" method="get">
+      <form action="/create" method="post" enctype="multipart/form-data">
         <div class="container">
-          <!-- //// -->
           <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="image">
               <input
@@ -79,11 +78,18 @@
             </div>
             <div class="raone">
               <p>Start Date:</p>
-              <input type="date" id="eventDate" name="eventDate" />
+              <input type="date" id="eventDate" name="eventDate" required />
             </div>
             <div class="raone">
               <p>End Date:</p>
-              <input type="date" id="endDate" name="endDate" />
+              <input type="date" id="endDate" name="endDate" required />
+              <div class="tooltip">
+                <img src="/images/information.png" />
+                <span class="tooltiptext"
+                  >the end date should be same as start date for single-day
+                  events</span
+                >
+              </div>
             </div>
             <div class="raone"></div>
             <div class="raone">
@@ -115,7 +121,17 @@
             </div>
             <div class="raone">
               <p></p>
-              <input type="text" id="venueInput" name="venue" />
+              <input
+                type="text"
+                id="venueInput"
+                name="venue"
+                required
+                disabled
+              />
+            </div>
+            <div class="raone">
+              <p>Description:</p>
+              <input type="text" id="desc" name="desc" required />
             </div>
             <div class="raone">
               <p>Registration:</p>
@@ -153,10 +169,7 @@
               <p>Registration Range:</p>
               <input type="number" id="range" name="range" />
             </div>
-            <div class="raone">
-              <p>Description:</p>
-              <input type="text" id="desc" name="desc" />
-            </div>
+
             <div class="raone">
               <p>Google Form link:</p>
               <input type="url" id="formlink" name="formlink" />
@@ -172,6 +185,7 @@
                       id="yesattendance"
                       name="attendance"
                       value="1"
+                      required
                     />
                   </div>
                   <div class="">
@@ -181,6 +195,7 @@
                       id="noattendance"
                       name="attendance"
                       value="0"
+                      required
                     />
                   </div>
                   <div class="tooltip">
@@ -246,11 +261,14 @@
       function handleRegistrationChange() {
         var yesRegistration = document.getElementById("yesRegistration");
         var rangeInput = document.getElementById("range");
+        var formInput = document.getElementById("formlink");
 
         if (yesRegistration.checked) {
           rangeInput.disabled = false;
+          formInput.disabled = false;
         } else {
           rangeInput.disabled = true;
+          formInput.disabled = true;
         }
       }
 
@@ -277,10 +295,6 @@
 
       window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("eventDate").valueAsDate = new Date();
-
-        const endDate = new Date();
-        endDate.setDate(endDate.getDate() + 1);
-        document.getElementById("endDate").valueAsDate = endDate;
       });
     </script>
   </body>
