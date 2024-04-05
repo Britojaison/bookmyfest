@@ -35,7 +35,7 @@
     <div class="container">
         <%for(var i=0;i< event.length ;i++){%>
             <div class="event">
-                <a href="/event/<%= eventid[i] %>">
+                <a href="/adminevent/<%= eventid[i] %>">
                     <img src="<%= posters[i]%>" alt="Describe Image" />
                 </a>
             </div>
@@ -53,7 +53,8 @@
                     }
                     document.write(formatDate("<%= date[i] %>"));
                 </script><br>
-                <a href=""><button class="button">Edit Event</button></a>
+                <a href="/editEvent/<%= eventid[i] %>"><button class="button">Edit Event</button></a><br>
+                <a href="/deleteEvent/<%= eventid[i] %>"><button class="button-delete">Delete Event</button></a>
             </div>
             
             

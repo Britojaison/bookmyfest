@@ -45,7 +45,7 @@ async function adminpage(req, res) {
     "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
     [req.session.user]
   );
-  //console.log(results[0]);
+  console.log(results[0]);
   var n = results[0].length;
   // console.log(n);
   var eventid = [];
@@ -72,7 +72,7 @@ async function adminpage(req, res) {
   );
   //console.log(pastEventResults[0]);
   var n = pastEventResults.length;
-  n = n - 1;
+  //n = n - 1;
 
   // console.log("itha ivde noku", req.session.user);
   // console.log(pastEventResults);
@@ -962,3 +962,66 @@ app.get("/editEvent", async (req, res) => {
     console.log(error);
   }
 });
+
+app.get("/deleteEvent/:id", async (req, res) => {
+  let id = req.params.id;
+  console.log(`Deleting ${id}`);
+  await db.query('DELETE FROM events WHERE eventID = ?', [id]);
+  adminpage(req, res);
+});
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString().slice(-2);
+  return `${day}/${month}/${year}`;
+}
+
+app.get("/editEvent/:id", async (req, res) => {
+  const eventid = req.params.id;
+  console.log(eventid + " is the ID");
+  try {
+    const result = await db.query("select * from events where eventid=?", [eventid]);
+    // console.log(result[0]);
+    const start_date = formatDate(result[0][0].start_date)
+    const end_date = formatDate(result[0][0].end_date)
+    const eventdetails = {
+      eventid: result[0][0].eventID,
+      eventname: result[0][0].eventname,
+      pan_campus: result[0][0].pan_campus,
+      audience: result[0][0].audience,
+      start_date: start_date,
+      end_date: end_date,
+      event_time: result[0][0].event_time,
+      venue: result[0][0].venue,
+      event_desc: result[0][0].event_desc,
+      attendance: result[0][0].attendance,
+      registration: result[0][0].registration,
+      reg_range: result[0][0].reg_range,
+      poster: result[0][0].poster,
+      categoryID: result[0][0].categoryID,
+      formlink: result[0][0].formlink,
+      hostID: result[0][0].hostID
+    }
+    console.log(eventdetails);
+    res.render("editevent.ejs", eventdetails);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// app.post("/update/:id", async (req, res) => {
+//   var id = req.params.id;
+//   console.log(id);
+//   console.log(req.body);
+//   try {
+//     await db.query(`UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?`,
+//       [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.end_date, req.body.eventTime, req.body.venue[0], req.body.event_desc, req.body.attendance, req.body.registration, req.body.range, req.body.poster, req.body.category, req.body.formlink, id]);
+//     adminpage(req, res);
+//   } catch (error) {
+//     console.log(error)
+//   }
+
+// });
+

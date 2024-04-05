@@ -143,7 +143,16 @@ p {
   background-color: #3093b1;
   border: 0;
   color: #ffff;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px;
+}
+.button-delete{
+  background-color: #e55959;
+  border: 0;
+  color: #ffff;
+  font-size: 1.2rem;
   cursor: pointer;
   border-radius: 8px;
   padding: 5px;
