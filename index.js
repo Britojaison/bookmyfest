@@ -1004,7 +1004,7 @@ app.post("/update/:id", async (req, res) => {
         req.body.eventName,
         req.body.campusWide,
         req.body.targeted,
-        req.body.eventDate,
+        req.body.startDate,
         req.body.endDate,
         req.body.eventTime,
         req.body.venue[0],
