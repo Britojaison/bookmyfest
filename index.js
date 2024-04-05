@@ -135,7 +135,7 @@ async function homepage(req, res) {
   );
   // console.log(userRecommended[0]);
   var q = userRecommended[0].length;
-  console.log(q,"recommended");
+  console.log(q, "recommended");
   var recommendeventid = [];
   for (let index = 0; index < q; index++) {
     recommendeventid.push(userRecommended[0][index].eventID);
@@ -163,8 +163,8 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  
-  console.log(t,"upcomming");
+
+  console.log(t, "upcomming");
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -289,12 +289,12 @@ app.get("/profile", async (req, res) => {
     var events = new Array();
     var n = pastEventResults[0].length;
     var t = n;
-     console.log(t,"is the number for past events");
-    while (0<t) {
+    console.log(t, "is the number for past events");
+    while (0 < t) {
       // console.log(pastEventResults[0][t -1].eventID);
 
       var event = await db.query("select * from events where eventID=?", [
-        pastEventResults[0][t -1].eventID,
+        pastEventResults[0][t - 1].eventID,
       ]);
       events.push(event[0][0]);
       t--;
@@ -899,7 +899,7 @@ app.post("/create", upload.single("poster"), async (req, res) => {
   adminpage(req, res);
 });
 
-app.get("/editEvent", async (req, res) => {
+async function editlist(req, res) {
   try {
     const results = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
@@ -937,13 +937,17 @@ app.get("/editEvent", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+}
+
+app.get("/editEvent", async (req, res) => {
+  editlist(req, res);
 });
 
 app.get("/deleteEvent/:id", async (req, res) => {
   let id = req.params.id;
   console.log(`Deleting ${id}`);
   await db.query("DELETE FROM events WHERE eventID = ?", [id]);
-  adminpage(req, res);
+  editlist(req, res);
 });
 
 function formatDate(dateString) {
@@ -991,11 +995,11 @@ app.get("/editEvent/:id", async (req, res) => {
 app.post("/update/:id", async (req, res) => {
   var id = req.params.id;
   console.log(req.file);
-  const imagePath = "\\images\\" + req.file.filename;
-  const poster = imagePath;
+  // const imagePath = "\\images\\" + req.file.filename;
+  // const poster = imagePath;
   try {
     await db.query(
-      "UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?",
+      "UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,categoryID=?,formlink=? WHERE eventID = ?",
       [
         req.body.eventName,
         req.body.campusWide,
@@ -1008,13 +1012,13 @@ app.post("/update/:id", async (req, res) => {
         req.body.attendance,
         req.body.registration,
         req.body.range,
-        poster,
+        // poster,
         req.body.category,
         req.body.formlink,
         id,
       ]
     );
-    adminpage(req, res);
+    editlist(req, res);
   } catch (error) {
     console.log(error);
   }
