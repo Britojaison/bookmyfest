@@ -16,23 +16,20 @@
       </div>
       <form action="/create" method="post" enctype="multipart/form-data">
         <div class="container">
-          <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="image">
-              <input
-                type="file"
-                id="fileInput"
-                name="poster"
-                style="display: none"
-              />
-              <a
-                href="#"
-                onclick="document.getElementById('fileInput').click()"
-              >
-                <img id="previewImage" src="/images/plus.png" alt="" />
-              </a>
-              <input type="submit" value="Create" class="button" />
-            </div>
-          </form>
+          <!-- <form action="/upload" method="post" enctype="multipart/form-data"> -->
+          <div class="image">
+            <input
+              type="file"
+              id="fileInput"
+              name="poster"
+              style="display: none"
+            />
+            <a href="#" onclick="document.getElementById('fileInput').click()">
+              <img id="previewImage" src="/images/plus.png" alt="" />
+            </a>
+            <input type="submit" value="Create" class="button" />
+          </div>
+          <!-- </form> -->
           <div class="info">
             <div class="raone">
               <p>Name:</p>
@@ -78,11 +75,12 @@
             </div>
             <div class="raone">
               <p>Start Date:</p>
-              <input type="date" id="eventDate" name="eventDate" required />
+              <input type="date" id="startDate" name="eventDate" required />
             </div>
             <div class="raone">
               <p>End Date:</p>
               <input type="date" id="endDate" name="endDate" required />
+              <div class="error" id="dateError"></div>
               <div class="tooltip">
                 <img src="/images/information.png" />
                 <span class="tooltiptext"
@@ -228,6 +226,11 @@
       </form>
     </div>
     <script>
+      const dateError = document.getElementById("dateError");
+      const startDateInput = document.getElementById("startDate");
+      const endDateInput = document.getElementById("endDate");
+      let endDateError = false;
+
       function previewImage(event) {
         var image = document.getElementById("previewImage");
         if (event.target.files && event.target.files[0]) {
@@ -250,11 +253,7 @@
         }
       }
 
-      console.log("asdasdasd");
-
       document.querySelectorAll('input[name="campusWide"]').forEach((elem) => {
-        console.log("elem", elem);
-
         elem.addEventListener("change", handleCampusWideChange);
       });
 
@@ -294,8 +293,35 @@
         .addEventListener("change", handleVenueChange);
 
       window.addEventListener("DOMContentLoaded", (event) => {
-        document.getElementById("eventDate").valueAsDate = new Date();
+        startDateInput.valueAsDate = new Date();
       });
+
+      endDateInput.addEventListener("change", function () {
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        if (endDate < startDate) {
+          endDateError = true;
+        } else {
+          endDateError = false;
+        }
+      });
+
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          if (endDateError) {
+            event.preventDefault();
+            dateError.textContent =
+              "End date must be greater than or equal to start date.";
+          }
+        });
+      function formatDate(date) {
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      }
     </script>
   </body>
 </html>

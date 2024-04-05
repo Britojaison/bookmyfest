@@ -27,51 +27,53 @@
       <div class="container">
         <div class="image image-div">
           <img src="<%= poster %>" alt="Event Image" class="image" />
+        </div>
+        <div class="info">
           <div class="button-wrapper">
             <a href="<%= formlink %>" target="_blank">
               <button>Register</button>
             </a>
           </div>
-        </div>
-        <div class="info">
-          <p>Host:</p>
-          <p>Campus Wide:</p>
-          <% if (audience !== null) { %>
+          <div class="date-flex">
+            <p>Host:</p>
+            <% if (host) { %>
+            <p><%= host %></p>
+          </div>
+          <% } %> <% if (pan_campus) { %>
+          <p>Campus Wide: Yes</p>
+          <% } else if (pan_campus === false) { %>
+          <p>Campus Wide: No</p>
+          <% } %> <% if (audience !== null) { %>
           <p>For: <%= audience %></p>
           <% } %>
-          <p>Date:</p>
-          <% if (event_time !=='00:00:00') { %>
-          <p>Time:</p>
+          <div class="date-flex">
+            <p class="class-date">Date:</p>
+            <% if (start_date && end_date) { %>
+            <div class="date-flex">
+              <p>
+                <script>
+                  document.write(formatDate("<%= start_date %>"));
+                </script>
+              </p>
+              <% if (start_date.getTime() !== end_date.getTime()) { %>
+              <p>-</p>
+              <p>
+                <script>
+                  document.write(formatDate("<%= end_date %>"));
+                </script>
+              </p>
+              <% } %>
+            </div>
+          </div>
+
+          <% } %> <% if (event_time && event_time !=='00:00:00') { %>
+          <p>Time: <%= event_time %></p>
           <% } %> <% if (venue !== null) { %>
-          <p>Venue:</p>
-          <% } %>
-          <p>Description:</p>
-          <% if (attendance === 1) { %>
+          <p>Venue: <%= venue %></p>
+          <% } %> <% if (event_desc) { %>
+          <p>Description: <%= event_desc %></p>
+          <% } %> <% if (attendance === 1) { %>
           <p>Attendance: Yes</p>
-          <% } %>
-        </div>
-        <div class="results">
-          <p><%= host %></p>
-          <% if (pan_campus) { %>
-          <p>Yes</p>
-          <% } else { %>
-          <p>No</p>
-          <% } %> <% if (audience !== null) { %>
-          <p><%= audience %></p>
-          <% } %>
-          <p>
-            <script>
-              document.write(formatDate("<%= start_date %>"));
-            </script>
-          </p>
-          <% if (event_time !=='00:00:00') { %>
-          <p><%= event_time %></p>
-          <% } %> <% if (venue !== null) { %>
-          <p><%= venue %></p>
-          <% } %>
-          <p><%= event_desc %></p>
-          <% if (attendance === 1) { %>
-          <p><%= attendance %></p>
           <% } %>
         </div>
       </div>
