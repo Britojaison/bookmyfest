@@ -86,17 +86,17 @@
       <%if(schoolevent.length==0){%>
         <h2>No Upcoming Events Found!</h2>
         <% } %>
-      <%for(var i=0;i< schoolevent.length ;i++){%>
-        
-        <a href="/event/<%= schooleventid[i] %>">
-          <div class="item">
-            <img src="<%= schoolposters[i]%>" alt="Describe Image" />
-            <p>
-              <%= schoolevent[i] %>
-            </p>
-          </div>
-        </a>
-        <%}%>
+          <%for(var i=0;i< schoolevent.length && i<4;i++){%>
+
+            <a href="/event/<%= schooleventid[i] %>">
+              <div class="item">
+                <img src="<%= schoolposters[i]%>" alt="Describe Image" />
+                <p>
+                  <%= schoolevent[i] %>
+                </p>
+              </div>
+            </a>
+            <%}%>
     </section>
   </div>
 
@@ -106,7 +106,7 @@
   </div>
   <div class="wrapper">
     <section id="section1">
-      <%for(var i=0;i< campusevent.length ;i++){%>
+      <%for(var i=0;i< campusevent.length && i<4 ;i++){%>
         <a href="/event/<%= campuseventid[i] %>">
           <div class="item">
             <img src="<%= campusposters[i]%>" alt="Describe Image" />
@@ -124,10 +124,8 @@
   </div>
   <div class="wrapper">
     <section id="section1">
-      <%if(recommendevent.length==0){%>
-        <h2>No Upcoming Events Found!</h2>
-        <% } %>
-      <%for(var i=0;i< recommendevent.length ;i++){%>
+
+      <%for(var i=0;i< recommendevent.length && i<4 ;i++){%>
         <a href="/event/<%= recommendeventid[i] %>">
           <div class="item">
             <img src="<%= recommendposters[i]%>" alt="Describe Image" />

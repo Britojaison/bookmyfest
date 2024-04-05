@@ -257,7 +257,7 @@ app.get("/profile", async (req, res) => {
       events.push(event[0][0]);
       t--;
     }
-    //console.log(events);
+    // console.log(events);
     var eventid = [];
     for (let index = 0; index < l; index++) {
       eventid.push(events[index].eventID);
@@ -277,22 +277,26 @@ app.get("/profile", async (req, res) => {
       "SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date < CURDATE();",
       [req.session.user]
     );
-    console.log(req.session.user);
+    // console.log(req.session.user);
+    //  console.log(pastEventResults[0]);
     // console.log(pastEventResults[0]); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // var n = pastEventResults.length;
     // n = n - 1;
     // console.log(pastEventResults);
     var events = new Array();
-    var n = results[0].length;
+    var n = results.length;
     var t = n;
-    while (0 < t) {
-      //console.log("hello");
+    // console.log(t);
+    while (0<t) {
+      // console.log(pastEventResults[0][t -1].eventID);
+
       var event = await db.query("select * from events where eventID=?", [
-        results[0][t - 1].eventID,
+        pastEventResults[0][t -1].eventID,
       ]);
       events.push(event[0][0]);
       t--;
     }
+    // console.log(events);
 
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
@@ -320,7 +324,7 @@ app.get("/profile", async (req, res) => {
       pastposters: pastposter,
       pastcount: n,
     };
-    // console.log(eventsdetails);
+    //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
   } catch (error) {
