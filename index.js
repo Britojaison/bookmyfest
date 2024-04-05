@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
