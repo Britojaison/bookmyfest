@@ -997,6 +997,7 @@ app.post("/update/:id", async (req, res) => {
   console.log(req.file);
   // const imagePath = "\\images\\" + req.file.filename;
   // const poster = imagePath;
+  console.log(req.body);
   try {
     await db.query(
       "UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,categoryID=?,formlink=? WHERE eventID = ?",
@@ -1007,7 +1008,7 @@ app.post("/update/:id", async (req, res) => {
         req.body.startDate,
         req.body.endDate,
         req.body.eventTime,
-        req.body.venue[0],
+        req.body.venue,
         req.body.desc,
         req.body.attendance,
         req.body.registration,
