@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -982,10 +982,12 @@ app.get("/editEvent/:id", async (req, res) => {
 app.post("/update/:id", async (req, res) => {
 
   var id = req.params.id;
-  console.log(req.body);
+  console.log(req.file);
+  const imagePath = "\\images\\" + req.file.filename;
+  const poster = imagePath;
   try {
     await db.query("UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?",
-      [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.endDate, req.body.eventTime, req.body.venue[0], req.body.desc, req.body.attendance, req.body.registration, req.body.range, req.body.poster, req.body.category, req.body.formlink, id]);
+      [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.endDate, req.body.eventTime, req.body.venue[0], req.body.desc, req.body.attendance, req.body.registration, req.body.range,  poster, req.body.category, req.body.formlink, id]);
       adminpage(req,res);
   } catch (error) {
     console.log(error);
