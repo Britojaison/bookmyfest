@@ -290,7 +290,8 @@ app.get("/profile", async (req, res) => {
     var n = pastEventResults[0].length;
     var t = n;
     console.log(t, "is the number for past events");
-    while (0 < t) {
+    while (0 < t) 
+    {
     console.log(t, "is the number for past events");
     while (0 < t) {
       // console.log(pastEventResults[0][t -1].eventID);
@@ -332,10 +333,14 @@ app.get("/profile", async (req, res) => {
     //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
-  } catch (error) {
+  } 
+ 
+}
+ catch (error) {
     console.log(error);
   }
-});
+};
+
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
