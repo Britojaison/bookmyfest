@@ -290,9 +290,6 @@ app.get("/profile", async (req, res) => {
     var n = pastEventResults[0].length;
     var t = n;
     console.log(t, "is the number for past events");
-    while (0 < t) 
-    {
-    console.log(t, "is the number for past events");
     while (0 < t) {
       // console.log(pastEventResults[0][t -1].eventID);
 
@@ -987,7 +984,7 @@ app.get("/editEvent/:id", async (req, res) => {
       attendance: result[0][0].attendance,
       registration: result[0][0].registration,
       reg_range: result[0][0].reg_range,
-      // poster: result[0][0].poster,
+      poster: result[0][0].poster,
       categoryID: result[0][0].categoryID,
       formlink: result[0][0].formlink,
       hostID: result[0][0].hostID,
@@ -1004,6 +1001,7 @@ app.post("/update/:id", async (req, res) => {
   console.log(req.file);
   // const imagePath = "\\images\\" + req.file.filename;
   // const poster = imagePath;
+  console.log(req.body);
   try {
     await db.query(
       "UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,categoryID=?,formlink=? WHERE eventID = ?",
@@ -1011,17 +1009,17 @@ app.post("/update/:id", async (req, res) => {
         req.body.eventName,
         req.body.campusWide,
         req.body.targeted,
-        req.body.eventDate,
+        req.body.startDate,
         req.body.endDate,
-        req.body.eventTime || null,
-        req.body.venue[0],
+        req.body.eventTime,
+        req.body.venue,
         req.body.desc,
         req.body.attendance,
         req.body.registration,
         req.body.range,
         // poster,
         req.body.category,
-        req.body.formlink || null,
+        req.body.formlink,
         id,
       ]
     );
