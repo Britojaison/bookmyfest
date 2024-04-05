@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -130,14 +130,15 @@ async function homepage(req, res) {
   //recommended events!!!!!!
 
   const userRecommended = await db.query(
-    "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
+    "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
     [req.session.user]
   );
   // console.log(userRecommended[0]);
   var q = userRecommended[0].length;
+  console.log(q, "recommended");
   var recommendeventid = [];
   for (let index = 0; index < q; index++) {
-    recommendeventid.push(userRecommended[0][index].eventid);
+    recommendeventid.push(userRecommended[0][index].eventID);
   }
 
   var recommendeventname = [];
@@ -162,7 +163,8 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  //console.log(Upresults[0]);
+
+  console.log(t, "upcomming");
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -287,6 +289,8 @@ app.get("/profile", async (req, res) => {
     var events = new Array();
     var n = pastEventResults[0].length;
     var t = n;
+    console.log(t, "is the number for past events");
+    while (0 < t) {
     console.log(t, "is the number for past events");
     while (0 < t) {
       // console.log(pastEventResults[0][t -1].eventID);
@@ -653,7 +657,7 @@ app.get("/seemore-upcomming", async (req, res) => {
 app.get("/recomm-seemore", async (req, res) => {
   try {
     const userRecommended = await db.query(
-      "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
+      "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
       [req.session.user]
     );
     //console.log(userRecommended[0]);
@@ -897,7 +901,7 @@ app.post("/create", upload.single("poster"), async (req, res) => {
   adminpage(req, res);
 });
 
-app.get("/editEvent", async (req, res) => {
+async function editlist(req, res) {
   try {
     const results = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
@@ -935,13 +939,17 @@ app.get("/editEvent", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+}
+
+app.get("/editEvent", async (req, res) => {
+  editlist(req, res);
 });
 
 app.get("/deleteEvent/:id", async (req, res) => {
   let id = req.params.id;
   console.log(`Deleting ${id}`);
   await db.query("DELETE FROM events WHERE eventID = ?", [id]);
-  adminpage(req, res);
+  editlist(req, res);
 });
 
 function formatDate(dateString) {
@@ -1005,13 +1013,14 @@ app.post("/update/:id", async (req, res) => {
         req.body.desc,
         req.body.attendance,
         req.body.registration,
-        req.body.range || null,
+        req.body.range,
+        // poster,
         req.body.category,
         req.body.formlink || null,
         id,
       ]
     );
-    adminpage(req, res);
+    editlist(req, res);
   } catch (error) {
     console.log(error);
   }
