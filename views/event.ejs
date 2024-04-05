@@ -40,7 +40,7 @@
           <p>For: <%= audience %></p>
           <% } %>
           <p>Date:</p>
-          <% if (event_time) { %>
+          <% if (event_time !=='00:00:00') { %>
           <p>Time:</p>
           <% } %> <% if (venue !== null) { %>
           <p>Venue:</p>
@@ -64,7 +64,7 @@
               document.write(formatDate("<%= start_date %>"));
             </script>
           </p>
-          <% if (event_time) { %>
+          <% if (event_time !=='00:00:00') { %>
           <p><%= event_time %></p>
           <% } %> <% if (venue !== null) { %>
           <p><%= venue %></p>

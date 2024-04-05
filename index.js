@@ -10,6 +10,7 @@ import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
 import multer from "multer";
+import path from "path"; // Import the path module
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -297,7 +298,6 @@ app.get("/profile", async (req, res) => {
       events.push(event[0][0]);
       t--;
     }
-
 
     var pasteventid = [];
     for (let index = 0; index < n; index++) {
@@ -827,28 +827,48 @@ app.get("/A-logo-home", (req, res) => {
   adminpage(req, res);
 });
 
+///////////// poster storage
+
 app.get("/createEvent", (req, res) => {
   // console.log("helllo123");
   res.render("createEvent.ejs");
 });
 
-app.get("/create", async (req, res) => {
-  const eventName = req.query.eventName;
-  const campusWide = req.query.campusWide;
-  let targeted = req.query.targeted;
-  const eventDate = req.query.eventDate;
-  const endDate = req.query.endDate;
-  const eventTime = req.query.eventTime;
-  const venue = req.query.venue;
-  const registration = req.query.registration;
-  let range = req.query.range;
-  const desc = req.query.desc;
-  const formlink = req.query.formlink;
-  const attendance = req.query.attendance;
-  const category = req.query.category;
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+    // console.log("testt");
+  },
+});
+const upload = multer({ storage: storage });
+
+app.post("/create", upload.single("poster"), async (req, res) => {
+  // console.log(req.query);
+  const eventName = req.body.eventName;
+  const campusWide = req.body.campusWide;
+  let targeted = req.body.targeted;
+  const eventDate = req.body.eventDate;
+  const endDate = req.body.endDate;
+  const eventTime = req.body.eventTime || null;
+  const venue = req.body.venue;
+  const registration = req.body.registration;
+  let range = req.body.range || null;
+  const desc = req.body.desc;
+  const formlink = req.body.formlink || null;
+  const attendance = req.body.attendance;
+  const category = req.body.category;
   const hostid = req.session.user;
-  const poster = "/images/example.png";
-  console.log(req.query);
+
+  // console.log(req.query, req.file);
+
+  // upload.single("poster");
+  const imagePath = "\\images\\" + req.file.filename;
+  const poster = imagePath;
+  // console.log(req.query);
 
   if (campusWide == 1) {
     targeted = null;
@@ -889,139 +909,3 @@ app.get("/create", async (req, res) => {
 app.listen(port, () => {
   console.log(`server running on http://localhost:${port}`);
 });
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/public");
-  },
-  filename: function (req, file, cb) {
-    // Generate a unique filename for the uploaded file
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/public", upload.single("poster"), (req, res) => {
-  // Access the uploaded file via req.file
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
-
-  const imagePath = "public/" + req.file.filename; // Relative path to the uploaded image
-
-  db.query(
-    "INSERT INTO events (poster) VALUES (?)",
-    [imagePath],
-    (err, result) => {
-      if (err) throw err;
-      console.log("Image path saved to database.");
-    }
-  );
-
-  res.send("File uploaded successfully.");
-});
-
-app.get("/editEvent", async (req, res) => {
-  try {
-    const results = await db.query(
-      "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
-      [req.session.user]
-    );
-    //console.log(results[0]);
-    var n = results[0].length;
-    // console.log(n);
-    var eventid = [];
-    for (let index = 0; index < n; index++) {
-      eventid.push(results[0][index].eventID);
-    }
-
-    var eventname = [];
-    for (let index = 0; index < n; index++) {
-      eventname.push(results[0][index].eventname);
-    }
-    var poster = [];
-    for (let index = 0; index < n; index++) {
-      poster.push(results[0][index].poster);
-    }
-    var dates = [];
-    for (let index = 0; index < n; index++) {
-      dates.push(results[0][index].start_date);
-    }
-
-    const hostevents = {
-      eventid: eventid,
-      event: eventname,
-      posters: poster,
-      date: dates,
-      count: n,
-    };
-    res.render("editlist.ejs", hostevents);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.get("/deleteEvent/:id", async (req, res) => {
-  let id = req.params.id;
-  console.log(`Deleting ${id}`);
-  await db.query('DELETE FROM events WHERE eventID = ?', [id]);
-  adminpage(req, res);
-});
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear().toString().slice(-2);
-  return `${day}/${month}/${year}`;
-}
-
-app.get("/editEvent/:id", async (req, res) => {
-  const eventid = req.params.id;
-  console.log(eventid + " is the ID");
-  try {
-    const result = await db.query("select * from events where eventid=?", [eventid]);
-    // console.log(result[0]);
-    const start_date = formatDate(result[0][0].start_date)
-    const end_date = formatDate(result[0][0].end_date)
-    const eventdetails = {
-      eventid: result[0][0].eventID,
-      eventname: result[0][0].eventname,
-      pan_campus: result[0][0].pan_campus,
-      audience: result[0][0].audience,
-      start_date: start_date,
-      end_date: end_date,
-      event_time: result[0][0].event_time,
-      venue: result[0][0].venue,
-      event_desc: result[0][0].event_desc,
-      attendance: result[0][0].attendance,
-      registration: result[0][0].registration,
-      reg_range: result[0][0].reg_range,
-      poster: result[0][0].poster,
-      categoryID: result[0][0].categoryID,
-      formlink: result[0][0].formlink,
-      hostID: result[0][0].hostID
-    }
-    console.log(eventdetails);
-    res.render("editevent.ejs", eventdetails);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// app.post("/update/:id", async (req, res) => {
-//   var id = req.params.id;
-//   console.log(id);
-//   console.log(req.body);
-//   try {
-//     await db.query(`UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?`,
-//       [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.end_date, req.body.eventTime, req.body.venue[0], req.body.event_desc, req.body.attendance, req.body.registration, req.body.range, req.body.poster, req.body.category, req.body.formlink, id]);
-//     adminpage(req, res);
-//   } catch (error) {
-//     console.log(error)
-//   }
-
-// });
-
