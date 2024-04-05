@@ -10,22 +10,19 @@ import { isModuleNamespaceObject } from "util/types";
 import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
 import multer from "multer";
-import path from "path"; // Import the path module
+import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const saltround = 10;
 const port = 3000;
-// const multer = require("multer");
-// const path = require("path");
-// const fs = require("fs");
 
 const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -228,8 +225,6 @@ app.get("/", async (req, res) => {
     console.log(" alen  11223343 \n swo 1100001 pwd 78304923");
   } catch (error) {
     console.error("Error deleting events:", error);
-    // Handle the error appropriately
-    // For example, render an error page or send an error response
     res.status(500).send("Internal Server Error");
   }
 });
@@ -827,10 +822,9 @@ app.get("/A-logo-home", (req, res) => {
   adminpage(req, res);
 });
 
-///////////// poster storage
+///////////// poster storage and event insertion
 
 app.get("/createEvent", (req, res) => {
-  // console.log("helllo123");
   res.render("createEvent.ejs");
 });
 
@@ -841,13 +835,11 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
-    // console.log("testt");
   },
 });
 const upload = multer({ storage: storage });
 
 app.post("/create", upload.single("poster"), async (req, res) => {
-  // console.log(req.query);
   const eventName = req.body.eventName;
   const campusWide = req.body.campusWide;
   let targeted = req.body.targeted;
@@ -863,12 +855,8 @@ app.post("/create", upload.single("poster"), async (req, res) => {
   const category = req.body.category;
   const hostid = req.session.user;
 
-  // console.log(req.query, req.file);
-
-  // upload.single("poster");
   const imagePath = "\\images\\" + req.file.filename;
   const poster = imagePath;
-  // console.log(req.query);
 
   if (campusWide == 1) {
     targeted = null;
@@ -901,8 +889,6 @@ app.post("/create", upload.single("poster"), async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-  //console.log(req.query);
   adminpage(req, res);
 });
 
