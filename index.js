@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "1234",
-    database: "uems",
+    password: "sqlmakri",
+    database: "bmf",
   })
   .promise();
 
@@ -138,7 +138,7 @@ async function homepage(req, res) {
   console.log(q,"recommended");
   var recommendeventid = [];
   for (let index = 0; index < q; index++) {
-    recommendeventid.push(userRecommended[0][index].eventid);
+    recommendeventid.push(userRecommended[0][index].eventID);
   }
 
   var recommendeventname = [];
