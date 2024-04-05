@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="">
                                     <label for="No">No</label>
-                                    <input type="radio" id="noCampus" name="campusWide" value="0" required <% if (pan_campus == 0) { %>checked<% } %> />
+                                    <input type="radio" id="noCampus" name="campusWide" value="0" required <% if (pan_campus == 0) { %>checked><% } %> />
                                 </div>
                                 <div class="tooltip">
                                     <img src="/images/information.png" />
@@ -61,11 +61,11 @@
                     </script>
                     <div class="raone">
                         <p>Start Date:</p>
-                        <input type="date" id="eventDate" name="eventDate" value="" required/>
+                        <input type="date" id="startDate" name="startDate" value="<%- start_date %>" required/>
                     </div>
                     <div class="raone">
                         <p>End Date:</p>
-                        <input type="date" id="endDate" name="endDate" value="" required />
+                        <input type="date" id="endDate" name="endDate" value="<%- end_date %>" required />
                     </div>
                     <div class="raone"></div>
                     <div class="raone">
