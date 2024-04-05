@@ -124,7 +124,9 @@
   </div>
   <div class="wrapper">
     <section id="section1">
-
+      <%if(schoolevent.length==0){%>
+        <h2>No Upcoming Events Found!</h2>
+        <% } %>
       <%for(var i=0;i< recommendevent.length && i<4 ;i++){%>
         <a href="/event/<%= recommendeventid[i] %>">
           <div class="item">
