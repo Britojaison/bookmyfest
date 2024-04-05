@@ -25,3 +25,5 @@ SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.re
 
 SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.end_date < CURDATE();
 not working
+
+SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = 2241110;

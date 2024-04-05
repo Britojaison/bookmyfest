@@ -130,11 +130,12 @@ async function homepage(req, res) {
   //recommended events!!!!!!
 
   const userRecommended = await db.query(
-    "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
+    "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
     [req.session.user]
   );
   // console.log(userRecommended[0]);
   var q = userRecommended[0].length;
+  console.log(q,"recommended");
   var recommendeventid = [];
   for (let index = 0; index < q; index++) {
     recommendeventid.push(userRecommended[0][index].eventid);
@@ -162,7 +163,8 @@ async function homepage(req, res) {
   var events = new Array();
   var l = Upresults[0].length;
   var t = l;
-  //console.log(Upresults[0]);
+  
+  console.log(t,"upcomming");
   while (0 < t) {
     // console.log("hello");
     var event = await db.query("select * from events where eventID=?", [
@@ -653,7 +655,7 @@ app.get("/seemore-upcomming", async (req, res) => {
 app.get("/recomm-seemore", async (req, res) => {
   try {
     const userRecommended = await db.query(
-      "SELECT e.eventid, e.eventname, e.poster, e.start_date, p.regno FROM events e INNER JOIN participated p ON e.eventid = p.eventid WHERE p.regno = ? AND e.end_date > CURDATE();",
+      "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
       [req.session.user]
     );
     //console.log(userRecommended[0]);
@@ -991,8 +993,8 @@ app.post("/update/:id", async (req, res) => {
   const imagePath = "\\images\\" + req.file.filename;
   const poster = imagePath;
   try {
-    await db.query("UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,poster=?,categoryID=?,formlink=? WHERE eventID = ?",
-      [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.endDate, req.body.eventTime, req.body.venue[0], req.body.desc, req.body.attendance, req.body.registration, req.body.range,  poster, req.body.category, req.body.formlink, id]);
+    await db.query("UPDATE events SET eventName=?,pan_campus=?,audience=?,start_date=?,end_date=?,event_time=?,venue=?,event_desc=?,attendance=?,registration=?,reg_range=?,categoryID=?,formlink=? WHERE eventID = ?",
+      [req.body.eventName, req.body.campusWide, req.body.targeted, req.body.eventDate, req.body.endDate, req.body.eventTime, req.body.venue[0], req.body.desc, req.body.attendance, req.body.registration, req.body.range, req.body.category, req.body.formlink, id]);
       adminpage(req,res);
   } catch (error) {
     console.log(error);
