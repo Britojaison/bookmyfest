@@ -658,11 +658,11 @@ app.get("/recomm-seemore", async (req, res) => {
       "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
       [req.session.user]
     );
-    //console.log(userRecommended[0]);
+    console.log(userRecommended[0]);
     var q = userRecommended[0].length;
     var recommendeventid = [];
     for (let index = 0; index < q; index++) {
-      recommendeventid.push(userRecommended[0][index].eventid);
+      recommendeventid.push(userRecommended[0][index].eventID);
     }
 
     var recommendeventname = [];
