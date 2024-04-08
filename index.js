@@ -330,10 +330,14 @@ app.get("/profile", async (req, res) => {
     //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
-  } catch (error) {
+  } 
+ 
+}
+ catch (error) {
     console.log(error);
   }
-});
+};
+
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
