@@ -75,7 +75,7 @@ async function adminpage(req, res) {
 
   // console.log("itha ivde noku", req.session.user);
   // console.log(pastEventResults);
-  var pasteventid = []; 
+  var pasteventid = [];
   for (let index = 0; index < n; index++) {
     pasteventid.push(pastEventResults[0][index].eventID);
   }
@@ -217,7 +217,7 @@ app.get("/", async (req, res) => {
 
 
 
-  
+
 
   // Calculate the date 60 days ago
   const cutOffDate = new Date();
@@ -910,21 +910,29 @@ app.post("/create", upload.single("poster"), async (req, res) => {
         pass: 'jxre inap eciv uhmk'
       }
     });
-  
-    let results=await db.query(`select email from user where categoryID=?`,[category]);
-    let mail=results[0][0].email;
-    console.log("Mail is "+mail);
+
+    let results = await db.query(`select email from user where categoryID=?`, [category]);
+    let mail = results[0][0].email;
+    console.log("Mail is " + mail);
 
     var mailOptions = {
       from: 'britojaison123@gmail.com',
       to: mail,
       subject: 'New Event Is Up  ',
-      text: 'Hey there, a new event on your interest is up, come register for it.'
+      text: `Hey there,
+
+A new event on your interest is up, come register for it.
+
+Event Name: ${eventName}
+Date: ${eventDate}
+Venue: ${venue}
+Time: ${eventTime}
+`
     };
-  
+
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-  
+
         console.log(error + " ippo ellam mansilayilleda shonnee");
       } else {
         console.log('Email sent: ' + info.response);
