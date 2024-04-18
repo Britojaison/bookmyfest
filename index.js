@@ -919,7 +919,7 @@ app.post("/create", upload.single("poster"), async (req, res) => {
       from: 'britojaison123@gmail.com',
       to: mail,
       subject: 'New Event Is Up  ',
-      text: 'Hey there, a new event on your interest is up, come register for it.\n'
+      text: 'Hey there, a new event on your interest is up, come register for it.'
     };
   
     transporter.sendMail(mailOptions, function (error, info) {
