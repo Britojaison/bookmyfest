@@ -21,8 +21,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -243,7 +243,6 @@ app.get("/profile", async (req, res) => {
   // console.log(req.session.user);
   try {
     //upcoming events
-
     const results = await db.query(
       "SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE()",
       [req.session.user]
@@ -291,6 +290,8 @@ app.get("/profile", async (req, res) => {
     var t = n;
     console.log(t, "is the number for past events");
     while (0 < t) {
+      console.log(t, "is the number for past events");
+
       // console.log(pastEventResults[0][t -1].eventID);
 
       var event = await db.query("select * from events where eventID=?", [
@@ -330,14 +331,10 @@ app.get("/profile", async (req, res) => {
     //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
-  } 
- 
-}
- catch (error) {
+  } catch (error) {
     console.log(error);
   }
-};
-
+});
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
