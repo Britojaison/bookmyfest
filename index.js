@@ -11,6 +11,7 @@ import { count } from "console";
 import bcrypt, { hash } from "bcrypt";
 import multer from "multer";
 import path from "path";
+import nodemailer from "nodemailer";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -43,7 +44,7 @@ async function adminpage(req, res) {
     "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
     [req.session.user]
   );
-  console.log(results[0]);
+  // console.log(results[0]);
   var n = results[0].length;
   // console.log(n);
   var eventid = [];
@@ -214,6 +215,10 @@ app.get("/", async (req, res) => {
     content: "",
   };
 
+
+
+
+
   // Calculate the date 60 days ago
   const cutOffDate = new Date();
   cutOffDate.setDate(cutOffDate.getDate() - 60);
@@ -331,10 +336,13 @@ app.get("/profile", async (req, res) => {
     //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
+  }
+  catch (error) {
   } catch (error) {
     console.log(error);
   }
-});
+};
+
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -659,11 +667,11 @@ app.get("/recomm-seemore", async (req, res) => {
       "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
       [req.session.user]
     );
-    //console.log(userRecommended[0]);
+    console.log(userRecommended[0]);
     var q = userRecommended[0].length;
     var recommendeventid = [];
     for (let index = 0; index < q; index++) {
-      recommendeventid.push(userRecommended[0][index].eventid);
+      recommendeventid.push(userRecommended[0][index].eventID);
     }
 
     var recommendeventname = [];
@@ -894,6 +902,45 @@ app.post("/create", upload.single("poster"), async (req, res) => {
       hostid,
     ];
     await db.query(sql, values);
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 465,               // true for 465, false for other ports
+      host: "smtp.gmail.com",
+      auth: {
+        user: 'britojaison123@gmail.com',
+        pass: 'jxre inap eciv uhmk'
+      }
+    });
+
+    let results = await db.query(`select email from user where categoryID=?`, [category]);
+    let mail = results[0][0].email;
+    console.log("Mail is " + mail);
+
+    var mailOptions = {
+      from: 'britojaison123@gmail.com',
+      to: mail,
+      subject: 'New Event Is Up  ',
+      text: `Hey there,
+
+A new event on your interest is up, come register for it.
+
+Event Name: ${eventName}
+Date: ${eventDate}
+Venue: ${venue}
+Time: ${eventTime}
+`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+
+        console.log(error + " ippo ellam mansilayilleda shonnee");
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
   } catch (error) {
     console.log(error);
   }
