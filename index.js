@@ -4,6 +4,7 @@ import session from "express-session";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from "mysql2";
+import postgres from "postgres";
 import bodyParser from "body-parser";
 import render from "ejs";
 import { isModuleNamespaceObject } from "util/types";
@@ -36,13 +37,13 @@ app.use(
     secret: "secret-key",
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 
 async function adminpage(req, res) {
   const results = await db.query(
     "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
-    [req.session.user]
+    [req.session.user],
   );
   // console.log(results[0]);
   var n = results[0].length;
@@ -67,7 +68,7 @@ async function adminpage(req, res) {
 
   const pastEventResults = await db.query(
     "SELECT * FROM events WHERE hostid = ? AND end_date < CURDATE();",
-    [req.session.user]
+    [req.session.user],
   );
   //console.log(pastEventResults[0]);
   var n = pastEventResults.length;
@@ -107,7 +108,7 @@ async function adminpage(req, res) {
 
 async function homepage(req, res) {
   var results = await db.query(
-    "SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();"
+    "SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();",
   );
   var n = results[0].length < 5 ? results[0].length : 5;
   //console.log(results);
@@ -132,7 +133,7 @@ async function homepage(req, res) {
 
   const userRecommended = await db.query(
     "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
-    [req.session.user]
+    [req.session.user],
   );
   // console.log(userRecommended[0]);
   var q = userRecommended[0].length;
@@ -159,7 +160,7 @@ async function homepage(req, res) {
 
   const Upresults = await db.query(
     "SELECT p.* FROM participated p INNER JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE(); ",
-    [req.session.user]
+    [req.session.user],
   );
   var events = new Array();
   var l = Upresults[0].length;
@@ -247,7 +248,7 @@ app.get("/profile", async (req, res) => {
 
     const results = await db.query(
       "SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE()",
-      [req.session.user]
+      [req.session.user],
     );
     var events = new Array();
     var l = results[0].length;
@@ -279,7 +280,7 @@ app.get("/profile", async (req, res) => {
     // past events
     const pastEventResults = await db.query(
       "SELECT p.* FROM participated p JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date < CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
     console.log(req.session.user);
     //  console.log(pastEventResults[0]);
@@ -478,7 +479,7 @@ app.post("/register", async (req, res) => {
     if (results[0].length == 0) {
       let departmentid = await db.query(
         "select deptid from department where deptname=?",
-        [department]
+        [department],
       );
       // console.log(departmentid[0]);
       departmentid = departmentid[0][0].deptid;
@@ -521,7 +522,7 @@ app.get("/past-seemore", async (req, res) => {
   try {
     const pastEventResults = await db.query(
       "SELECT e.* FROM events e JOIN participated p ON e.eventID = p.eventID WHERE p.regno = ? AND e.eventID = 8 AND e.end_date < CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
 
     var n = pastEventResults.length;
@@ -565,7 +566,7 @@ app.get("/past-seemore", async (req, res) => {
 app.get("/campus-seemore", async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();"
+      "SELECT eventID, eventname, poster, start_date FROM events WHERE pan_campus = 1 AND end_date > CURDATE();",
     );
 
     var n = results[0].length;
@@ -608,7 +609,7 @@ app.get("/seemore-upcomming", async (req, res) => {
   try {
     const Upresults = await db.query(
       "SELECT p.* FROM participated p INNER JOIN events e ON p.eventID = e.eventID WHERE p.regno = ? AND e.end_date > CURDATE(); ",
-      [req.session.user]
+      [req.session.user],
     );
     var events = new Array();
     var l = Upresults[0].length;
@@ -657,7 +658,7 @@ app.get("/recomm-seemore", async (req, res) => {
   try {
     const userRecommended = await db.query(
       "SELECT e.* FROM events e INNER JOIN user u ON e.categoryID = u.categoryID WHERE u.regno = ? AND e.end_date > CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
     console.log(userRecommended[0]);
     var q = userRecommended[0].length;
@@ -750,7 +751,7 @@ app.get("/up_seemore_A", async (req, res) => {
   try {
     const results = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
     //console.log(results[0]);
     var n = results[0].length;
@@ -790,7 +791,7 @@ app.get("/past_seemore_A", async (req, res) => {
   try {
     const pastEventResults = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date < CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
     //console.log(pastEventResults[0]);
     var n = pastEventResults.length;
@@ -943,7 +944,7 @@ async function editlist(req, res) {
   try {
     const results = await db.query(
       "SELECT * FROM events WHERE hostid = ? AND end_date > CURDATE();",
-      [req.session.user]
+      [req.session.user],
     );
     //console.log(results[0]);
     var n = results[0].length;
@@ -1057,7 +1058,7 @@ app.post("/update/:id", async (req, res) => {
         req.body.category,
         req.body.formlink,
         id,
-      ]
+      ],
     );
     editlist(req, res);
   } catch (error) {
