@@ -22,8 +22,8 @@ const db = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "sqlmakri",
-    database: "bmf",
+    password: "1234",
+    database: "uems",
   })
   .promise();
 
@@ -215,10 +215,6 @@ app.get("/", async (req, res) => {
     content: "",
   };
 
-
-
-
-
   // Calculate the date 60 days ago
   const cutOffDate = new Date();
   cutOffDate.setDate(cutOffDate.getDate() - 60);
@@ -335,12 +331,10 @@ app.get("/profile", async (req, res) => {
     //  console.log(eventsdetails);
 
     res.render("profile.ejs", eventsdetails);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 });
-
 
 // school drop-down!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -902,23 +896,25 @@ app.post("/create", upload.single("poster"), async (req, res) => {
     await db.query(sql, values);
 
     var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      port: 465,               // true for 465, false for other ports
+      service: "gmail",
+      port: 465, // true for 465, false for other ports
       host: "smtp.gmail.com",
       auth: {
-        user: 'britojaison123@gmail.com',
-        pass: 'jxre inap eciv uhmk'
-      }
+        user: "britojaison123@gmail.com",
+        pass: "jxre inap eciv uhmk",
+      },
     });
 
-    let results = await db.query(`select email from user where categoryID=?`, [category]);
+    let results = await db.query(`select email from user where categoryID=?`, [
+      category,
+    ]);
     let mail = results[0][0].email;
     console.log("Mail is " + mail);
 
     var mailOptions = {
-      from: 'britojaison123@gmail.com',
+      from: "britojaison123@gmail.com",
       to: mail,
-      subject: 'New Event Is Up  ',
+      subject: "New Event Is Up  ",
       text: `Hey there,
 
 A new event on your interest is up, come register for it.
@@ -927,18 +923,16 @@ Event Name: ${eventName}
 Date: ${eventDate}
 Venue: ${venue}
 Time: ${eventTime}
-`
+`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-
         console.log(error + " ippo ellam mansilayilleda shonnee");
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log("Email sent: " + info.response);
       }
     });
-
   } catch (error) {
     console.log(error);
   }
